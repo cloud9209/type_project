@@ -1,0 +1,47 @@
+.Thumbnail{
+	width: 200px;
+	height: 200px;
+}
+
+.table-size{
+	float: left;
+	margin: auto 3px;
+	width: 180px;
+	height: 300px;
+}
+
+.test-content{
+	width: 100%;
+	height: 300px;
+}
+
+.font_name{
+	font-size: 12px;
+	text-align: left;
+	line-height: 0px;
+	cursor: pointer;
+}
+.font_name:hover{
+	font-weight: 500
+}
+
+.font_name_clicked{
+	font-size: 15px;
+}
+.font_list{
+	height: 115px;
+}
+
+#og-grid > li > div.font_list > p {
+	margin-bottom:0px;
+}
+hr{
+	margin: 16px 0px;
+}
+.hr_top{
+	margin-top: 10px;
+}
+
+.to_hide{
+    visibility: hidden;
+}

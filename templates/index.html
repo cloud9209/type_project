@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Human Grid</title>
+	<link type='text/css' rel='stylesheet' href="{{ url_for('static', filename = 'css/stylesheet.css')}}" />
+
+	<script type='text/javascript' src="{{ url_for('static', filename = 'js/script.js')}}"></script>
+	<script type='text/javascript' src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type='text/javascript' src="{{ url_for('static', filename = 'js/jquery-ui.min.js')}}"></script>
+	<script type='text/javascript' src="{{ url_for('static', filename = 'js/script.js')}}"></script>
+
+	<meta charset="UTF-8">
+
+</head>
+
+<body>
+	<div id="fb-root">
+	</div>
+	<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&appId=1437182446560987&version=v2.0";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+
+	<div id="ladder-box">
+		<div id="ladder-in-box">
+			<img id="ladder" src="http://corners.kr/images/sadari_w.gif" alt="LADDER IMAGE"/>
+			<div class="fb-like" data-href="https://cloud-9209.appspot.com" data-width="500" data-layout="box_count" data-action="like" data-show-faces="true" data-share="true">
+			</div>
+		</div>
+	</div>
+
+
+	<div id="header">
+		<img id="cloud" src="{{ url_for('static', filename = 'res/images/clouds.gif')}}" alt="CLOUD IMAGE"/>
+		<h1 id="heading">Human Grid Works</h1>
+		<div id="menu-bar">
+			<div class="bar" id="intro">INTRO</div>
+			<div class="bar" id="works">WORKS</div>
+			<div class="bar" id="contact">CONTACT</div>
+		</div>
+		<a href="{{ url_for('ideada') }}" target="_blank"><b>GO IDEA PAGE</b></a>
+	</div>
+
+	<div id="body">
+		<div id="contact-div">
+			<img id="map" src="{{ url_for('static', filename = 'res/images/49.png')}}" alt="49DONG IMAGE"/>
+		</div>
+
+		<div id="profile-div">
+			<img id="profile-img" src="{{ url_for('static', filename = 'res/images/profile.jpg')}}" alt="PROFILE IMAGE"/>
+
+			<div id="profile-table">
+				<h4>Simon Jo</h4>
+				<table id="info-table">
+					<tr>
+						<td>
+							<table>
+								<tr>
+									<td>age_</td>
+									<td class="my-info">27</td>
+								</tr>
+								<tr>
+									<td>sex_</td>
+									<td class="my-info">male</td>
+								</tr>
+								<tr>
+									<td>mil_</td>
+									<td class="my-info">done</td>
+								</tr>
+								<tr>
+									<td>add_</td>
+									<td class="my-info">1064-25 Namhyeondong<br>Kwanackgoo Seoul</td>
+								</tr>
+								<tr>
+									<td>phn_</td>
+									<td class="my-info">010_6879_****</td>
+								</tr>
+							</table>
+						</td>
+						<td id="profile-text">
+							<em>Simon Jo</em> was the son of a provincial signwriter, and he was trained in calligraphy. This artisan background and calligraphic training set him apart from almost all other noted typographers of the time, since they had inevitably trained in architecture or the fine arts. <em>It also may help explain why he never worked with handmade papers and custom fonts as many typographers did</em>, preferring instead to use stock fonts on a careful choice from commercial paper stocks.
+
+						</td>						
+					</table>
+				</div>
+
+			</div>
+			<div id="works-whole">
+				<div id="works-video">
+					<iframe id="iframe-video" width="560" height="315" src="//www.youtube.com/embed/9KuA19qznZ8" style="border-width:1px" allowfullscreen></iframe>
+				</div>
+
+				<table id="works-table">
+					<tr>
+						<td>
+							<img class="works" id="img1" src="https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xfp1/t31.0-8/10495977_741220322607645_864673066361779465_o.jpg" alt="WORKS IMAGE" />
+						</td>
+						<td>
+							<img class="works" id="img2" src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xfa1/t1.0-9/10455369_740067199389624_6984170895532839942_n.jpg" alt="WORKS IMAGE" />
+						</td>
+						<td>
+							<img class="works" id="img3" src="https://scontent-b.xx.fbcdn.net/hphotos-xap1/t1.0-9/10340148_717901541606190_3173269249905120227_n.jpg" alt="WORKS IMAGE" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img class="works" id="img4" src="https://scontent-a.xx.fbcdn.net/hphotos-xfp1/t1.0-9/10320352_723949154334762_9207291815584072020_n.jpg" alt="WORKS IMAGE" />
+						</td>
+						<td>
+							<img class="works" id="img5" src="https://scontent-a.xx.fbcdn.net/hphotos-xaf1/t1.0-9/p417x417/10371986_724957780900566_1339302885542195593_n.jpg" alt="WORKS IMAGE" />
+						</td>
+						<td>
+							<img class="works" id="img6" src="{{ url_for('static', filename = 'res/images/human-coca.jpg')}}" alt="WORKS IMAGE" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img class="works" id="img7" src="https://scontent-a.xx.fbcdn.net/hphotos-xaf1/t1.0-9/1176109_571058439623835_1106469894_n.jpg" alt="WORKS IMAGE" />
+						</td>
+						<td>
+							<img class="works" id="img8" src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xfp1/t1.0-9/p417x417/1208847_570214876374858_1086347121_n.jpg" alt="WORKS IMAGE" />
+						</td>
+						<td>
+							<img class="works" id="img9" src="https://scontent-b.xx.fbcdn.net/hphotos-xaf1/t1.0-9/998630_567001713362841_1440919150_n.jpg" alt="WORKS IMAGE" />
+						</td>
+					</tr>
+				</table>
+			</div>
+
+
+		</div>
+		<div id="top-fixed"></div>
+		<div id="bottom-fixed"></div>
+	</body>
+
+	</html>
