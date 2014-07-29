@@ -73,9 +73,9 @@ a{
 }
 
 
-/*----------------------------------------- 헤더 끝*/
+/*-----------------------------------------*/
 
-/*----------------------------------------- 바디 시작*/
+/*-----------------------------------------*/
 
 
 #body{
@@ -164,3 +164,25 @@ a{
 #bottom-fixed{
 
 }
+
+/* twitter api*/
+
+.twit_name{
+	font-weight : bold;
+	font-size : 20px;
+	padding-bottom : 15px;
+}
+
+.twit_contents{
+	
+	font-size : 13px;
+}
+
+#twit_table{
+	margin-top : 50px;	
+}
+#td_right{
+	padding-left : 20px;	
+}
+
+
