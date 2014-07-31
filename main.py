@@ -27,7 +27,7 @@ def tweepy_query():
 	
 	if request.method == 'POST':
 		query = request.form['query']
-		results = api.search(q=query, count=10)
+		results = api.search(q=query, count=15)
 
 		tweet_content_list = []
 		
