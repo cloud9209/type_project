@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<title>Korean Type Design Group</title>
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/component.css')}}" />
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/stylesheet.css')}}" />
+
+	<script src="{{ url_for('static', filename = 'js/jquery-2.1.1.min.js')}}"></script>
+	<script src="{{ url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+	<script src="static/js/modernizr.custom.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand">한글 짜임</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a id="fonts_to_read" href="#">읽는 서체</a></li>
+				<li><a id="fonts_to_see" href="#">보는 서체</a></li>
+
+				<li class="dropdown">
+
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 작가별<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">김아무개</a></li>
+						<li><a href="#">김아무개</a></li>
+						<li><a href="#">김아무개</a></li>
+						<li class="divider"></li>
+						<li><a href="#">이아무개</a></li>
+						<li><a href="#">이아무개</a></li>
+						<li><a href="#">이아무개</a></li>
+						<li><a href="#">이아무개</a></li>
+						<li class="divider"></li>
+					</ul>
+				</li>
+			</ul>
+			<form class="navbar-form navbar-right" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+			
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+<div class="main">
+		<ul class="og-grid">
+			<li class="project_item">
+				<a href="#">
+					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/1.png')}}" alt="Image Not Available"/>
+				</a>
+				<div class="font_list">
+					<hr class="hr_top" style="height:2px; background-color:gray">
+					<p class = "font_name project_brief">마시멜로</p>
+					<hr style="height:1px; background-color:gray">
+					<p class = "author project_brief">김아무개</p>
+					<hr style="height:1px; background-color:gray">
+					<p class = "project_date project_brief">2014.10.5</p>
+				</div>
+			</li>
+			<li class="project_item">
+				<a href="#">
+					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/1.png')}}" alt="Image Not Available"/>
+				</a>
+				<div class="font_list">
+					<hr class="hr_top" style="height:2px; background-color:gray">
+					<p class = "font_name project_brief">마시멜로</p>
+					<hr style="height:1px; background-color:gray">
+					<p class = "author project_brief">김아무개</p>
+					<hr style="height:1px; background-color:gray">
+					<p class = "project_date project_brief">2014.10.5</p>
+				</div>
+			</li>
+			<li class="project_item">
+				<a href="#">
+					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/1.png')}}" alt="Image Not Available"/>
+				</a>
+				<div class="font_list">
+					<hr class="hr_top" style="height:2px; background-color:gray">
+					<p class = "font_name project_brief">마시멜로</p>
+					<hr style="height:1px; background-color:gray">
+					<p class = "author project_brief">김아무개</p>
+					<hr style="height:1px; background-color:gray">
+					<p class = "project_date project_brief">2014.10.5</p>
+				</div>
+			</li>
+			<li class="project_item">
+				<a href="#">
+					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/1.png')}}" alt="Image Not Available"/>
+				</a>
+				<div class="font_list">
+					<hr class="hr_top" style="height:2px; background-color:gray">
+					<p class = "font_name project_brief">마시멜로</p>
+					<hr style="height:1px; background-color:gray">
+					<p class = "author project_brief">김아무개</p>
+					<hr style="height:1px; background-color:gray">
+					<p class = "project_date project_brief">2014.10.5</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+</body>
+</html>
