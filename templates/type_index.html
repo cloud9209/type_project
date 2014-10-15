@@ -8,6 +8,8 @@
 
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/component.css')}}" />
 	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}" />
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Noto+Sans">
+
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/stylesheet.css')}}" />
 
 	<script src="{{ url_for('static', filename = 'js/jquery-2.1.1.min.js')}}"></script>
@@ -16,105 +18,312 @@
 </head>
 <body>
 	<nav class="navbar navbar-default" role="navigation">
-	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand">한글 짜임</a>
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand">한글 짜임</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a id="fonts_to_read" href="#">읽는 서체</a></li>
+					<li><a id="fonts_to_see" href="#">보는 서체</a></li>
+
+					<li class="dropdown">
+
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 작가별<span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">김아무개</a></li>
+							<li><a href="#">김아무개</a></li>
+							<li><a href="#">김아무개</a></li>
+							<li class="divider"></li>
+							<li><a href="#">이아무개</a></li>
+							<li><a href="#">이아무개</a></li>
+							<li><a href="#">이아무개</a></li>
+							<li><a href="#">이아무개</a></li>
+							<li class="divider"></li>
+						</ul>
+					</li>
+				</ul>
+				<form class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Search">
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+
+	<div class="main">	
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<p class= "font_name">
+							반흘림 고딕
+						</p>
+					</div>
+				</div>
+				<div class = "proj_credit">
+				</div>
+			</div>
+			<div class = "proj_body">
+				<a href="#">
+					<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test.jpg')}}" alt="Image Not Available"/>
+				</a>
+
+				<div class="font_decription">
+					<p>어떤 폰트인지에 대한 설명을 여기에 작성하게 되는 것입니다</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<p class="font_name">
+							바람체
+						</p>
+					</div>
+				</div>
+				<div class = "proj_credit">
+				</div>
+			</div>
+			<div class = "proj_body">
+				<a href="#">
+					<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test1.jpg')}}" alt="Image Not Available"/>
+				</a>
+
+				<div class="font_decription">
+					<p>바람.체는 옛날 책에 쓰인 한글에서 영감을 받았습니다. 
+우리 옛 책을 보면 한글은 지금보다 크게 쓰였고, 
+그래서 글꼴의 개성이 잘 나타납니다. </p>
+<p>
+바람.체의 구조는 명조(바탕)체를 따랐고, 
+점과 획 등의 표현은 궁서체 등 옛 글씨를 따랐습니다. </p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<p class= "font_name">
+							직선 순명조 
+						</p>
+					</div>
+				</div>
+				<div class = "proj_credit">
+				</div>
+			</div>
+			<div class = "proj_body">
+				<a href="#">
+					<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test2.jpg')}}" alt="Image Not Available"/>
+				</a>
+
+				<div class="font_decription">
+					<p>this will help me decide on fonts when i'm doing a project with text, i never know what to do
+</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<p class= "font_name">
+							명주실
+						</p>
+					</div>
+				</div>
+				<div class = "proj_credit">
+				</div>
+			</div>
+			<div class = "proj_body">
+				<a href="#">
+					<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test3.jpg')}}" alt="Image Not Available"/>
+				</a>
+
+				<div class="font_decription">
+					<p>Doing something similar only I sketch the quotes as I read them so I don't have any set time guides. They're also a lot smaller than this but bigger like this makes sense...
+</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<p class= "font_name">
+							명주실
+						</p>
+					</div>
+				</div>
+				<div class = "proj_credit">
+				</div>
+			</div>
+			<div class = "proj_body">
+				<a href="#">
+					<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test3.jpg')}}" alt="Image Not Available"/>
+				</a>
+
+				<div class="font_decription">
+					<p>Doing something similar only I sketch the quotes as I read them so I don't have any set time guides. They're also a lot smaller than this but bigger like this makes sense...
+</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<p class= "font_name">
+							직선 순명조 
+						</p>
+					</div>
+				</div>
+				<div class = "proj_credit">
+				</div>
+			</div>
+			<div class = "proj_body">
+				<a href="#">
+					<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test2.jpg')}}" alt="Image Not Available"/>
+				</a>
+
+				<div class="font_decription">
+					<p>this will help me decide on fonts when i'm doing a project with text, i never know what to do
+</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<p class="font_name">
+							바람체
+						</p>
+					</div>
+				</div>
+				<div class = "proj_credit">
+				</div>
+			</div>
+			<div class = "proj_body">
+				<a href="#">
+					<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test1.jpg')}}" alt="Image Not Available"/>
+				</a>
+
+				<div class="font_decription">
+					<p>바람.체는 옛날 책에 쓰인 한글에서 영감을 받았습니다. 
+우리 옛 책을 보면 한글은 지금보다 크게 쓰였고, 
+그래서 글꼴의 개성이 잘 나타납니다. </p>
+<p>
+바람.체의 구조는 명조(바탕)체를 따랐고, 
+점과 획 등의 표현은 궁서체 등 옛 글씨를 따랐습니다. </p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
 		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a id="fonts_to_read" href="#">읽는 서체</a></li>
-				<li><a id="fonts_to_see" href="#">보는 서체</a></li>
-
-				<li class="dropdown">
-
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 작가별<span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">김아무개</a></li>
-						<li><a href="#">김아무개</a></li>
-						<li><a href="#">김아무개</a></li>
-						<li class="divider"></li>
-						<li><a href="#">이아무개</a></li>
-						<li><a href="#">이아무개</a></li>
-						<li><a href="#">이아무개</a></li>
-						<li><a href="#">이아무개</a></li>
-						<li class="divider"></li>
-					</ul>
-				</li>
-			</ul>
-			<form class="navbar-form navbar-right" role="search">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search">
-				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
-			</form>
-			
-		</div><!-- /.navbar-collapse -->
-	</div><!-- /.container-fluid -->
-</nav>
-<div class="main">
-		<ul class="og-grid">
-			<li class="project_item">
-				<a href="#">
-					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/1.png')}}" alt="Image Not Available"/>
-				</a>
-				<div class="font_list">
-					<hr class="hr_top" style="height:2px; background-color:gray">
-					<p class = "font_name project_brief">마시멜로</p>
-					<hr style="height:1px; background-color:gray">
-					<p class = "author project_brief">김아무개</p>
-					<hr style="height:1px; background-color:gray">
-					<p class = "project_date project_brief">2014.10.5</p>
-				</div>
-			</li>
-			<li class="project_item">
-				<a href="#">
-					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/1.png')}}" alt="Image Not Available"/>
-				</a>
-				<div class="font_list">
-					<hr class="hr_top" style="height:2px; background-color:gray">
-					<p class = "font_name project_brief">마시멜로</p>
-					<hr style="height:1px; background-color:gray">
-					<p class = "author project_brief">김아무개</p>
-					<hr style="height:1px; background-color:gray">
-					<p class = "project_date project_brief">2014.10.5</p>
-				</div>
-			</li>
-			<li class="project_item">
-				<a href="#">
-					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/1.png')}}" alt="Image Not Available"/>
-				</a>
-				<div class="font_list">
-					<hr class="hr_top" style="height:2px; background-color:gray">
-					<p class = "font_name project_brief">마시멜로</p>
-					<hr style="height:1px; background-color:gray">
-					<p class = "author project_brief">김아무개</p>
-					<hr style="height:1px; background-color:gray">
-					<p class = "project_date project_brief">2014.10.5</p>
-				</div>
-			</li>
-			<li class="project_item">
-				<a href="#">
-					<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/1.png')}}" alt="Image Not Available"/>
-				</a>
-				<div class="font_list">
-					<hr class="hr_top" style="height:2px; background-color:gray">
-					<p class = "font_name project_brief">마시멜로</p>
-					<hr style="height:1px; background-color:gray">
-					<p class = "author project_brief">김아무개</p>
-					<hr style="height:1px; background-color:gray">
-					<p class = "project_date project_brief">2014.10.5</p>
-				</div>
-			</li>
-		</ul>
 	</div>
 
 </body>
