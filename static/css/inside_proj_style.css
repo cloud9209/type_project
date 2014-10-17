@@ -230,8 +230,10 @@ a:hover{text-decoration:none;}
 /*-----------------------------promotion img & text about font ends*/
 
 #proj_papers{
-	width: 95%;
-	margin: 15px;
+	width: 100%;
+	padding: 10px 20px;
+	background-color: #f1f1f1;
+
 }
 
 	#process_label{
