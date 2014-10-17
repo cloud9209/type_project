@@ -177,12 +177,12 @@ a:hover{text-decoration:none;}
 		font-size: 10pt;
 		line-height: 175%;
 	}
-	.reactions_to_proj{
+	.reactions_to_paper{
 		border-top: 1px solid #e7e7e7;
 		height: 40px;
 		text-align:center;
-
 	}
+	
 		.reactions_to_proj>a>span{
 			font-size: 18pt;
 			color: gray;
