@@ -1,0 +1,624 @@
+{% extends "type_index.html" %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/inside_proj_style.css')}}" />
+{% endblock%}
+
+{% block body %}
+
+<div id="main">	
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-book"></span>
+						<a href='#'><p class= "font_name">반흘림 고딕</p></a>
+					</div>
+				</div>
+				
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_div">
+					<div class="font_profile_image">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test.jpg')}}" alt="Image Not Available"/>
+						<div id="img_control_div">
+							<input type="submit" value="삭제">	
+							<input type="submit" value="등록">	
+						</div>
+					</div>
+					<div class="font_description_div">
+						<div class="above_font_description_div">
+							<div id ="concept_label">
+								<p>제작 의도</p>
+							</div>
+							<div class = "proj_credit">
+								<a href="#">
+									<p class = "artist_name">한세정</p>
+									<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/test.jpg')}}" alt="Image Not Available"/>
+								</a>
+							</div>
+						</div>
+
+						<div class="font_description">
+							<p>어떤 폰트인지에 대한 설명을 여기에 작성하게 되는 것입니다</p>
+						</div>
+						<div id="text_control_div">	
+							<input type="submit" value="수정">	
+						</div>
+
+					</div>
+					<div class="font_sale_div">
+						<div id="price_info_div">
+							<div id="price_info_fix">
+								<p style="color: gray;">낱자 당</p>
+								<p style="color: gray; font-size: 23pt;">₩</p>
+							</div>
+							<div id="price_per_char">
+								<p style="color: gray; font-size: 23pt;">2,000</p>
+							</div>
+						</div>
+						<div id="request_info">
+							<p>구매/작업 요청</p>
+						</div>
+						<input id="send_request" type="submit" value="요청 보내기">	
+
+					</div>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+
+		<!-- <div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-eye-open" title="보는서체"></span>
+						<a href='#'><p class="font_name">바람체</p></a>
+					</div>
+				</div>
+				<div class = "proj_credit">
+					<a href='#'>
+						<p class = "artist_name">이용제</p>
+						<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/lyj.jpg')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_image">
+					<a href="#">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test1.jpg')}}" alt="Image Not Available"/>
+						<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+
+				<div class="font_description">
+					<p>
+						바람.체는 옛날 책에 쓰인 한글에서 영감을 받았습니다. 
+						우리 옛 책을 보면 한글은 지금보다 크게 쓰였고, 
+						그래서 글꼴의 개성이 잘 나타납니다. 
+					</p>
+					
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-eye-open" title="보는서체"></span>
+						<a href='#'><p class= "font_name">직선 순명조</p></a>
+					</div>
+				</div>
+				<div class = "proj_credit">
+					<a href='#'>
+					<p class = "artist_name">조윤준</p>
+					<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/jyj.jpg')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_image">
+					<a href="#">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test2.jpg')}}" alt="Image Not Available"/>
+						<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+
+				<div class="font_description">
+					<p>this will help me decide on fonts when i'm doing a project with text, i never know what to do
+					</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-book" title="읽는서체"></span>
+						<a href='#'><p class= "font_name">명주실</p></a>
+					</div>
+				</div>
+				<div class = "proj_credit">
+					<a href='#'>
+						<p class = "artist_name">엄후영</p>
+						<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/uhy.jpg')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_image">
+					<a href="#">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test3.jpg')}}" alt="Image Not Available"/>
+						<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+
+				<div class="font_description">
+					<p>Doing something similar only I sketch the quotes as I read them so I don't have any set time guides. They're also a lot smaller than this but bigger like this makes sense...
+					</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-book" title="읽는서체"></span>
+						<a href='#'><p class= "font_name">명주실</p></a>
+					</div>
+				</div>
+				<div class = "proj_credit">
+					<a href='#'>
+						<p class = "artist_name">엄후영</p>
+						<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/uhy.jpg')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_image">
+					<a href="#">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test3.jpg')}}" alt="Image Not Available"/>
+						<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+				<div class="font_description">
+					<p>Doing something similar only I sketch the quotes as I read them so I don't have any set time guides. They're also a lot smaller than this but bigger like this makes sense...
+					</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-eye-open" title="보는 서체"></span>
+						<a href='#'><p class= "font_name">직선 순명조</p></a>
+					</div>
+				</div>
+				<div class = "proj_credit">
+					<a href='#'>
+					<p class = "artist_name">조윤준</p>
+					<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/jyj.jpg')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_image">
+					<a href="#">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test2.jpg')}}" alt="Image Not Available"/>
+						<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+				<div class="font_description">
+					<p>this will help me decide on fonts when i'm doing a project with text, i never know what to do
+					</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-eye-open" title="보는서체"></span>
+						<a href='#'><p class="font_name">바람체</p></a>
+					</div>
+				</div>
+				<div class = "proj_credit">
+					<a href='#'>
+						<p class = "artist_name">이용제</p>
+						<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/test1.jpg')}}" alt="Image Not Available"/
+					</a>
+				</div>
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_image">
+					<a href="#">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test1.jpg')}}" alt="Image Not Available"/>
+						<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+
+				<div class="font_description">
+					<p>바람.체는 옛날 책에 쓰인 한글에서 영감을 받았습니다. 
+						우리 옛 책을 보면 한글은 지금보다 크게 쓰였고, 
+						그래서 글꼴의 개성이 잘 나타납니다. </p>
+						
+						</div>
+						<div class="reactions_to_proj">
+							<a href="#">
+								<span class="glyphicon glyphicon-heart-empty"></span>
+							</a>
+							<a href="#">
+								<span class="glyphicon glyphicon-comment"></span>
+							</a>
+							<a href="#">
+								<span class="glyphicon glyphicon-share-alt"></span>
+							</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-book"></span>
+						<a href='#'><p class= "font_name">반흘림 고딕</p></a>
+					</div>
+				</div>
+				<div class = "proj_credit">
+					<a href='#'>
+						<p class = "artist_name">한세정</p>
+						<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/test.jpg')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_image">
+					<a href="#">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test.jpg')}}" alt="Image Not Available"/>
+						<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+				<div class="font_description">
+					<p>어떤 폰트인지에 대한 설명을 여기에 작성하게 되는 것입니다</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-eye-open" title="보는서체"></span>
+						<a href='#'><p class="font_name">바람체</p></a>
+					</div>
+				</div>
+				<div class = "proj_credit">
+					<a href='#'>
+						<p class = "artist_name">이용제</p>
+						<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/lyj.jpg')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_image">
+					<a href="#">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test1.jpg')}}" alt="Image Not Available"/>
+						<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+
+				<div class="font_description">
+					<p>
+						바람.체는 옛날 책에 쓰인 한글에서 영감을 받았습니다. 
+						우리 옛 책을 보면 한글은 지금보다 크게 쓰였고, 
+						그래서 글꼴의 개성이 잘 나타납니다. 
+					</p>
+					
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-eye-open" title="보는서체"></span>
+						<a href='#'><p class= "font_name">직선 순명조</p></a>
+					</div>
+				</div>
+				<div class = "proj_credit">
+					<a href='#'>
+						<p class = "artist_name">조윤준</p>
+						<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/jyj.jpg')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_image">
+					<a href="#">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test2.jpg')}}" alt="Image Not Available"/>
+						<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+
+				<div class="font_description">
+					<p>this will help me decide on fonts when i'm doing a project with text, i never know what to do
+					</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-book" title="읽는서체"></span>
+						<a href='#'><p class= "font_name">명주실</p></a>
+					</div>
+				</div>
+				<div class = "proj_credit">
+					<a href='#'>
+						<p class = "artist_name">엄후영</p>
+						<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/uhy.jpg')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_image">
+					<a href="#">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test3.jpg')}}" alt="Image Not Available"/>
+						<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+
+				<div class="font_description">
+					<p>Doing something similar only I sketch the quotes as I read them so I don't have any set time guides. They're also a lot smaller than this but bigger like this makes sense...
+					</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-book" title="읽는서체"></span>
+						<a href='#'><p class= "font_name">명주실</p></a>
+					</div>
+				</div>
+				<div class = "proj_credit">
+					<a href='#'>
+						<p class = "artist_name">엄후영</p>
+						<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/uhy.jpg')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_image">
+					<a href="#">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test3.jpg')}}" alt="Image Not Available"/>
+						<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+				<div class="font_description">
+					<p>Doing something similar only I sketch the quotes as I read them so I don't have any set time guides. They're also a lot smaller than this but bigger like this makes sense...
+					</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-eye-open" title="보는서체"></span>
+						<a href='#'><p class= "font_name">직선 순명조</p></a>
+					</div>
+				</div>
+				<div class = "proj_credit">
+					<a href='#'>
+						<p class = "artist_name">조윤준</p>
+						<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/jyj.jpg')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_image">
+					<a href="#">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test2.jpg')}}" alt="Image Not Available"/>
+						<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+				<div class="font_description">
+					<p>this will help me decide on fonts when i'm doing a project with text, i never know what to do
+					</p>
+				</div>
+				<div class="reactions_to_proj">
+					<a href="#">
+						<span class="glyphicon glyphicon-heart-empty"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-comment"></span>
+					</a>
+					<a href="#">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</div>	
+			</div>
+		</div>
+		<div class="proj_item">
+			<div class = "proj_head">
+				<div class = "proj_title">
+					<div class = "font_name_div">
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
+						<span class="glyphicon glyphicon-eye-open" title="는서체"></span>
+						<a href='#'><p class="font_name">바람체</p></a>
+					</div>
+				</div>
+				<div class = "proj_credit">
+					<a href='#'>
+						<p class = "artist_name">이용제</p>
+						<img class="artist_profile_image" src="{{ url_for('static', filename = 'res/images/lyj.jpg')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+			</div>
+			<div class = "proj_body">
+				<div class="font_profile_image">
+					<a href="#">
+						<img class="thumbnail" src="{{ url_for('static', filename = 'res/images/test1.jpg')}}" alt="Image Not Available"/>
+						<img class="thumbnail_gradi_cover" src="{{ url_for('static', filename = 'res/images/thumbnail_gradi_cover.png')}}" alt="Image Not Available"/>
+					</a>
+				</div>
+
+				<div class="font_description">
+					<p>바람.체는 옛날 책에 쓰인 한글에서 영감을 받았습니다. 
+						우리 옛 책을 보면 한글은 지금보다 크게 쓰였고, 
+						그래서 글꼴의 개성이 잘 나타납니다. 
+					</p>
+				</div>
+						<div class="reactions_to_proj">
+							<a href="#">
+								<span class="glyphicon glyphicon-heart-empty"></span>
+							</a>
+							<a href="#">
+								<span class="glyphicon glyphicon-comment"></span>
+							</a>
+							<a href="#">
+								<span class="glyphicon glyphicon-share-alt"></span>
+							</a>
+				</div>	
+			</div>
+		</div>
+ -->
+</div>
+
+{% endblock %}

@@ -1,0 +1,242 @@
+body{
+	background-color: #e9e9e9;
+}
+.nav>li{
+	margin-left : 80px;
+}
+#join{
+	margin-top: 15px;
+	float:right;
+}
+	#join>a{
+		margin-left: 30px;
+		text-decoration: none;
+		padding-top: 25px;
+		color : gray;
+	}
+a:hover{text-decoration:none;}
+#search_box{
+	display: list-item;
+	margin-top: -10px;
+	margin-right:70px;
+}
+
+#main{
+	width: 95%;
+	min-width: 400px;
+	margin: auto;
+}
+
+.proj_item{
+	margin : 15px;
+	margin-bottom: 25px;
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	column-break-inside: avoid;
+}
+
+.proj_head{		
+	display: inline-block;
+	height: 43px;
+	width: 100%;
+}
+	.proj_title {
+		float:left;		
+		height : 30px;
+	}
+	.font_name_div{
+		width: 165px;
+		height: 43px;
+	}
+		.font_name_back{
+			z-index : -1;
+			width: 200px;
+		}
+		.font_name_div>span{
+			top: -28px;
+			margin-left: 17px;
+			position: relative;
+			font-size: 14pt;
+			color: #b0b0b0;
+		}
+
+		.font_name{
+			color: black;
+			text-decoration: none;
+			padding-left: 8px;
+			border-left: 2px solid #d7d7d7;
+			position: relative;
+			top: -52px;
+			margin-left: 45px;
+			font-size: 11pt;
+			font-weight: bold;
+			font-family: 'Noto Sans', sans-serif;
+		}
+
+.proj_body{
+	display: inline-block;
+	margin-top : -5px;
+	box-shadow : 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+	width: 95%;
+	height: 460px;
+	border-radius: 0 6px 6px 6px;
+	background-color: white;
+}
+.font_profile_div{
+	width: 100%;
+	height: 280px;
+	display: inline-block;	
+}
+	.font_profile_image{
+		float: left;
+		margin-top: 20px;
+		margin-left: 20px;
+		width : 200px;
+		height: 240px;
+	}
+		.thumbnail{
+			margin : 0px;
+			padding : 0px;
+			border-radius: 0 6px 0 0;
+			box-shadow : 2px 2px 2px 2px rgba(0, 0, 0, 0.22);
+			border: 0px;
+			width: 200px;
+			height: 200px;
+		}
+		#img_control_div{
+			margin-top: 10px;
+		}
+			#img_control_div>input{
+				background-color: white;
+				border-radius: 3px;
+				box-shadow : 1px 1px 1px 1px rgba(0, 0, 0, 0.22);
+				border:none;
+				width: 45px;
+				margin-left: 10px;
+				float:right;
+			}
+
+	.font_description_div{
+		margin-left: 20px;
+		margin-top : 15px;
+		float: left;
+		height: 240px;
+		width: 50%;
+	}
+		.above_font_description_div{
+			display: inline-block;
+			margin-top: 5px;
+			width: 100%;
+
+		}
+			#concept_label{
+				float:left;
+				padding-top: 5px;
+				height: 30px;
+				color: gray;
+				
+			}
+			.proj_credit{
+				float: right;
+				height: 30px;
+			}
+			.artist_name{
+				text-decoration: none;
+				font-family: 'Noto Sans', sans-serif;
+				display: inline;
+				color: gray;
+			}
+			.artist_profile_image{
+				border-radius: 3px;
+				display: inline;
+				margin-left: 5px;
+				width:28px;
+				height: 28px;
+			}
+
+		.font_description{
+			padding-top: 15px;
+			border-top: 1px solid #d7d7d7;
+			width: 100%;
+			height : 171px;
+			font-family: 'Noto Sans', sans-serif;
+			font-size: 10pt;
+			line-height: 175%;
+		}
+		#text_control_div{
+			border-top: 1px solid #d7d7d7;
+			
+		}
+		#text_control_div>input{
+			width: 45px;
+			background-color: white;
+			border-radius: 3px;
+			box-shadow : 1px 1px 1px 1px rgba(0, 0, 0, 0.22);
+			margin-top: 10px;
+			border:none;
+			float:right;
+		}
+	.font_sale_div{
+		float: right;
+		margin-top : 15px;
+		margin-right : 20px;
+		padding-left: 20px;
+		border-left: 1px solid #d7d7d7;
+		heigh: 200px;
+		width: 25%;
+	}
+		#price_info_div{
+			margin-top: -10px;
+			border-bottom: 1px dashed #d7d7d7;
+			height: 53px;
+
+		}	
+			#price_info_fix{
+				float:left;	
+			}	
+				#price_info_fix>p{
+					display: inline;
+					margin-right: 10px;
+				}	
+			#price_per_char{
+				float: right;
+			}
+		#request_info{
+			width: 100%;
+			height : 162px;
+		}
+			#request_info>p{
+				color: gray; 
+				font-size: 13pt; 
+				padding-top: 10px;
+			}
+	#send_request{
+		vertical-align: bottom;
+		background-color: white;
+		width: 100%;
+		font-size: 15pt;
+		border-radius: 3px;
+		box-shadow : 1px 1px 1px 1px rgba(0, 0, 0, 0.22);
+		margin-top: 10px;
+		border:none;
+	}
+
+
+.reactions_to_proj{
+	margin-top: 15px;
+	border-top: 1px solid #e7e7e7;
+	height: 40px;
+	text-align:center;
+
+}
+		.reactions_to_proj>a>span{
+			font-size: 18pt;
+			color: gray;
+			margin : 10px 25px;
+		}
+
+
+
+
+
+

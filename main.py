@@ -8,8 +8,12 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
-    return render_template('type_index.html')
+    return render_template('main.html')
 
+@app.route('/inside_proj')
+def inside_proj():
+    """Return a friendly HTTP greeting."""
+    return render_template('inside_proj_item.html')
 
 @app.errorhandler(404)
 def page_not_found(e):
