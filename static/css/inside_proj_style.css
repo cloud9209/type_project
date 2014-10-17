@@ -27,29 +27,29 @@ a:hover{text-decoration:none;}
 	margin: auto;
 }
 
-.proj_item{
+#proj_item{
 	margin : 15px;
 	margin-bottom: 25px;
 }
 
-.proj_head{		
+#proj_head{		
 	display: inline-block;
 	height: 43px;
 	width: 100%;
 }
-	.proj_title {
+	#proj_title {
 		float:left;		
 		height : 30px;
 	}
-	.font_name_div{
+	#font_name_div{
 		width: 165px;
 		height: 43px;
 	}
-		.font_name_back{
+		#font_name_back{
 			z-index : -1;
 			width: 200px;
 		}
-		.font_name_div>span{
+		#font_name_div>span{
 			top: -28px;
 			margin-left: 17px;
 			position: relative;
@@ -57,7 +57,7 @@ a:hover{text-decoration:none;}
 			color: #b0b0b0;
 		}
 
-		.font_name{
+		#font_name{
 			color: black;
 			text-decoration: none;
 			padding-left: 8px;
@@ -70,7 +70,7 @@ a:hover{text-decoration:none;}
 			font-family: 'Noto Sans', sans-serif;
 		}
 
-.proj_body{
+#proj_body{
 	display: inline-block;
 	margin-top : -5px;
 	box-shadow : 0 1px 2px 0 rgba(0, 0, 0, 0.22);
@@ -78,19 +78,23 @@ a:hover{text-decoration:none;}
 	border-radius: 0 6px 6px 6px;
 	background-color: white;
 }
-.font_profile_div{
+
+/*-------------------promotion img & text about font start*/
+#font_profile_div{
 	width: 100%;
 	height: 280px;
 	display: inline-block;	
+	border-bottom: 1px dashed #d7d7d7;
+
 }
-	.font_profile_image{
+	#font_profile_image{
 		float: left;
 		margin-top: 20px;
 		margin-left: 20px;
 		width : 200px;
 		height: 240px;
 	}
-		.thumbnail{
+		#thumbnail{
 			margin : 0px;
 			padding : 0px;
 			border-radius: 0 6px 0 0;
@@ -106,20 +110,22 @@ a:hover{text-decoration:none;}
 				background-color: white;
 				border-radius: 3px;
 				box-shadow : 1px 1px 1px 1px rgba(0, 0, 0, 0.22);
+				font-family: 'Noto Sans', sans-serif;
+				/*font-size: 11px;*/
 				border:none;
 				width: 45px;
 				margin-left: 10px;
 				float:right;
 			}
 
-	.font_description_div{
+	#font_description_div{
 		margin-left: 20px;
 		margin-top : 15px;
 		float: left;
 		height: 240px;
 		width: 50%;
 	}
-		.above_font_description_div{
+		#above_font_description_div{
 			display: inline-block;
 			margin-top: 5px;
 			width: 100%;
@@ -127,41 +133,42 @@ a:hover{text-decoration:none;}
 		}
 			#concept_label{
 				float:left;
+				font-family: 'Noto Sans', sans-serif;
+				font-size: 12pt;
 				padding-top: 5px;
 				height: 30px;
 				color: gray;
-				
 			}
-			.proj_credit{
+			#proj_credit{
 				float: right;
 				height: 30px;
 			}
-			.artist_name{
+			#artist_name{
 				text-decoration: none;
 				font-family: 'Noto Sans', sans-serif;
 				display: inline;
 				color: gray;
 			}
-			.artist_profile_image{
+			#artist_profile_image{
 				border-radius: 3px;
+				box-shadow : 1px 1px 1px 1px rgba(0, 0, 0, 0.22);
 				display: inline;
 				margin-left: 5px;
 				width:28px;
 				height: 28px;
 			}
-
-		.font_description{
+/*-------------------description text about font*/
+		#font_description{
 			padding-top: 15px;
 			border-top: 1px solid #d7d7d7;
 			width: 100%;
-			height : 171px;
+			height : 165px;
 			font-family: 'Noto Sans', sans-serif;
 			font-size: 10pt;
 			line-height: 175%;
 		}
 		#text_control_div{
 			border-top: 1px solid #d7d7d7;
-			
 		}
 		#text_control_div>input{
 			width: 45px;
@@ -172,7 +179,10 @@ a:hover{text-decoration:none;}
 			border:none;
 			float:right;
 		}
-	.font_sale_div{
+/*-------------------description about font*/
+
+/*-------------------font sale part*/
+	#font_sale_div{
 		float: right;
 		margin-top : 15px;
 		margin-right : 20px;
@@ -181,11 +191,19 @@ a:hover{text-decoration:none;}
 		heigh: 200px;
 		width: 25%;
 	}
+		#request_info{
+			width: 100%;
+			border-bottom: 1px solid #d7d7d7;
+		}
+			#request_info>p{
+				color: gray;  
+				font-family: 'Noto Sans', sans-serif;
+				font-size: 12pt;
+				padding-top: 6px;
+			}
 		#price_info_div{
-			margin-top: -10px;
-			border-bottom: 1px dashed #d7d7d7;
-			height: 53px;
-
+			padding-top: 7px;
+			height: 161px;
 		}	
 			#price_info_fix{
 				float:left;	
@@ -197,40 +215,57 @@ a:hover{text-decoration:none;}
 			#price_per_char{
 				float: right;
 			}
-		#request_info{
-			width: 100%;
-			height : 162px;
-		}
-			#request_info>p{
-				color: gray; 
-				font-size: 13pt; 
-				padding-top: 10px;
-			}
 	#send_request{
 		vertical-align: bottom;
 		background-color: white;
 		width: 100%;
-		font-size: 15pt;
+		font-size: 13pt;
+		height: 33px;
 		border-radius: 3px;
 		box-shadow : 1px 1px 1px 1px rgba(0, 0, 0, 0.22);
 		margin-top: 10px;
 		border:none;
 	}
+/*-------------------font sale part*/
+/*-----------------------------promotion img & text about font ends*/
 
 #proj_papers{
 	width: 95%;
-	margin-top: 15px;
-	border-top: 1px solid #e7e7e7;
+	margin: 15px;
 }
+
+	#process_label{
+		margin-top: 10px;
+		width: 100%;
+		border-bottom: 1px solid #e7e7e7;
+	}
+		#process_label>p{
+			color: gray;
+			margin-left: 20px;
+			font-family: 'Noto Sans', sans-serif;
+			font-size: 12pt;
+		}
+	.paper_date_div{
+			width: 100%;
+			display: inline-block;
+		}
+		.paper_date{
+			float:left;
+			margin : 3px 10px;
+			font-family: 'Noto Sans', sans-serif;
+			font-size: 9pt;
+			color: gray;
+			line-height: 175%;
+		}
+
 	.paper_item{
 		display: inline-block;
-		margin : 15px;
-		margin-bottom: 25px;
+		margin: 20px 15px;
 	}
 		.paper_body{
 			box-shadow : 2px 2px 2px 2px rgba(0, 0, 0, 0.22);
 			width: 250px;
-			height: 430px;
+			height: 440px;
 			border-radius: 6px;
 			background-color: white;
 		}
@@ -247,12 +282,13 @@ a:hover{text-decoration:none;}
 					width: 250px;
 					height: 250px;
 				}
+			
 			.paper_description{
 				height : 110px;
 				margin : 10px;
 				padding : 10px;
 				font-family: 'Noto Sans', sans-serif;
-				font-size: 10pt;
+				font-size: 11pt;
 				line-height: 175%;
 			}
 
@@ -268,20 +304,122 @@ a:hover{text-decoration:none;}
 				margin : 10px 25px;
 			}
 
-		.reactions_to_proj{
+		#like_on_proj_div{
 			width: 100%;
-			display: inline-block;
-			margin-top: 15px;
-			border-top: 1px solid #e7e7e7;
 			height: 40px;
-			text-align:center;
+			padding: 10px 20px;
+			border-top: 1px solid #e7e7e7;
 		}
-		.reactions_to_proj>a>span{
-			font-size: 18pt;
-			color: gray;
-			margin : 10px 25px;
+			#like_on_proj_div>span{
+				float: left;
+				font-size: 14pt;
+				color: gray;
+			}
+			#like_users_div{
+				float: left;
+				margin-left : 7px;
+				padding-top: 1px;
+			}
+				#like_users_div>*{
+					font-family: 'Noto Sans', sans-serif;
+					font-size: 11pt;
+					display: inline;
+				}
+			
+		#comment_on_proj_div{
+			width: 100%;
+			padding: 10px 20px;
+			border-top: 1px solid #e7e7e7;
 		}
+			#comment_on_proj_label{
+				display: inline-block;
+				height: 30px;
+				width: 100%;
+			}
+				#comment_on_proj_label>span{
+					float:left;
+					font-size: 14pt;
+					color: gray;
+				}
+				#comment_on_proj_num_count{
+					display: inline;
+					margin-left: 5px;
+					font-family: 'Noto Sans', sans-serif;
+					font-size: 11pt;
+				}
 
+			.comment_on_proj{
+				width: 100%;
+				height: 45px;
+				padding: 5px 0px;
+				display: inline-block;
+				border-top: 1px dashed #d7d7d7;
+			}
+				.comment_user{
+					margin: 5px 0px;
+					float: left;
+					padding-right: 10px;
+					border-right: 2px solid #e7e7e7;
+				}	
+					.comment_user>a>*{
+						display: inline;
+					}
+					.comment_user_img{
+						border-radius: 3px;
+						width:28px;
+						height: 28px;
+					}
+					.comment_user_name{
+						margin-left: 5px;
+						font-family: 'Noto Sans', sans-serif;
+						font-size: 11pt;
+					}
+
+				.comment_body{
+					margin: 7px 0px;
+					padding-left: 10px;
+					width: 85%;
+					float: left;
+				}
+					.comment_body>div{
+						font-family: 'Noto Sans', sans-serif;
+					}
+					.comment_content{
+						font-size: 11pt;
+						float: left;
+					}
+					.comment_date{
+						font-size: 9pt;
+						margin: 5px 0px;
+						padding-right: 10px;
+						float: right;
+					}
+				.comment_manage_btn{
+					margin-top: 10px;
+					float: right;	
+					border-left: 2px solid #e7e7e7;
+
+				}
+					.comment_manage_btn>span{
+						font-size: 14pt;
+						margin-left: 10px;
+						display: inline;
+					}
+
+				.comment_body>input{
+					
+					padding-left: 10px;
+					width: 95%;
+				}	
+
+				#comment_submit{
+					width: 50px;
+					background-color: white;
+					border-radius: 3px;
+					box-shadow : 1px 1px 1px 1px rgba(0, 0, 0, 0.22);
+					border:none;
+					margin-left: 10px;					
+				}
 
 
 
