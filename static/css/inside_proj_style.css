@@ -270,18 +270,32 @@ a:hover{text-decoration:none;}
 			font-family: 'Noto Sans', sans-serif;
 			font-size: 12pt;
 		}
-	.paper_date_div{
-			width: 100%;
-			display: inline-block;
+	.above_paper_div{
+		display: inline-block;
+		width: 100%;
+	}
+		.paper_date_div{
+			float: left;
 		}
-		.paper_date{
-			float:left;
-			margin : 3px 10px;
-			font-family: 'Noto Sans', sans-serif;
-			font-size: 9pt;
-			color: gray;
-			line-height: 175%;
+			.paper_date{
+				margin : 3px 10px;
+				font-family: 'Noto Sans', sans-serif;
+				font-size: 9pt;
+				color: gray;
+				line-height: 175%;
+			}
+		.btn_paper_manage{
+			float:right;
+			padding-top: 3px;
 		}
+			.btn_paper_manage>span{
+				font-size: 10pt;
+				margin-left: 9px;
+				display: inline;
+			}		
+			.btn_paper_manage>span:hover{
+				cursor:pointer;
+			}
 
 	.paper_item{
 		display: inline-block;
@@ -297,6 +311,8 @@ a:hover{text-decoration:none;}
 			.paper_image{
 				width : 260px;
 				height: 260px;
+				background-color: #f0f0f0;
+				border-radius: 6px 6px 0 0;
 				z-index : 1;
 				box-shadow : 0 1px 2px 0 rgba(0, 0, 0, 0.22);
 				position:relative;
@@ -306,7 +322,7 @@ a:hover{text-decoration:none;}
 					margin:auto;
 					max-width: 95%;
 					max-height: 95%;
-					border-radius: 6px;
+					/*border-radius: 6px;*/
 					position:absolute;
 				    top:0;
 				    bottom:0;
