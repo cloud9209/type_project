@@ -178,8 +178,13 @@ a:hover{text-decoration:none;}
 		z-index : 2;
 		width: 280px;
 		height: 280px;
+		background: -moz-linear-gradient(#fff, #fff, #878787);
+		background: -webkit-linear-gradient(#fff, #fff, #878787);
+		background: -o-linear-gradient(#fff, #fff, #878787);
+		opacity: 0.1;
 	}
 	.thumbnail{
+
 		z-index : 1;
 		margin : 0px;
 		padding : 0px;
@@ -190,6 +195,10 @@ a:hover{text-decoration:none;}
 		height: 280px;
 	}
 	.font_description{
+		-o-text-overflow: ellipsis;   /* Opera */
+    	text-overflow:    ellipsis;   /* IE, Safari (WebKit) */
+    	overflow:hidden;              /* don't show excess chars */
+
 		height : 110px;
 		margin : 10px;
 		padding : 10px;

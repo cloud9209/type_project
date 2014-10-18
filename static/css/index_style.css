@@ -1,0 +1,65 @@
+#modal_enter_proj_name {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;
+	opacity:0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
+
+#modal_enter_proj_name:target {
+	opacity:1;
+	pointer-events: auto;
+}
+/*create_new_proj_modal custom*/
+	#enter_proj_name_div{
+		margin:auto;
+		max-width: 100%;
+		max-height: 100%;
+		/*border-radius: 6px;*/
+		position:absolute;
+	    top:0;
+	    bottom:0;
+	    left:0;
+	    right:0;
+
+		padding: 15px;
+		border-radius: 10px;
+		background-color: white;
+		width: 350px;
+		height: 110px;
+	}
+		#label_enter_proj_name{
+			border-bottom: 1px solid #d7d7d7;
+			margin-bottom: 10px;
+			color: gray;
+		}
+
+		#enter_proj_name{
+			display: inline;
+		}
+			#enter_proj_name>input{
+				height: 33px;
+				width: 200px;
+			}
+
+		#btn_create_proj_or_not{
+			display: inline;
+		}
+			#btn_create_proj_or_not>a>input{
+				width: 50px;
+				height: 30px;
+				margin-left: 5px;
+				background-color: white;
+				border-radius: 3px;
+				box-shadow : 1px 1px 1px 1px rgba(0, 0, 0, 0.22);
+				border:none;
+				color: gray;
+			}

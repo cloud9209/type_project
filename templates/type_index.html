@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/component.css')}}" />
 	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}" />
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Noto+Sans">
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/index_style.css')}}" />
 
 	<script src="{{ url_for('static', filename = 'js/jquery-2.1.1.min.js')}}"></script>
 	<script src="{{ url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
@@ -70,9 +71,23 @@
 			</form>
 		</div>
 		<div id="btn_create_proj">
-			<a href="">
+			<a href="#modal_enter_proj_name">
 			<span class="glyphicon glyphicon-folder-open"></span>내 작업 개설하기
 			</a>
+		</div>
+	</div>
+	<div id="modal_enter_proj_name">
+		<div id="enter_proj_name_div">
+			<div id="label_enter_proj_name" >
+				<p>작업 이름을 입력하세요.</p>	
+			</div>
+			<div id="enter_proj_name">
+				<input type="text" placeholder="작업 이름">
+			</div>
+			<div id="btn_create_proj_or_not">
+				<a href="#close"><input type="submit" value="등록"></a>
+				<a href="#close"><input type="submit" value="취소"></a>
+			</div>
 		</div>
 	</div>
 {%block body%}
