@@ -15,11 +15,32 @@ body{
 		color : gray;
 	}
 a:hover{text-decoration:none;}
-#search_box{
-	display: list-item;
-	margin-top: -10px;
-	margin-right:70px;
+/*do not show search box & btn_create_proj in inside_proj_item.html*/
+#above_proj_items{
+	display: none;	
+	width: 90%;
+	heigth: 45px;
+	border-bottom: 1px solid gray;
+	margin-left: 60px;
 }
+	#search_box{
+		float: left;
+		margin: 5px 0px;			
+	}	
+	#btn_create_proj{
+		float: right;
+		margin-top: 10px;
+		font-family: 'Noto Sans', sans-serif;
+	}
+		#btn_create_proj>a{
+			color: gray;
+			text-decoration: none;
+		}
+		#btn_create_proj>a>span{	
+			font-size: 15pt;
+			margin-right: 10px;
+		}
+/*do not show search box & btn_create_proj in inside_proj_item.html*/
 
 #main{
 	width: 95%;
@@ -400,14 +421,16 @@ a:hover{text-decoration:none;}
 					margin-top: 10px;
 					float: right;	
 					border-left: 2px solid #e7e7e7;
-
 				}
 					.comment_manage_btn>span{
 						font-size: 14pt;
 						margin-left: 10px;
 						display: inline;
 					}
+					.comment_manage_btn>span:hover{
 
+						cursor:pointer;
+					}
 				.comment_body>input{
 					
 					padding-left: 10px;

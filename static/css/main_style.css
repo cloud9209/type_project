@@ -17,12 +17,32 @@ body{
 	}
 
 a:hover{text-decoration:none;}
-#search_box{
-	display: list-item;
-	margin-top: -10px;
-	margin-right:70px;
+#above_proj_items{
+	display: inline-block;	
+	width: 90%;
+	heigth: 45px;
+	border-bottom: 1px solid #a7a7a7;
+	margin-left: 60px;
 
 }
+	#search_box{
+		float: left;
+		margin: 9px 0px;			
+	}	
+	#btn_create_proj{
+		float: right;
+		margin-top: 15px;
+		font-family: 'Noto Sans', sans-serif;
+	}
+		#btn_create_proj>a{
+			color: gray;
+			text-decoration: none;
+		}
+		#btn_create_proj>a>span{
+			
+			font-size: 15pt;
+			margin-right: 10px;
+		}
 #main{
 	width: 93%;
 	min-width: 400px;
@@ -177,7 +197,7 @@ a:hover{text-decoration:none;}
 		font-size: 10pt;
 		line-height: 175%;
 	}
-	.reactions_to_paper{
+	.reactions_to_proj{
 		border-top: 1px solid #e7e7e7;
 		height: 40px;
 		text-align:center;
