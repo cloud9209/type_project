@@ -65,7 +65,7 @@
 			}
 
 
-
+/* ---------------- show inside_proj_item.html by modal start--------------- */
 #modal_inside_proj_item{
 	position: fixed;
 	font-family: Arial, Helvetica, sans-serif;
@@ -102,7 +102,7 @@
 	    right:0;
 	    overflow: auto;
 	}
-	#close {
+	#close_modal_inside_proj_item {
 		background: red;
 		color: #ffffff;
 		line-height: 35px;
@@ -124,4 +124,5 @@
 		opacity: 1;
 	}
 
-	#close:hover { background: #00d9ff; }
+	#close_modal_inside_proj_item:hover { background: #00d9ff; }
+/* ---------------- show inside_proj_item.html by modal end--------------- */

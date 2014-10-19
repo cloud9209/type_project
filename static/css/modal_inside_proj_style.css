@@ -333,12 +333,12 @@
 				font-size: 14pt;
 				color: gray;
 			}
-			#like_users_div{
+			#like_proj_users_div{
 				float: left;
 				margin-left : 7px;
 				padding-top: 1px;
 			}
-				#like_users_div>*{
+				#like_proj_users_div>*{
 					font-family: 'Noto Sans', sans-serif;
 					font-size: 10pt;
 					display: inline;
@@ -373,65 +373,65 @@
 				display: inline-block;
 				border-top: 1px dashed #d7d7d7;
 			}
-				.comment_user{
+				.comment_on_proj_user{
 					margin: 5px 0px;
 					float: left;
 					padding-right: 10px;
 					border-right: 2px solid #e7e7e7;
 				}	
-					.comment_user>a>*{
+					.comment_on_proj_user>a>*{
 						display: inline;
 					}
-					.comment_user_img{
+					.comment_on_proj_user_img{
 						border-radius: 3px;
 						width:27px;
 						height: 27px;
 					}
-					.comment_user_name{
+					.comment_on_proj_user_name{
 						margin-left: 5px;
 						font-family: 'Noto Sans', sans-serif;
 						font-size: 10pt;
 					}
 
-				.comment_body{
+				.comment_on_proj_body{
 					margin: 7px 0px;
 					padding-left: 10px;
 					width: 85%;
 					float: left;
 				}
-					.comment_body>div{
+					.comment_on_proj_body>div{
 						font-family: 'Noto Sans', sans-serif;
 					}
-					.comment_content{
+					.comment_on_proj_content{
 						padding-top: 3px;
 						font-size: 10pt;
 						float: left;
 					}
-					.comment_date{
+					.comment_on_proj_date{
 						font-size: 9pt;
 						margin: 5px 0px;
 						padding-right: 10px;
 						float: right;
 					}
-				.comment_manage_btn{
+				.comment_on_proj_manage_btn{
 					margin-top: 10px;
 					float: right;	
 					border-left: 2px solid #e7e7e7;
 				}
-					.comment_manage_btn>span{
+					.comment_on_proj_manage_btn>span{
 						font-size: 14pt;
 						padding-left: 10px;
 						display: inline;
 					}
-					.comment_manage_btn>span:hover{
+					.comment_on_proj_manage_btn>span:hover{
 						cursor:pointer;
 					}
-				.comment_body>input{
+				.comment_on_proj_body>input{
 					padding-left: 10px;
 					width: 100%;
 				}	
 
-				#comment_submit{
+				#comment_on_proj_submit{
 					width: 50px;
 					background-color: white;
 					border-radius: 3px;
