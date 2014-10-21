@@ -39,32 +39,33 @@ a:hover{text-decoration:none;}
 			text-decoration: none;
 		}
 		#btn_create_proj>a>span{
-			
 			font-size: 15pt;
 			margin-right: 10px;
 		}
+
 #main{
-	width: 93%;
 	min-width: 400px;
 	margin: 30px auto;
+	margin-left: 50px;
 }
 
 /*align proj_items in columns according to its height*/
 #columns {
 	-webkit-column-count: 5;
-	-webkit-column-gap: 10px;
+	-webkit-column-gap: 20px;
 	-moz-column-count: 5;
-	-moz-column-gap: 10px;
+	-moz-column-gap: 20px;
 	-moz-column-fill: auto;
 	column-count: 5;
-	column-gap: 15px;
+	column-gap: 20px;
+	column-width: 240px;
 	margin:auto;
 }
 
 .proj_item{
 	display: inline-block;
 	margin:auto;
-	margin-bottom: 25px;
+	margin-bottom: 35px;
 	-webkit-column-break-inside: avoid;
 	-moz-column-break-inside: avoid;
 	column-break-inside: avoid;
@@ -75,48 +76,89 @@ a:hover{text-decoration:none;}
 }
 
 /*change column number by min width*/
-@media (min-width: 240px) {
+@media (min-width: 300px) {
+	#main{
+		width: 250px;
+	}	
 	#columns {
 		-webkit-column-count: 1;
 		-moz-column-count: 1;
 		column-count: 1;
 	}
 }
-@media (min-width: 520px) {
+
+@media (min-width: 550px) {
+	#main{
+		width: 500px;
+	}		
 	#columns {
 		-webkit-column-count: 2;
 		-moz-column-count: 2;
 		column-count: 2;
+		
+		-webkit-column-gap: 20px;
+		-moz-column-gap: 20px;
+		column-gap: 20px;
 	}
 }
-@media (min-width: 780px) {
+
+@media (min-width: 810px) {
+	#main{
+		width: 760px;
+	}		
 	#columns {
 		-webkit-column-count: 3;
 		-moz-column-count: 3;
 		column-count: 3;
+		
+		-webkit-column-gap: 20px;
+		-moz-column-gap: 20px;
+		column-gap: 20px;
 	}
 }
-@media (min-width: 1045px) {
+
+@media (min-width: 1070px) {
+	#main{
+		width: 1020px;
+	}	
 	#columns {
 		-webkit-column-count: 4;
 		-moz-column-count: 4;
 		column-count: 4;
+		
+		-webkit-column-gap: 20px;
+		-moz-column-gap: 20px;
+		column-gap: 20px;
 	}
 }
-@media (min-width: 1300px) {
+
+@media (min-width: 1330px) {
+	#main{
+		width: 1280px;
+	}
 	#columns {
 		-webkit-column-count: 5;
 		-moz-column-count: 5;
 		column-count: 5;
+		-webkit-column-gap: 20px;
+		-moz-column-gap: 20px;
+		column-gap: 20px;
 	}
 }
-@media (min-width: 1500px) {
+@media (min-width: 1590px) {
+	#main{
+		width: 1540px;
+	}	
 	#columns {
 		-webkit-column-count: 6;
 		-moz-column-count: 6;
 		column-count: 6;
+		-webkit-column-gap: 20px;
+		-moz-column-gap: 20px;
+		column-gap: 20px;
 	}
 }
+
 .proj_head{		
 	display: inline-block;
 	width: 240px;
