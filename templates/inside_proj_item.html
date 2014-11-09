@@ -70,10 +70,11 @@
 			<!-- ***********************project papers****************** -->
 
 			<div id="proj_papers">	
+				{% for paper_item in paper_items %}
 				<div class="paper_item">
 					<div class="above_paper_div">
 						<div class="paper_date_div">
-							<p class="paper_date">2014년 6월 7일 14시 20분</p>
+							<p class="paper_date">{{ paper_item.date }}</p>
 						</div>	
 						<div class="btn_paper_manage">
 							<span class="glyphicon glyphicon-pencil"></span>
@@ -83,11 +84,11 @@
 					<div class = "paper_body">
 						<div class="paper_image">
 							<a href="#">
-								<img class="paper_img_thumbnail" src="{{ url_for('static', filename = 'res/images/process_test_1.jpg')}}" alt="Image Not Available"/>
+								<img class="paper_img_thumbnail" src="{{ url_for('static', filename = {{ paper_item.thumbnail }})}}" alt="Image Not Available"/>
 							</a>
 						</div>
 						<div class="paper_description">
-							<p>하 너무 어려웡..</p>
+							<p>{{ paper_item.description }}</p>
 						</div>
 						<div class="reactions_to_paper">
 							<a href="#">
@@ -102,205 +103,8 @@
 						</div>	
 					</div>
 				</div>
-				<div class="paper_item">
-					<div class="above_paper_div">
-						<div class="paper_date_div">
-							<p class="paper_date">2014년 6월 7일 14시 20분</p>
-						</div>	
-						<div class="btn_paper_manage">
-							<span class="glyphicon glyphicon-pencil"></span>
-							<span class="glyphicon glyphicon-trash"></span>
-						</div>
-					</div>
-					<div class = "paper_body">
-						<div class="paper_image">
-							<a href="#">
-								<img class="paper_img_thumbnail" src="{{ url_for('static', filename = 'res/images/process_test_2.jpg')}}" alt="Image Not Available"/>
-							</a>
-						</div>
-							
-						<div class="paper_description">
-							<p>하 너무 어려웡..</p>
-						</div>
-						<div class="reactions_to_paper">
-							<a href="#">
-								<span class="glyphicon glyphicon-heart-empty"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-comment"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-share-alt"></span>
-							</a>
-						</div>	
-					</div>
-				</div>
-				<div class="paper_item">
-					<div class="above_paper_div">
-						<div class="paper_date_div">
-							<p class="paper_date">2014년 6월 7일 14시 20분</p>
-						</div>	
-						<div class="btn_paper_manage">
-							<span class="glyphicon glyphicon-pencil"></span>
-							<span class="glyphicon glyphicon-trash"></span>
-						</div>
-					</div>
-					<div class = "paper_body">
-						<div class="paper_image">
-							<a href="#">
-								<img class="paper_img_thumbnail" src="{{ url_for('static', filename = 'res/images/process_test_3.jpg')}}" alt="Image Not Available"/>
-							</a>
-						</div>
-						
-						<div class="paper_description">
-							<p>하 너무 어려웡..</p>
-						</div>
-						<div class="reactions_to_paper">
-							<a href="#">
-								<span class="glyphicon glyphicon-heart-empty"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-comment"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-share-alt"></span>
-							</a>
-						</div>	
-					</div>
-				</div>
-				<div class="paper_item">
-					<div class="above_paper_div">
-						<div class="paper_date_div">
-							<p class="paper_date">2014년 6월 7일 14시 20분</p>
-						</div>	
-						<div class="btn_paper_manage">
-							<span class="glyphicon glyphicon-pencil"></span>
-							<span class="glyphicon glyphicon-trash"></span>
-						</div>
-					</div>
-					<div class = "paper_body">
-						<div class="paper_image">
-							<a href="#">
-								<img class="paper_img_thumbnail" src="{{ url_for('static', filename = 'res/images/process_test_4.jpg')}}" alt="Image Not Available"/>
-							</a>
-						</div>
+				{% endfor %}
 
-						
-						<div class="paper_description">
-							<p>하 너무 어려웡..</p>
-						</div>
-						<div class="reactions_to_paper">
-							<a href="#">
-								<span class="glyphicon glyphicon-heart-empty"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-comment"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-share-alt"></span>
-							</a>
-						</div>	
-					</div>
-				</div>
-				<div class="paper_item">
-					<div class="above_paper_div">
-						<div class="paper_date_div">
-							<p class="paper_date">2014년 6월 7일 14시 20분</p>
-						</div>	
-						<div class="btn_paper_manage">
-							<span class="glyphicon glyphicon-pencil"></span>
-							<span class="glyphicon glyphicon-trash"></span>
-						</div>
-					</div>
-					<div class = "paper_body">
-						<div class="paper_image">
-							<a href="#">
-								<img class="paper_img_thumbnail" src="{{ url_for('static', filename = 'res/images/process_test_5.jpg')}}" alt="Image Not Available"/>
-							</a>
-						</div>
-						
-						<div class="paper_description">
-							<p>하 너무 어려웡..</p>
-						</div>
-						<div class="reactions_to_paper">
-							<a href="#">
-								<span class="glyphicon glyphicon-heart-empty"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-comment"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-share-alt"></span>
-							</a>
-						</div>	
-					</div>
-				</div>
-				<div class="paper_item">
-					<div class="above_paper_div">
-						<div class="paper_date_div">
-							<p class="paper_date">2014년 6월 7일 14시 20분</p>
-						</div>	
-						<div class="btn_paper_manage">
-							<span class="glyphicon glyphicon-pencil"></span>
-							<span class="glyphicon glyphicon-trash"></span>
-						</div>
-					</div>
-					<div class = "paper_body">
-						<div class="paper_image">
-							<a href="#">
-								<img class="paper_img_thumbnail" src="{{ url_for('static', filename = 'res/images/process_test_6.jpg')}}" alt="Image Not Available"/>
-							</a>
-						</div>
-						
-						<div class="paper_description">
-							<p>하 너무 어려웡..</p>
-						</div>
-						<div class="reactions_to_paper">
-							<a href="#">
-								<span class="glyphicon glyphicon-heart-empty"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-comment"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-share-alt"></span>
-							</a>
-						</div>	
-					</div>
-				</div>
-				<div class="paper_item">
-					<div class="above_paper_div">
-						<div class="paper_date_div">
-							<p class="paper_date">2014년 6월 7일 14시 20분</p>
-						</div>	
-						<div class="btn_paper_manage">
-							<span class="glyphicon glyphicon-pencil"></span>
-							<span class="glyphicon glyphicon-trash"></span>
-						</div>
-					</div>
-					<div class = "paper_body">
-						<div class="paper_image">
-							<a href="#">
-								<img class="paper_img_thumbnail" src="{{ url_for('static', filename = 'res/images/test1.jpg')}}" alt="Image Not Available"/>
-							</a>
-						</div>
-						
-						<div class="paper_description">
-							<p>하 너무 어려웡..</p>
-						</div>
-						<div class="reactions_to_paper">
-							<a href="#">
-								<span class="glyphicon glyphicon-heart-empty"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-comment"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-share-alt"></span>
-							</a>
-						</div>	
-					</div>
-				</div>
 			</div>
 			<div id="like_on_proj_div">
 				<span class="glyphicon glyphicon-heart-empty"></span>
