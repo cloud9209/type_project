@@ -1,0 +1,35 @@
+{% for paper_item in paper_items %}
+<div class="paper_item">
+	<div class="above_paper_div">
+		<div class="paper_date_div">
+			<p class="paper_date">{{ paper_item.date }}</p>
+		</div>	
+		<div class="btn_paper_manage">
+			<span class="glyphicon glyphicon-pencil"></span>
+			<span class="glyphicon glyphicon-trash"></span>
+		</div>
+	</div>
+	<div class = "paper_body">
+		<div class="paper_image">
+			<a href="#modal_paper_item">
+				<img class="paper_img_thumbnail" src="{{ url_for('static', filename = paper_item.thumbnail )}}" alt="Image Not Available"/>
+			</a>
+		</div>
+		<div class="paper_description">
+			<p>{{ paper_item.description }}</p>
+		</div>
+		<div class="reactions_to_paper">
+			<a href="#">
+				<span class="glyphicon glyphicon-heart-empty"></span>
+			</a>
+			<a href="#">
+				<span class="glyphicon glyphicon-comment"></span>
+			</a>
+			<a href="#">
+				<span class="glyphicon glyphicon-share-alt"></span>
+			</a>
+		</div>	
+	</div>
+</div>
+
+{% endfor %}
