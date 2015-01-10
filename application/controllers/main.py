@@ -1,14 +1,8 @@
 # -*- coding: utf-8 -*-
-
 from flask import Flask, render_template, request
-
-app = Flask(__name__)
-
-
 
 @app.route('/')
 def main():
-
 	proj_items = [
 		{ 'proj_name' : u"반흘림 고딕", 
 			'artist_name' : u"한세정",
