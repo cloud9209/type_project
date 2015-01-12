@@ -8,4 +8,4 @@ app.config.update(dict(
     SQLALCHEMY_DATABASE_URI ='mysql+gaerdbms:///cloud-9209?instance=cloud-9209:cloud-database',
     migration_directory = 'migrations'
 ))
-app.config.from_envvar('FLASKR_SETTINGS', silent=True)
+app.config.from_envvar('TYPE_DESIGN_ALPHA', silent=True)

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request
+from application import app
 
 @app.route('/')
 def main():
@@ -94,9 +95,7 @@ def main():
 	return render_template("main.html", proj_items = proj_items)
 
 @app.route('/inside_proj', methods=['POST'])
-
 def inside_proj():
-
 	if request.method == 'POST':
 		paper_items = [
 			{ 'date' : u"2014년 6월 7일 14시 20분", 
@@ -122,9 +121,3 @@ def inside_proj():
 		]
 
 	return render_template('paper_items.html', paper_items = paper_items)
-
-@app.errorhandler(404)
-def page_not_found(e):
-
-	return 'Sorry, nothing at this URL.', 404
-
