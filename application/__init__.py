@@ -9,8 +9,6 @@ from flask.ext.script import Manager
 
 # Create Flask Application Instance
 app = Flask('application')
-from flask.ext.mobility import Mobility
-Mobility(app)
 
 # Import application configuration file
 import config
