@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from application import db
-from schema import author
+from schema import *
 import logging
 
 def init_proj_list () :
@@ -103,7 +103,7 @@ def init_proj_list () :
 
         logging.info(author.id)
 
-        # db.session.add(FontRepository(
+        # db.session.add(TypeProject(
         #     font_type = 'READING',
         #     font_name = item['proj_name']
         #     font_title_image = item['proj_thumbnail']
@@ -112,16 +112,18 @@ def init_proj_list () :
         # ))
 
 def get_proj_list (len_of_elements) :
-    repositories = FontRepository.query.filter().limit(len_of_elements)
+    projects = TypeProject.query.filter().limit(len_of_elements)
+    logging.info(projects)
+    logging.info(type(projects))
     proj_list = []
-    for repo in repository :
-        author = Author.query.filter(Author.id = repo['font_author_id'])
+    for prj in projects :
+        author = Author.query.filter(Author.id == prj['author_id'])
         proj_list.append(dict (
-            proj_name = repo['font_name'],
-            artist_name = repo[author['name']],
-            artist_profile_image = repo[author['profile_image']],
-            proj_thumbnail = repo['font_title_image'],
-            proj_description = respo['font_title_description']
+            proj_name = prj['name'],
+            artist_name = prj[author['name']],
+            artist_profile_image = prj[author['profile_image']],
+            proj_thumbnail = prj['title_image'],
+            proj_description = respo['title_description']
         ))
     return proj_list
 
