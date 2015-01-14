@@ -7,9 +7,9 @@ class Author(db.Model) :
     
     name        = db.Column(db.String(45))
     profile_image   = db.Column(db.String(100))
-    repositories    = db.relationship('FontRepository', backref='Author', lazy='dynamic')
+    repositories    = db.relationship('TypeProject', backref='Author', lazy='dynamic')
 
-class FontRepository(db.Model) :
+class TypeProject(db.Model) :
     id              = db.Column(db.Integer, primary_key = True)
     font_type       = db.Column(db.Enum('READING', 'DISPLAYING'))
     font_name       = db.String(db.String(40))
@@ -17,14 +17,14 @@ class FontRepository(db.Model) :
     font_title_description = db.Column(db.Text())
 
     font_author_id = db.Column(db.Integer, db.ForeignKey('author.id'))
-    work_history   = db.relationship('FontWork', backref='FontRepository', lazy='dynamic')
-    comments = db.relationship('CommentForRepository', backref='fontrepository', lazy='dynamic')
+    work_history   = db.relationship('FontWork', backref='TypeProject', lazy='dynamic')
+    comments = db.relationship('CommentForRepository', backref='type_project', lazy='dynamic')
 
 class CommentForRepository(db.Model) :
     id = db.Column(db.Integer, primary_key = True)
     body = db.Column(db.Text())
     creation_time = db.Column(db.DateTime, default=db.func.now())
-    repository_id = db.Column(db.Integer, db.ForeignKey('font_repository.id'))
+    repository_id = db.Column(db.Integer, db.ForeignKey('type_project.id'))
     writer_id = db.Column(db.Integer, db.ForeignKey('author.id'))
 
 class FontWork(db.Model) :
