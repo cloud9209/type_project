@@ -12,9 +12,9 @@ class TypeProject(db.Model) :
     id                  = db.Column(db.Integer, primary_key = True)
     category            = db.Column(db.Enum('READING', 'DISPLAYING'))
     name                = db.String(db.String(40))
-    title_image         = db.String(db.String(100))
-    title_description   = db.Column(db.Text())
-
+    description         = db.Column(db.Text())
+    thumbnail         = db.String(db.String(100))
+   
     author_id           = db.Column(db.Integer, db.ForeignKey('author.id'))
     history             = db.relationship('TypeWork', backref='type_project', lazy='dynamic')
     comments            = db.relationship('TypeProjectComment', backref='type_project', lazy='dynamic')
