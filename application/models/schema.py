@@ -11,11 +11,11 @@ class Author(db.Model) :
 class TypeProject(db.Model) :
     id                  = db.Column(db.Integer, primary_key = True)
     category            = db.Column(db.Enum('READING', 'DISPLAYING'))
-    name                = db.String(db.String(40))
+    name                = db.Column(db.String(40))
     description         = db.Column(db.Text())
-    thumbnail         = db.String(db.String(100))
-   
+    thumbnail           = db.Column(db.String(100))
     author_id           = db.Column(db.Integer, db.ForeignKey('author.id'))
+    author              = db.relationship('Author', foreign_keys = [author_id])
     history             = db.relationship('TypeWork', backref='type_project', lazy='dynamic')
     comments            = db.relationship('TypeProjectComment', backref='type_project', lazy='dynamic')
 
@@ -24,7 +24,9 @@ class TypeProjectComment(db.Model) :
     body                = db.Column(db.Text())
     creation_time       = db.Column(db.DateTime, default=db.func.now())
     project_id          = db.Column(db.Integer, db.ForeignKey('type_project.id'))
+    project             = db.relationship('TypeProject', foreign_keys = [project_id])
     writer_id           = db.Column(db.Integer, db.ForeignKey('author.id'))
+    writer              = db.relationship('Author', foreign_keys = [writer_id])
 
 class TypeWork(db.Model) :
     id                  = db.Column(db.Integer, primary_key = True)
@@ -32,6 +34,7 @@ class TypeWork(db.Model) :
     description         = db.Column(db.Text())
     cretion_time        = db.Column(db.DateTime, default=db.func.now())
     project_id          = db.Column(db.Integer, db.ForeignKey('type_project.id'))
+    project             = db.relationship('TypeProject', foreign_keys = [project_id])
     comments            = db.relationship('TypeWorkComment', backref='type_work', lazy='dynamic')
 
 class TypeWorkComment(db.Model) :
@@ -39,4 +42,6 @@ class TypeWorkComment(db.Model) :
     body                = db.Column(db.Text())
     creation_time       = db.Column(db.DateTime, default = db.func.now())
     work_id             = db.Column(db.Integer, db.ForeignKey('type_work.id'))
+    work                = db.relationship('TypeWork', foreign_keys = [work_id])
     writer_id           = db.Column(db.Integer, db.ForeignKey('author.id'))
+    writer              = db.relationship('Author', foreign_keys = [writer_id])
