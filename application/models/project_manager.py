@@ -7,7 +7,7 @@ def add(data) :
 		category = data['category'],
 		title = data['project_title'],
 		description = data['description'],
-		author_id = session['author-id'] # like user-id
+		author_id = session['author-id']
 	))
 	db.session.commit()
 
@@ -15,17 +15,16 @@ def load(num_of_projects_to_load = 10) :
 	return TypeProject.query.filter().limit(num_of_projects_to_load)
 
 def get_proj_items (len_of_elements) :
-    projects = TypeProject.query.filter().limit(len_of_elements)
-    logging.info(projects)
-    logging.info(type(projects))
+    projects = load(len_of_elements)
     proj_list = []
     for prj in projects :
         proj_list.append(dict (
-            proj_name = prj.name,
-            artist_name = prj.author.name,
-            artist_profile_image = prj.author.profile_image,
-            proj_thumbnail = prj.thumbnail,
-            proj_description = prj.description
+            title = prj.title,
+            author = prj.author.name,
+            author_thumbnail = prj.author.profile_image,
+            thumbnail = prj.thumbnail,
+            description = prj.description,
+            category = prj.category
         ))
     return proj_list
 

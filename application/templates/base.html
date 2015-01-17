@@ -1,0 +1,76 @@
+<!-- nav bar and search box only -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<title>Korean Type Design Group</title>
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/component.css')}}" />
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}" />
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Noto+Sans">
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/index_style.css')}}" />
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/modal_enter_proj_name.css')}}" />
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/modal_inside_proj_style.css')}}" />
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/modal_process_paper.css')}}" />
+
+
+	<script src="{{ url_for('static', filename = 'js/jquery-2.1.1.min.js')}}"></script>
+	<script type='text/javascript' src="{{ url_for('static', filename = 'js/jquery-ui.min.js')}}"></script>
+
+	<script src="{{ url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
+	<script src="static/js/modernizr.custom.js"></script>
+	<script src="{{ url_for('static', filename = 'js/ajax.js')}}"></script>
+
+	{% block head %}
+	{% endblock %}
+</head>
+<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="{{ url_for('main')}}" class="navbar-brand">한글 짜임</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a id="fonts_to_read" href="#">읽는 서체</a></li>
+				<li><a id="fonts_to_see" href="#">보는 서체</a></li>
+				<li class="dropdown">
+
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 작가별<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">김아무개</a></li>
+						<li><a href="#">김아무개</a></li>
+						<li><a href="#">김아무개</a></li>
+						<li class="divider"></li>
+						<li><a href="#">이아무개</a></li>
+						<li><a href="#">이아무개</a></li>
+						<li><a href="#">이아무개</a></li>
+						<li><a href="#">이아무개</a></li>
+						<li class="divider"></li>
+					</ul>
+				</li>
+			</ul>
+			<div id ="join">
+				<a href="#">들어가기</a>
+				<a href="#">가입하기</a>
+			</div>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+
+</body>
+	{%block body%}
+	{%endblock%}
+</body>
+</html>

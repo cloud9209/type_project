@@ -1,4 +1,4 @@
-{% extends "type_index.html" %}
+{% extends "base.html" %}
 {% block head %}
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main_style.css')}}" />
 {% endblock%}
@@ -7,20 +7,28 @@
 <div id="main">	
 	<div id="columns">
 		
-	{% for proj_item in proj_items %}
+	{% for project in projects %}
 		<div class="proj_item">
 			<div class = "proj_head">
 				<div class = "proj_title">
 					<div class = "font_name_div">
-						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/font_name_back.png')}}" alt="Image Not Available"/>
-						<span class="glyphicon glyphicon-book"></span>
-						<a href="#modal_inside_proj_item"><p class="font_name into_the_proj">{{ proj_item.proj_name }}</p></a>
+						<img class="font_name_back" src="{{ url_for('static', filename = 'res/images/project_title_background.png')}}" alt="Image Not Available"/>
+						{% if project.category == "READING" %}
+							<span class="glyphicon glyphicon-book"></span>
+						{% elif project.category == "DISPLAYING" %}
+							<span class="glyphicon glyphicon-eye-open"></span>
+						{% else %}
+							<span class="glyphicon glyphicon-remove"></span>						
+						{% endif %}
+						<a href="#modal_inside_proj_item"><p class="font_name into_the_proj">
+							{{ project.title }}
+						</p></a>
 					</div>
 				</div>
 				<div class = "proj_credit">
 					<a href="#">
-						<p class = "artist_name">{{ proj_item.artist_name }}</p>
-						<img class="artist_profile_image" src="{{ url_for('static', filename = proj_item.artist_profile_image)}}" alt="Image Not Available"/>
+						<p class = "artist_name">{{ project.author }}</p>
+						<img class="artist_profile_image" src="{{ url_for('static', filename = project.author_thumbnail )}}" alt="Image Not Available"/>
 					</a>
 
 				</div>
@@ -28,12 +36,12 @@
 			<div class = "proj_body">
 				<div class="font_profile_image into_the_proj">
 					<a href="#modal_inside_proj_item">
-						<img class="thumbnail" src="{{ url_for('static', filename = proj_item.proj_thumbnail)}}" alt="Image Not Available"/>
+						<img class="thumbnail" src="{{ url_for('static', filename = project.thumbnail)}}" alt="Image Not Available"/>
 						<div class="thumbnail_gradi_cover"></div>
 					</a>
 				</div>
 				<div class="font_description">
-					<p>{{ proj_item.proj_description }}</p>
+					<p>{{ project.description }}</p>
 				</div>
 				<div class="reactions_to_proj">
 					<a href="#">
@@ -49,7 +57,6 @@
 			</div>
 		</div>
 	{% endfor %}
-
 	</div>
 </div>
 {%endblock%}
