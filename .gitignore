@@ -1,6 +1,0 @@
-# Ignore For Personal deployment settings
-deploy.py
-app.yaml
-
-# Byte-compiled / optimized / DLL files
-*.py[cod]
