@@ -2,7 +2,7 @@
 from application import db
 class Author(db.Model) :
     id                  = db.Column(db.Integer, primary_key = True)
-    email               = db.Column(db.String(60))
+    email               = db.Column(db.String(60)) # -> to Unique
     password            = db.Column(db.String(100))
     name                = db.Column(db.String(45))
     profile_image       = db.Column(db.String(100), default = "")

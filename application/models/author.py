@@ -1,6 +1,6 @@
 from application import db
 from schema import Author
-import logging
+import logging, auth
 
 def add(data) :
     db.session.add( Author (
@@ -20,6 +20,14 @@ def add_exclusive(data) :
         return True
 
 def get (attr, value, limit = -1) :
+    author_filtered = Author.query.filter(getattr(Author, attr) == value)
+    if   limit == 1 : return author_filtered.one()
+    elif limit >  1 : return author_filtered.limit(limit)
+    else            : return author_filtered.all()
+
+""" TODO : Solve Circular import """
+def get_secure (attr, value, limit = -1) :
+    if not auth.secure() : return None
     author_filtered = Author.query.filter(getattr(Author, attr) == value)
     if   limit == 1 : return author_filtered.one()
     elif limit >  1 : return author_filtered.limit(limit)
