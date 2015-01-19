@@ -43,8 +43,8 @@ def sign_out() :
 def required(_func):
     @wraps(_func)
     def decorated(*args, **kwargs) :
-    	if 'author_id' in session :
-			return _func(*args, **kwargs)
-		else :
-			return redirect('page_not_found')
+        if 'author_id' in session :
+            return _func(*args, **kwargs)
+        else :
+            return redirect('page_not_found')
     return decorated
