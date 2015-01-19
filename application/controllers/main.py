@@ -5,24 +5,38 @@ from application.models import author, project_manager
 import logging
 
 @app.route('/')
-def index(signin_failed = False) :
-	return render_template('index.html', failed_sign_in = signin_failed)
+def index(failure = False, message = "") :
+	return render_template('index.html', failure = failure, message = message)
 
-@app.route('/sign_in')
+@app.route('/sign_in', methods=['GET', 'POST'])
 def sign_in() :
-	if request.methos != 'POST' :
+	if request.method != 'POST' :
 		return redirect(url_for('index'))
 	if not author.verified(request.form) :
-		return redirect(url_for('index', signin_failed = True))
+		logging.info("LOGIN FAILED")
+		return redirect(url_for('index', failure = True, message = "Sign-in failure due to a wrong password."))
+	logging.info("LOGIN SUCCESS")
 	_author = author.get('email', request.form['email'])
 	session['author_id'] = _author.id
 	session['author_email'] = _author.email
 	return redirect(url_for('main'))
 
+@app.route('/sign_up', methods=['GET', 'POST'])
+def sign_up() :
+	if request.method != 'POST' :
+		return redirect(url_for('index'))
+	success = author.add_exclusive(request.form)
+	logging.info(["Not Added","Added Exclusively"][success])
+	if not success :
+		redirect(url_for('index', failure = True, message = "Sign-up failure due to e-mail duplication"))
+	else :
+		redirect(url_for('index', message = 'Sign-up Success'))
+
 #@auth_required
 @app.route('/main')
 def main() :
 	projects = project_manager.get_proj_items(10)
+	# TODO : Make User-Welcome Message at layout
 	return render_template("main.html", projects = projects)
 
 

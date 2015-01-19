@@ -8,12 +8,12 @@
 <div class="modal fade bs-signup-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modal_sign_in">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content container-fluid">
-			<form role="form" action="{#url_for('signup')#}" method="POST">
+			<form role="form" action="{{url_for('sign_up')}}" method="POST">
 				<div class="form-group centered">
 					<label class="user-label">Sign Up</label>
 				</div>
 				<div class="form-group">
-					<label for="username" class="user-label">Username</label><input type="text" class="form-control" id="username" name="username" placeholder="can change after" required>
+					<label for="name" class="user-label">Username</label><input type="text" class="form-control" id="name" name="name" placeholder="can change after" required>
 				</div>
 				<div class="form-group">
 					<label for="email" class="user-label">Email</label>
@@ -26,7 +26,7 @@
 					<label for="password_check" class="user-label">Repeat Password</label><input type="password" class="form-control" id="password_check" name="password_check" required/>
 				</div>
 				<div class="centered">
-					<button type="submit" class="btn btn-default btn-lg" disabled id="btn_sign_up">Sign Up</button>
+					<button type="submit" class="btn btn-default btn-lg" id="btn_sign_up">Sign Up</button>
 					<button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
 				</div>
 			</form>
@@ -40,7 +40,7 @@
 	<div class="row clearfix">
 		<div class="col-md-4 col-md-offset-4 column col-xs-12">
 
-			<form role="form" action="{#url_for('login')#}" method="POST">
+			<form role="form" action="{{url_for('sign_in')}}" method="POST">
 				<div class="form-group">
 					<label for="email" class="form-label">Email</label>
 					<input type="email" class="form-control" id="email" name="email" required/>
@@ -55,13 +55,16 @@
 				</div>
 			</form>
 
-			<a href="{#url_for('/')#}" class="btn btn-link">
-				<p>FORGOT PASSWORD?<p>
-			</a>
-			{% if failed_sign_in %}
-			<div class="alert alert-info alert-dismissible" role="alert" id="login-error-div">
+			{% if failure %}
+			<div class="alert alert-info alert-dismissible" role="alert" id="failure">
 				<p>
-					<strong>Login error!</strong>
+					<strong>{{message}}</strong>
+				</p>
+			</div>
+			{% else %}
+			<div class="alert alert-info alert-dismissible" role="alert" id="success">
+				<p>
+					<strong>{{message}}</strong>
 				</p>
 			</div>
 			{% endif %}

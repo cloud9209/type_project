@@ -1,5 +1,6 @@
 from application import db
 from schema import Author
+import logging
 
 def add(data) :
     db.session.add( Author (
@@ -8,7 +9,18 @@ def add(data) :
         name = data['name']
     ))
     db.session.commit()
-    # TODO : db.session.add(obj).commit() availiable ?
+
+def add_exclusive(data) :
+    _author = get('email', data['email'])
+    logging.info("_author length : " + str(len(_author)))
+    if len(_author) :
+        return False
+    else :
+        add(data)
+        return True
+
+def get (attr, value) :
+    return Author.query.filter(getattr(Author, attr) == value).all()
 
 # def set_profile_image(author_id, new_path) :
 #     author = Author.query.get(Author.id == author_id)
@@ -28,11 +40,9 @@ def add(data) :
 #     db.session.commit()
 
 # form has 'email' & 'password' attribute
-def verify(form) : 
+def verified(form) : 
     return Author.query.filter(
         Author.email == form['email'],
         Author.password == db.func.md5(form['password'])
     ).count() != 0
 
-def get (attr, value) :
-    return Author.query.filter(getattr(Author, attr) == value).all()
