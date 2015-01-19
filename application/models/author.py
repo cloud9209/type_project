@@ -19,8 +19,13 @@ def add_exclusive(data) :
         add(data)
         return True
 
-def get (attr, value) :
-    return Author.query.filter(getattr(Author, attr) == value).all()
+def get (attr, value, limit = -1) :
+    if limit == 1 :
+        return Author.query.filter(getattr(Author, attr) == value).one()
+    elif limit > 1 : 
+        return Author.query.filter(getattr(Author, attr) == value).limit(limit)
+    else :
+        return Author.query.filter(getattr(Author, attr) == value).all()
 
 # def set_profile_image(author_id, new_path) :
 #     author = Author.query.get(Author.id == author_id)

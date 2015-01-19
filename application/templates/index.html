@@ -61,7 +61,7 @@
 					<strong>{{message}}</strong>
 				</p>
 			</div>
-			{% else %}
+			{% elif message|length > 0 %}
 			<div class="alert alert-info alert-dismissible" role="alert" id="success">
 				<p>
 					<strong>{{message}}</strong>

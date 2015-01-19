@@ -16,7 +16,7 @@ def sign_in() :
 		logging.info("LOGIN FAILED")
 		return redirect(url_for('index', failure = True, message = "Sign-in failure due to a wrong password."))
 	logging.info("LOGIN SUCCESS")
-	_author = author.get('email', request.form['email'])
+	_author = author.get('email', request.form['email'], 1)
 	session['author_id'] = _author.id
 	session['author_email'] = _author.email
 	return redirect(url_for('main'))
@@ -33,11 +33,20 @@ def sign_up() :
 		redirect(url_for('index', message = 'Sign-up Success'))
 
 #@auth_required
-@app.route('/main')
-def main() :
-	projects = project_manager.get_proj_items(10)
-	# TODO : Make User-Welcome Message at layout
-	return render_template("main.html", projects = projects)
+@app.route('/main/<string:category>', defaults = {'category' : 'all'})
+def main(category) :
+	projects = None
+	if category == 'all' :
+		projects = project_manager.get_proj_items(10)
+	elif category == 'reading' or category == 'displaying' :
+		projects = project.get('category', category.upper(), 10)
+	else :
+		projects = project.get('author', category, 10)
+
+	if projects == None : 
+		raise
+	else :
+		render_template('main.html', projects = projects)
 
 
 @app.route('/inside_proj', methods=['GET', 'POST'])

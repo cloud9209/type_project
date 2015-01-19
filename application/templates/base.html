@@ -43,21 +43,18 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a id="fonts_to_read" href="#">읽는 서체</a></li>
-				<li><a id="fonts_to_see" href="#">보는 서체</a></li>
+				<li><a id="fonts_to_read" href="{{url_for('main', category='reading')}}">읽는 서체</a></li>
+				<li><a id="fonts_to_see" href="{{url_for('main', category='displaying')}}">보는 서체</a></li>
 				<li class="dropdown">
 
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 작가별<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">김아무개</a></li>
-						<li><a href="#">김아무개</a></li>
-						<li><a href="#">김아무개</a></li>
-						<li class="divider"></li>
-						<li><a href="#">이아무개</a></li>
-						<li><a href="#">이아무개</a></li>
-						<li><a href="#">이아무개</a></li>
-						<li><a href="#">이아무개</a></li>
-						<li class="divider"></li>
+						{% if authors != None %}
+						{% for author in authors %}
+							<li><a href="{{url_for('main', category=author.name)}}">{{author.name}}</a></li>
+							<li class="divider"></li>
+						{% endfor %}
+						{% endif %}
 					</ul>
 				</li>
 			</ul>
