@@ -20,12 +20,17 @@ def add_exclusive(data) :
         return True
 
 def get (attr, value, limit = -1) :
-    if limit == 1 :
-        return Author.query.filter(getattr(Author, attr) == value).one()
-    elif limit > 1 : 
-        return Author.query.filter(getattr(Author, attr) == value).limit(limit)
-    else :
-        return Author.query.filter(getattr(Author, attr) == value).all()
+    author_filtered = Author.query.filter(getattr(Author, attr) == value)
+    if   limit == 1 : return author_filtered.one()
+    elif limit >  1 : return author_filtered.limit(limit)
+    else            : return author_filtered.all()
+
+# form has 'email' & 'password' attribute
+def verified(form) : 
+    return Author.query.filter(
+        Author.email == form['email'],
+        Author.password == db.func.md5(form['password'])
+    ).count() != 0
 
 # def set_profile_image(author_id, new_path) :
 #     author = Author.query.get(Author.id == author_id)
@@ -44,10 +49,5 @@ def get (attr, value, limit = -1) :
 #         author.profile_image = new_path
 #     db.session.commit()
 
-# form has 'email' & 'password' attribute
-def verified(form) : 
-    return Author.query.filter(
-        Author.email == form['email'],
-        Author.password == db.func.md5(form['password'])
-    ).count() != 0
+
 

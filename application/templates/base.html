@@ -1,16 +1,15 @@
 <!-- nav bar and search box only -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-	<title>Korean Type Design Group</title>
+	<title>{% block title %}Korean Type Design Group{% endblock %}</title>
 
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/component.css')}}" />
+	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/component.css')}}" />
 	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}" />
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Noto+Sans">
+	<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans">
 	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/index_style.css')}}" />
 	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/modal_enter_proj_name.css')}}" />
 	<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/modal_inside_proj_style.css')}}" />
@@ -37,31 +36,34 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a href="{{ url_for('main')}}" class="navbar-brand">한글 짜임</a>
+			<a href="{{ url_for('main', category = 'all')}}" class="navbar-brand">한글 짜임</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a id="fonts_to_read" href="{{url_for('main', category='reading')}}">읽는 서체</a></li>
-				<li><a id="fonts_to_see" href="{{url_for('main', category='displaying')}}">보는 서체</a></li>
+				<li><a id="fonts_to_read" href="{{ url_for('.main', category = 'reading') }}">읽는 서체</a></li>
+				<li><a id="fonts_to_see" href="{{ url_for('.main', category = 'displaying') }}">보는 서체</a></li>
 				<li class="dropdown">
 
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 작가별<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						{% if authors != None %}
 						{% for author in authors %}
-							<li><a href="{{url_for('main', category=author.name)}}">{{author.name}}</a></li>
+							<li><a href="{{url_for('main', category = author.name )}}">{{author.name}}</a></li>
 							<li class="divider"></li>
 						{% endfor %}
-						{% endif %}
 					</ul>
 				</li>
+				<li>{{ session }}</li>
+				{% if 'author_id' in session %}
+				<li> Welcome, {{ session.email }}! </li>
+				{% endif %}
 			</ul>
+			{% if 'author_id' in session %}
 			<div id ="join">
-				<a href="#">들어가기</a>
-				<a href="#">가입하기</a>
+				<a href="{{url_for('sign_out')}}"> Sign Out</a>
 			</div>
+			{% endif %}
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 </nav>
