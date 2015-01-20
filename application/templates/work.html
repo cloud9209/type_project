@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main_style.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/inside_proj_style.css')}}" />
+{% endblock%}
+{% block body %}
+<div class="work">
+  <div id="paper_item">
+    <div id="page_div">
+      <div id="page_div_left">
+        <img id="paper_img" src="{{ url_for('static', filename = work.image)}}" alt="Image Not Available"/>
+      </div>
+      <div id="page_div_right">
+        <div id="label_paper_description">
+          <p>설명</p>
+        </div>
+        <div id="paper_description">
+          <p>{{work.description}}</p>
+        </div>
+        <div id="like_on_paper_div">
+          <span class="glyphicon glyphicon-heart-empty"></span>
+          <div id="like_paper_users_div">
+            {% if likes|length %}
+            {% for like in likes %}
+            <a href="#">{{ like.target }}</a>
+            {% if not loop.last %}
+            <p>, </p>
+            {% endif %}
+            {% endfor %}
+            <p id="like_on_paper_closing_ment">님이 좋아합니다.</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div id="comment_on_paper_div">
+          <div id="comment_on_paper_label">
+            <span class="glyphicon glyphicon-comment"></span>
+            {% if comments|length %}
+            <p id="comment_on_paper_num_count">{{ comments|length }}</p>
+            {% endif %}
+          </div>
+
+          {% for comment in comments %}
+          <div class="comment_on_paper">
+            <div class="comment_on_paper_user">
+              <a href="#">
+                <img class="comment_on_paper_user_img" src="{{ url_for('static', filename = comment.writer.profile_image) }}" alt="Image Not Available"/>
+                <p class = "comment_on_paper_user_name">{{comment.writer.name}}</p>
+              </a>
+            </div>
+
+            <div class="comment_on_paper_body">
+              <div class="comment_on_paper_content">
+                <p>{{comment.body}}</p>
+              </div>
+              <div class="comment_on_paper_date">
+                <p>{{comment.creation_time}}</p>
+              </div>
+            </div>
+            <div class="comment_on_proj_manage_btn">
+              <span class="glyphicon glyphicon-pencil"></span>
+              <span class="glyphicon glyphicon-trash"></span>
+            </div>
+          </div>
+          {% endfor %}
+
+          <div class="comment_on_paper">
+            <div class="comment_on_paper_user">
+              <a href="#"><!-- to ??? -->
+                <img class="comment_on_paper_user_img" src="{{ url_for('static', filename = '')}}" alt="Image Not Available"/>
+                <p class = "comment_on_paper_user_name">{{session.name}}</p>
+              </a>
+            </div>
+            <div class="comment_on_paper_body">
+              <form role="form" action="{{url_for('submit_work_comment')}}" method="POST">
+                <div class="form-group">
+                  <input type="text" name="body" placecholder="써라." required/>
+                  <input id="comment_on_paper_submit" type="submit" value="등록">
+                </div>
+              </form>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <a href="#inside_proj_item" title="Close" id="close_paper_item">X</a> -->
+  </div>
+</div>
+{% endblock %}

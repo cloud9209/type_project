@@ -27,9 +27,6 @@ def add_project_copy(prj) :
     ))
     db.session.commit()
 
-def to_date(date) :
-    return date # to date in yyyy mm dd hh mm
-
 def get(attr = None, value = None, limit = -1) :
     works = None
     if (attr, value) == (None, None) : works = TypeWork.query.filter()
@@ -42,3 +39,14 @@ def get(attr = None, value = None, limit = -1) :
             return None
     if  limit >  1 : return works.limit(limit)
     else           : return works.all()
+
+def remove(attr, value) :
+    try :
+        _target = TypeWork.query.filter(getattr(TypeWork, attr) == value).one()
+    except :
+        return False
+    db.session.delete(_target)
+    db.session.commit()
+    return True
+
+
