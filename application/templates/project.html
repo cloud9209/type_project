@@ -159,6 +159,22 @@
                     </div>
                 </div>
                 {% endfor %}
+                <div class="comment_on_proj">
+                    <div class="comment_on_proj_user">
+                        <a href="#"><!-- to ??? -->
+                            <img class="comment_on_proj_user_img" src="{{ url_for('static', filename = '')}}" alt="Image Not Available"/>
+                            <p class = "comment_on_proj_user_name">{{session.name}}</p>
+                        </a>
+                    </div>
+                    <div class="comment_on_proj_body">
+                        <form role="form" action="{{url_for('submit_project_comment')}}" method="POST">
+                            <div class="form-group">
+                                <input type="text" name="body" placecholder="써라." required/>
+                                <input id="comment_on_proj_submit" type="submit" value="등록">
+                            </div>
+                        </form>
+                    </div>                    
+                </div>
             </div>
         </div>
     </div>

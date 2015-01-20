@@ -32,49 +32,6 @@ def main(category) :
     authors = author.get()
     return render_template('main.html', projects = projects, authors = authors)
 
-@app.route('/project/<int:project_id>/register', methods = ['GET', 'POST'])
-@auth.required # 404 if not authorized
-def register_project(project_id) :
-    if session['project-id'] != project_id : abort(404) # invalid project number
-    _project = project.get('id', project_id, 1)
-    work.add_project_copy(_project) # -> work.add(data)
-    return redirect(url_for('type_project', project_id = project_id))
-
-@app.route('/project/<int:project_id>', methods = ['GET', 'POST'])
-@auth.required # 404 if not authorized
-def type_project(project_id) :
-    session['project-id'] = project_id
-
-    curr_project = project.get('id', project_id, 1)
-    if curr_project is None : abort(404)
-
-    history = work.get('project_id', project_id) # get all works within the project.
-    return render_template('project.html', project = curr_project, history = history, likes = [], comments = [])
-
-    # paper_items = [
-    #     {
-    #         'date' : u"2014년 6월 7일 14시 20분", 
-    #         'image' : 'res/images/process_test_6.jpg',
-    #         'description' : u"어려웧ㅎㅎ"
-    #     }, {
-    #         'date' : u"2014년 6월 7일 14시 20분", 
-    #         'image' : 'res/images/process_test_6.jpg',
-    #         'description' : u"어려웧ㅎㅎ"
-    #     }, {
-    #         'date' : u"2014년 6월 7일 14시 20분", 
-    #         'image' : 'res/images/process_test_6.jpg',
-    #         'description' : u"어려웧ㅎㅎ"
-    #     }, {
-    #         'date' : u"2014년 6월 7일 14시 20분", 
-    #         'image' : 'res/images/process_test_6.jpg',
-    #         'description' : u"어려웧ㅎㅎ"
-    #     }, {
-    #         'date' : u"2014년 6월 7일 14시 20분", 
-    #         'image' : 'res/images/process_test_6.jpg',
-    #         'description' : u"어려웧ㅎㅎ"
-    #     }       
-    # ]
-
 @app.errorhandler(404)
 def page_not_found(e):
     authors = []

@@ -28,7 +28,7 @@ def add_project_copy(prj) :
     db.session.commit()
 
 def to_date(date) :
-    return date # to date in yyyy년 mm월 dd일 hh시 mm분
+    return date # to date in yyyy mm dd hh mm
 
 def get(attr = None, value = None, limit = -1) :
     works = None
