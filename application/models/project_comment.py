@@ -1,7 +1,7 @@
 from application import db
 from schema import Author, TypeProjectComment
 from flask import session
-
+import datetime
 '''
 class TypeProjectComment(db.Model) :
     id                  = db.Column(db.Integer, primary_key = True)
@@ -28,10 +28,16 @@ def get(attr = None, value = None, limit = -1) :
     if (attr, value) == (None, None) : project_comments = TypeProjectComment.query.filter()
     else                             : project_comments = TypeProjectComment.query.filter(getattr(TypeProjectComment, attr) == value)
 
-    if limit == 1 :
-        try :
-            return project_comments.one()
-        except :
-            return None
-    elif  limit >  1 : return project_comments.limit(limit)
-    else             : return project_comments.all()
+    comments = []
+    try :
+        if   limit == 1 : comments =[project_comments.one()]
+        elif limit >  1 : comments = project_comments.limit(limit)
+        else            : comments = project_comments.all()
+    except :
+        return None
+
+    for comment in comments :
+        comment.creation_time += datetime.timedelta(hours=9)
+
+    if limit == 1 : return comments[0]
+    else          : return comments

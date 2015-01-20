@@ -1,6 +1,7 @@
 from application import db
 from schema import TypeWork
 from flask import session
+import datetime
 
 '''
 class TypeWork(db.Model) :
@@ -28,17 +29,23 @@ def add_project_copy(prj) :
     db.session.commit()
 
 def get(attr = None, value = None, limit = -1) :
-    works = None
-    if (attr, value) == (None, None) : works = TypeWork.query.filter()
-    else                             : works = TypeWork.query.filter(getattr(TypeWork, attr) == value)
+    type_works = None
+    if (attr, value) == (None, None) : type_works = TypeWork.query.filter()
+    else                             : type_works = TypeWork.query.filter(getattr(TypeWork, attr) == value)
 
-    if limit == 1 :
-        try :
-            return works.one()
-        except :
-            return None
-    if  limit >  1 : return works.limit(limit)
-    else           : return works.all()
+    works = []
+    try :
+        if limit == 1 : works =[type_works.one()]
+        if limit >  1 : works = type_works.limit(limit)
+        else          : works = type_works.all()
+    except :
+        return None
+
+    for work in works :
+        work.date += datetime.timedelta(hours=9)
+
+    if limit == 1 : return works[0]
+    else          : return works
 
 def remove(attr, value) :
     try :
@@ -48,5 +55,3 @@ def remove(attr, value) :
     db.session.delete(_target)
     db.session.commit()
     return True
-
-

@@ -1,6 +1,7 @@
 from application import db
 from schema import Author, TypeWorkComment
 from flask import session
+import datetime
 
 '''
 class TypeWorkComment(db.Model) :
@@ -28,10 +29,16 @@ def get(attr = None, value = None, limit = -1) :
     if (attr, value) == (None, None) : work_comments = TypeWorkComment.query.filter()
     else                             : work_comments = TypeWorkComment.query.filter(getattr(TypeWorkComment, attr) == value)
 
-    if limit == 1 :
-        try :
-            return work_comments.one()
-        except :
-            return None
-    elif  limit >  1 : return work_comments.limit(limit)
-    else             : return work_comments.all()
+    comments = []
+    try :
+        if   limit == 1 : comments =[work_comments.one()]
+        elif limit >  1 : comments = work_comments.limit(limit)
+        else            : comments = work_comments.all()
+    except :
+        return None
+
+    for comment in comments :
+        comment.creation_time += datetime.timedelta(hours=9)
+
+    if limit == 1 : return comments[0]
+    else          : return comments
