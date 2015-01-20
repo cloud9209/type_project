@@ -6,7 +6,6 @@
 
 <div id="main"> 
     <div id="columns">
-        
     {% for project in projects %}
         <div class="proj_item">
             <div class = "proj_head">
@@ -20,23 +19,22 @@
                         {% else %}
                             <span class="glyphicon glyphicon-remove"></span>                        
                         {% endif %}
-                        <a href="#modal_inside_proj_item"><p class="font_name into_the_proj">
-                            {{ project.title }}
-                        </p></a>
+                        <a href="{{url_for ('type_project', project_id = project.id) }}">
+                            <p class="font_name into_the_proj">{{ project.title }}</p>
+                        </a>
                     </div>
                 </div>
                 <div class = "proj_credit">
-                    <a href="#">
-                        <p class = "artist_name">{{ project.author }}</p>
-                        <img class="artist_profile_image" src="{{ url_for('static', filename = project.author_thumbnail )}}" alt="Image Not Available"/>
+                    <a href="{{url_for ('main', category = project.author.id) }}">
+                        <p class = "artist_name">{{ project.author.name }}</p>
+                        <img class="artist_profile_image" src="{{ url_for('static', filename = project.author.profile_image )}}" alt="Image Not Available"/>
                     </a>
-
                 </div>
             </div>
             <div class = "proj_body">
                 <div class="font_profile_image into_the_proj">
-                    <a href="#modal_inside_proj_item">
-                        <img class="thumbnail" src="{{ url_for('static', filename = project.thumbnail)}}" alt="Image Not Available"/>
+                    <a href="{{url_for ('type_project', project_id = project.id) }}"><!-- #modal_inside_proj_item> -->
+                        <img class="thumbnail" src="{{ url_for('static', filename = project.thumbnail) }}" alt="Image Not Available"/>
                         <div class="thumbnail_gradi_cover"></div>
                     </a>
                 </div>

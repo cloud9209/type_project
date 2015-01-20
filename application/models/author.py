@@ -24,7 +24,11 @@ def get (attr = None, value = None, limit = -1) :
     if (attr, value) == (None, None) : authors = Author.query.filter()
     else                             : authors = Author.query.filter(getattr(Author, attr) == value)
 
-    if   limit == 1 : return authors.one()
+    if limit == 1 :
+        try :
+            return authors.one()
+        except :
+            return None        
     elif limit >  1 : return authors.limit(limit)
     else            : return authors.all()
 

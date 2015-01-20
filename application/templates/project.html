@@ -11,19 +11,26 @@
             <div id = "proj_title">
                 <div id = "font_name_div">
                     <img id="font_name_back" src="{{ url_for('static', filename = 'res/images/project_title_background.png')}}" alt="Image Not Available"/>
-                    <span class="glyphicon glyphicon-book"></span>
-                    <a href='#'><p id= "font_name">명주실</p></a>
+                    {% if project.category == "READING" %}
+                        <span class="glyphicon glyphicon-book"></span>
+                    {% elif project.category == "DISPLAYING" %}
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    {% else %}
+                        <span class="glyphicon glyphicon-remove"></span>                        
+                    {% endif %}
+                    <a href='#'><p id= "font_name">{{project.title}}</p></a>
                 </div>
             </div>
-            
         </div>
         <div id = "proj_body">
             <div id="font_profile_div">
                 <div id="font_profile_image">
-                    <img id="thumbnail" src="{{ url_for('static', filename = 'res/images/test3.jpg')}}" alt="Image Not Available"/>
+                    <img id="thumbnail" src="{{url_for('static', filename = project.thumbnail)}}" alt="Image Not Available"/>
                     <div id="img_control_div">
-                        <input type="submit" value="삭제">    
-                        <input type="submit" value="등록">    
+                        <input type="submit" value="삭제"> <!-- Delete Project : make it similar to that of github -->
+                        <a href="{{url_for('register_project', project_id = session['project-id'] )}}">
+                            <input type="submit" value="등록"> <!-- Register Work into History -->
+                        </a>
                     </div>
                 </div>
                 <div id="font_description_div">
@@ -33,19 +40,18 @@
                         </div>
                         <div id = "proj_credit">
                             <a href="#">
-                                <p id = "artist_name">엄후영</p>
-                                <img id="artist_profile_image" src="{{ url_for('static', filename = 'res/images/uhy.jpg')}}" alt="Image Not Available"/>
+                                <p id = "artist_name">{{project.author.name}}</p>
+                                <img id="artist_profile_image" src="{{ url_for('static', filename = project.author.profile_image )}}" alt="Image Not Available"/>
                             </a>
                         </div>
                     </div>
 
                     <div id="font_description">
-                        <p>어떤 폰트인지에 대한 설명을 여기에 작성하게 되는 것입니다</p>
+                        <p>{{project.description}}</p>
                     </div>
                     <div id="text_control_div"> 
-                        <input type="submit" value="수정">    
+                        <input type="submit" value="수정"> <!-- Modify project description -->
                     </div>
-
                 </div>
                 <!-- <div id="font_sale_div">
                     <div id="request_info">
@@ -67,7 +73,7 @@
                 <p>작업 과정</p>
             </div>
 
-<!-- PROJECT PAPERS -->
+<!-- PROJECT History -->
             <div id="proj_papers">  
                 {% for work in history %}
                 <div class="paper_item">
@@ -76,8 +82,8 @@
                             <p class="paper_date">{{ work.date }}</p>
                         </div>  
                         <div class="btn_paper_manage">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span class="glyphicon glyphicon-trash"></span>
+                            <span class="glyphicon glyphicon-pencil"></span> <!-- Edit work -->
+                            <span class="glyphicon glyphicon-trash"></span>  <!-- Delete work -->
                         </div>
                     </div>
                     <div class = "paper_body">
@@ -90,13 +96,13 @@
                             <p>{{ work.description }}</p>
                         </div>
                         <div class="reactions_to_paper">
-                            <a href="#">
+                            <a href="#"><!-- let JS do that vis POST -->
                                 <span class="glyphicon glyphicon-heart-empty"></span>
                             </a>
-                            <a href="#">
+                            <a href="#"><!-- let JS do that vis POST -->
                                 <span class="glyphicon glyphicon-comment"></span>
                             </a>
-                            <a href="#">
+                            <a href="#"><!-- let JS do that vis POST -->
                                 <span class="glyphicon glyphicon-share-alt"></span>
                             </a>
                         </div>  
