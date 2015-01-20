@@ -19,19 +19,22 @@ def add_exclusive(data) :
         add(data)
         return True
 
-def get (attr, value, limit = -1) :
-    author_filtered = Author.query.filter(getattr(Author, attr) == value)
-    if   limit == 1 : return author_filtered.one()
-    elif limit >  1 : return author_filtered.limit(limit)
-    else            : return author_filtered.all()
+def get (attr = None, value = None, limit = -1) :
+    authors = None
+    if (attr, value) == (None, None) : authors = Author.query.filter()
+    else                             : authors = Author.query.filter(getattr(Author, attr) == value)
 
-""" TODO : Solve Circular import """
-def get_secure (attr, value, limit = -1) :
-    if not auth.secure() : return None
-    author_filtered = Author.query.filter(getattr(Author, attr) == value)
-    if   limit == 1 : return author_filtered.one()
-    elif limit >  1 : return author_filtered.limit(limit)
-    else            : return author_filtered.all()
+    if   limit == 1 : return authors.one()
+    elif limit >  1 : return authors.limit(limit)
+    else            : return authors.all()
+
+# """ TODO : Solve Circular import """
+# def get_secure (attr, value, limit = -1) :
+#     if not auth.secure() : return None
+#     authors = Author.query.filter(getattr(Author, attr) == value)
+#     if   limit == 1 : return authors.one()
+#     elif limit >  1 : return authors.limit(limit)
+#     else            : return authors.all()
 
 # form has 'email' & 'password' attribute
 def verified(form) : 

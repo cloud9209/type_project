@@ -21,8 +21,6 @@
 
     <script type='text/javascript' src="{{ url_for('static', filename = 'js/bootstrap.min.js')}}"></script>
     <script type='text/javascript' src="{{ url_for('static', filename = 'js/modernizr.custom.js')}}"></script>
-    <script type='text/javascript' src="{{ url_for('static', filename = 'js/ajax.js')}}"></script>
-
     {% block head %}
     {% endblock %}
 </head>
@@ -49,7 +47,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 작가별<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         {% for author in authors %}
-                            <li><a href="{{url_for('main', category = author.name )}}">{{author.name}}</a></li>
+                            <li><a href="{{url_for('main', category = author.id )}}">{{author.name}}</a></li>
                             {% if not loop.last %} 
                                 <li class="divider"></li>
                             {% endif %}
@@ -69,6 +67,21 @@
     </div><!-- /.container-fluid -->
 </nav>
 <body>
+    <div id= "above_proj_items">    
+        <div id="search_box">
+            <form class="navbar-form navbar-left" role="search">
+                <button type="submit" class="btn btn-default">찾기</button>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="입력하세요" style="width:230px; ">
+                </div>
+            </form>
+        </div>
+        <div id="btn_create_proj">
+            <a href="#modal_enter_proj_name">
+                <span class="glyphicon glyphicon-folder-open"></span>내 작업 개설하기
+            </a>
+        </div>
+    </div>
     {%block body%}
     {%endblock%}
 </body>

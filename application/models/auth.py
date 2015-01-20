@@ -9,7 +9,7 @@ def secure():
     : raise 404 page if not authorized  """
 def required(f):
     @wraps(f)
-    def deco(*args, **kwargs) :
+    def auth_required(*args, **kwargs) :
         if not secure() : abort(404)
         return f(*args, **kwargs)
-    return deco
+    return auth_required

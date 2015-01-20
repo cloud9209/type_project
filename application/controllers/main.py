@@ -27,9 +27,10 @@ def main(category) :
             pass
         except : # sqlalchemy.orm.exc.NoResultFound or MultipleResultFound
             pass
-
     if projects == None : abort(404)
-    return render_template('main.html', projects = projects)
+
+    authors = author.get()
+    return render_template('main.html', projects = projects, authors = authors)
 
 @app.route('/inside_proj', methods=['GET', 'POST'])
 def inside_proj():
@@ -60,4 +61,5 @@ def inside_proj():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html')
+    if auth.secure() : authors = author.get()
+    return render_template('404.html', authors = authors)
