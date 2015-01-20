@@ -1,161 +1,161 @@
 {% extends "base.html" %}
 {% block head %}
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main_style.css')}}" />
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/inside_proj_style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main_style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/inside_proj_style.css')}}" />
 {% endblock%}
 {% block body %}
 
-<div id="main">	
-	<div id="proj_item">
-		<div id = "proj_head">
-			<div id = "proj_title">
-				<div id = "font_name_div">
-					<img id="font_name_back" src="{{ url_for('static', filename = 'res/images/project_title_background.png')}}" alt="Image Not Available"/>
-					<span class="glyphicon glyphicon-book"></span>
-					<a href='#'><p id= "font_name">명주실</p></a>
-				</div>
-			</div>
-			
-		</div>
-		<div id = "proj_body">
-			<div id="font_profile_div">
-				<div id="font_profile_image">
-					<img id="thumbnail" src="{{ url_for('static', filename = 'res/images/test3.jpg')}}" alt="Image Not Available"/>
-					<div id="img_control_div">
-						<input type="submit" value="삭제">	
-						<input type="submit" value="등록">	
-					</div>
-				</div>
-				<div id="font_description_div">
-					<div id="above_font_description_div">
-						<div id ="concept_label">
-							<p>제작 의도</p>
-						</div>
-						<div id = "proj_credit">
-							<a href="#">
-								<p id = "artist_name">엄후영</p>
-								<img id="artist_profile_image" src="{{ url_for('static', filename = 'res/images/uhy.jpg')}}" alt="Image Not Available"/>
-							</a>
-						</div>
-					</div>
+<div id="main"> 
+    <div id="proj_item">
+        <div id = "proj_head">
+            <div id = "proj_title">
+                <div id = "font_name_div">
+                    <img id="font_name_back" src="{{ url_for('static', filename = 'res/images/project_title_background.png')}}" alt="Image Not Available"/>
+                    <span class="glyphicon glyphicon-book"></span>
+                    <a href='#'><p id= "font_name">명주실</p></a>
+                </div>
+            </div>
+            
+        </div>
+        <div id = "proj_body">
+            <div id="font_profile_div">
+                <div id="font_profile_image">
+                    <img id="thumbnail" src="{{ url_for('static', filename = 'res/images/test3.jpg')}}" alt="Image Not Available"/>
+                    <div id="img_control_div">
+                        <input type="submit" value="삭제">    
+                        <input type="submit" value="등록">    
+                    </div>
+                </div>
+                <div id="font_description_div">
+                    <div id="above_font_description_div">
+                        <div id ="concept_label">
+                            <p>제작 의도</p>
+                        </div>
+                        <div id = "proj_credit">
+                            <a href="#">
+                                <p id = "artist_name">엄후영</p>
+                                <img id="artist_profile_image" src="{{ url_for('static', filename = 'res/images/uhy.jpg')}}" alt="Image Not Available"/>
+                            </a>
+                        </div>
+                    </div>
 
-					<div id="font_description">
-						<p>어떤 폰트인지에 대한 설명을 여기에 작성하게 되는 것입니다</p>
-					</div>
-					<div id="text_control_div">	
-						<input type="submit" value="수정">	
-					</div>
+                    <div id="font_description">
+                        <p>어떤 폰트인지에 대한 설명을 여기에 작성하게 되는 것입니다</p>
+                    </div>
+                    <div id="text_control_div"> 
+                        <input type="submit" value="수정">    
+                    </div>
 
-				</div>
-				<!-- <div id="font_sale_div">
-					<div id="request_info">
-						<p>구매/작업 요청</p>
-					</div>
-					<div id="price_info_div">
-						<div id="price_info_fix">
-							<p style="color: gray;">낱자 당</p>
-							<p style="color: gray; font-size: 23pt;">₩</p>
-						</div>
-						<div id="price_per_char">
-							<p style="color: gray; font-size: 23pt;">2,000</p>
-						</div>
-					</div>
-					<input id="send_request" type="submit" value="요청 보내기">	
-				</div> -->
-			</div>
-			<div id="process_label">
-				<p>작업 과정</p>
-			</div>
+                </div>
+                <!-- <div id="font_sale_div">
+                    <div id="request_info">
+                        <p>구매/작업 요청</p>
+                    </div>
+                    <div id="price_info_div">
+                        <div id="price_info_fix">
+                            <p style="color: gray;">낱자 당</p>
+                            <p style="color: gray; font-size: 23pt;">₩</p>
+                        </div>
+                        <div id="price_per_char">
+                            <p style="color: gray; font-size: 23pt;">2,000</p>
+                        </div>
+                    </div>
+                    <input id="send_request" type="submit" value="요청 보내기">  
+                </div> -->
+            </div>
+            <div id="process_label">
+                <p>작업 과정</p>
+            </div>
 
 <!-- PROJECT PAPERS -->
-			<div id="proj_papers">	
-				{% for work in history %}
-				<div class="paper_item">
-					<div class="above_paper_div">
-						<div class="paper_date_div">
-							<p class="paper_date">{{ work.date }}</p>
-						</div>	
-						<div class="btn_paper_manage">
-							<span class="glyphicon glyphicon-pencil"></span>
-							<span class="glyphicon glyphicon-trash"></span>
-						</div>
-					</div>
-					<div class = "paper_body">
-						<div class="paper_image">
-							<a href="#">
-								<img class="paper_img_thumbnail" src="{{ url_for('static', filename = work.image ) }}" alt="Image Not Available"/>
-							</a>
-						</div>
-						<div class="paper_description">
-							<p>{{ work.description }}</p>
-						</div>
-						<div class="reactions_to_paper">
-							<a href="#">
-								<span class="glyphicon glyphicon-heart-empty"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-comment"></span>
-							</a>
-							<a href="#">
-								<span class="glyphicon glyphicon-share-alt"></span>
-							</a>
-						</div>	
-					</div>
-				</div>
-				{% endfor %}
+            <div id="proj_papers">  
+                {% for work in history %}
+                <div class="paper_item">
+                    <div class="above_paper_div">
+                        <div class="paper_date_div">
+                            <p class="paper_date">{{ work.date }}</p>
+                        </div>  
+                        <div class="btn_paper_manage">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </div>
+                    </div>
+                    <div class = "paper_body">
+                        <div class="paper_image">
+                            <a href="#">
+                                <img class="paper_img_thumbnail" src="{{ url_for('static', filename = work.image ) }}" alt="Image Not Available"/>
+                            </a>
+                        </div>
+                        <div class="paper_description">
+                            <p>{{ work.description }}</p>
+                        </div>
+                        <div class="reactions_to_paper">
+                            <a href="#">
+                                <span class="glyphicon glyphicon-heart-empty"></span>
+                            </a>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-comment"></span>
+                            </a>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-share-alt"></span>
+                            </a>
+                        </div>  
+                    </div>
+                </div>
+                {% endfor %}
 
-			</div>
+            </div>
 <!-- LIKES -->
-			<div id="like_on_proj_div">
+            <div id="like_on_proj_div">
 
-				<span class="glyphicon glyphicon-heart-empty"></span>
-				<div id="like_users_div">
-					{% if likes|length %}
-						{% for like in likes %}
-							<a href="#">{{ like.target }}</a>
-							{% if not loop.last %}
-								<p>, </p>
-							{% endif %}
-						{% endfor %}
-						<p id="like_on_proj_closing_ment">님이 좋아합니다.</p>
-					{% endif %}
-				</div>
-			</div>
+                <span class="glyphicon glyphicon-heart-empty"></span>
+                <div id="like_users_div">
+                    {% if likes|length %}
+                        {% for like in likes %}
+                            <a href="#">{{ like.target }}</a>
+                            {% if not loop.last %}
+                                <p>, </p>
+                            {% endif %}
+                        {% endfor %}
+                        <p id="like_on_proj_closing_ment">님이 좋아합니다.</p>
+                    {% endif %}
+                </div>
+            </div>
 <!-- COMMENTS  -->
-			<div id="comment_on_proj_div">
-				<div id="comment_on_proj_label">
-					<span class="glyphicon glyphicon-comment"></span>
-					{% if comments|length %}
-						<p id="comment_on_proj_num_count">{{ comments|length }}</p>
-					{% endif %}
-				</div>
+            <div id="comment_on_proj_div">
+                <div id="comment_on_proj_label">
+                    <span class="glyphicon glyphicon-comment"></span>
+                    {% if comments|length %}
+                        <p id="comment_on_proj_num_count">{{ comments|length }}</p>
+                    {% endif %}
+                </div>
 
-				{% for comment in comments %}
-				<div class="comment_on_proj">
-					<div class="comment_user">
-						<a href="#">
-							<img class="comment_user_img" src="{{ url_for('static', filename = comment.writer.profile_image )}}" alt="Image Not Available"/>
-							<p class = "comment_user_name">{{comment.writer.name}}</p>
-						</a>
-					</div>
+                {% for comment in comments %}
+                <div class="comment_on_proj">
+                    <div class="comment_user">
+                        <a href="#">
+                            <img class="comment_user_img" src="{{ url_for('static', filename = comment.writer.profile_image )}}" alt="Image Not Available"/>
+                            <p class = "comment_user_name">{{comment.writer.name}}</p>
+                        </a>
+                    </div>
 
-					<div class="comment_body">
-						<div class="comment_content">
-							<p>{{comment.body}}</p>
-						</div>
-						<div class="comment_date">
-							<p>{{comment.creation_time}}</p>
-						</div>
-					</div>
-					<div class="comment_manage_btn">
-						<span class="glyphicon glyphicon-pencil"></span><!-- TODO : MODIFY -->
-						<span class="glyphicon glyphicon-trash"></span> <!-- TODO : DELETE -->
-					</div>
-				</div>
-				{% endfor %}
-			</div>
-		</div>
-	</div>
+                    <div class="comment_body">
+                        <div class="comment_content">
+                            <p>{{comment.body}}</p>
+                        </div>
+                        <div class="comment_date">
+                            <p>{{comment.creation_time}}</p>
+                        </div>
+                    </div>
+                    <div class="comment_manage_btn">
+                        <span class="glyphicon glyphicon-pencil"></span><!-- TODO : MODIFY -->
+                        <span class="glyphicon glyphicon-trash"></span> <!-- TODO : DELETE -->
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
