@@ -77,7 +77,7 @@
 
 <!-- PROJECT History -->
       <div id="proj_papers">  
-        {% for work in history %}
+        {% for work in project.history %}
         <div class="paper_item">
           <div class="above_paper_div">
             <div class="paper_date_div">
@@ -98,28 +98,26 @@
               <p>{{ work.description }}</p>
             </div>
             <div class="reactions_to_paper">
-              <a href="#"><!-- let JS do that via POST -->
-                <span class="glyphicon glyphicon-heart-empty"></span>
+              <a href="#">
+                <span class="glyphicon glyphicon-heart-empty"></span>{{ work.likes.count() }}
               </a>
-              <a href="{{ url_for('type_work', work_id = work.id) }}"><!-- let JS do that via POST -->
-                <span class="glyphicon glyphicon-comment"></span>
+              <a href="{{ url_for('type_work', work_id = work.id) }}">
+                <span class="glyphicon glyphicon-comment"></span>{{ work.comments.count() }}
               </a>
-              <a href="#"><!-- let JS do that via POST -->
+              <a href="#">
                 <span class="glyphicon glyphicon-share-alt"></span>
               </a>
             </div>  
           </div>
         </div>
         {% endfor %}
-
       </div>
 <!-- LIKES -->
       <div id="like_on_proj_div">
-
         <span class="glyphicon glyphicon-heart-empty"></span>
         <div id="like_users_div">
-          {% if likes|length %}
-            {% for like in likes %}
+          {% if project.likes.count() %}
+            {% for like in project.likes %}
               <a href="#">{{ like.target }}</a>
               {% if not loop.last %}
                 <p>, </p>
@@ -133,12 +131,10 @@
       <div id="comment_on_proj_div">
         <div id="comment_on_proj_label">
           <span class="glyphicon glyphicon-comment"></span>
-          {% if comments|length %}
-            <p id="comment_on_proj_num_count">{{ comments|length }}</p>
-          {% endif %}
+          <p id="comment_on_proj_num_count">{{ project.comments.count() }}</p>
         </div>
 
-        {% for comment in comments %}
+        {% for comment in project.comments %}
         <div class="comment_on_proj">
           <div class="comment_user">
             <a href="#">

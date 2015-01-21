@@ -21,8 +21,8 @@
         <div id="like_on_paper_div">
           <span class="glyphicon glyphicon-heart-empty"></span>
           <div id="like_paper_users_div">
-            {% if likes|length %}
-            {% for like in likes %}
+            {% if work.likes.count() %}
+            {% for like in work.likes %}
             <a href="#">{{ like.target }}</a>
             {% if not loop.last %}
             <p>, </p>
@@ -36,12 +36,10 @@
         <div id="comment_on_paper_div">
           <div id="comment_on_paper_label">
             <span class="glyphicon glyphicon-comment"></span>
-            {% if comments|length %}
-            <p id="comment_on_paper_num_count">{{ comments|length }}</p>
-            {% endif %}
+            <p id="comment_on_paper_num_count">{{ work.comments.count() }}</p>
           </div>
 
-          {% for comment in comments %}
+          {% for comment in work.comments %}
           <div class="comment_on_paper">
             <div class="comment_on_paper_user">
               <a href="#">

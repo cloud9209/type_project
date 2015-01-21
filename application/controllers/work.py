@@ -9,10 +9,7 @@ import logging
 def type_work(work_id) :
     session['work-id'] = work_id
 
-    current_work = work.get('id', work_id, 1)
-    if current_work is None : abort(404)
+    __work__ = work.get('id', work_id, 1)
+    if __work__ is None : abort(404)
 
-    return render_template('work.html', work = current_work,
-        likes    = [],#   work_like.get('work_id', work_id),
-        comments = work_comment.get('work_id', work_id)
-    )
+    return render_template('work.html', work = __work__)

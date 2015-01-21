@@ -25,11 +25,7 @@ def delete_project(project_id) :
 def type_project(project_id) :
     session['project-id'] = project_id
 
-    current_project = project.get('id', project_id, 1)
-    if current_project is None : abort(404)
+    __project__ = project.get('id', project_id, 1)
+    if __project__ is None : abort(404)
 
-    return render_template('project.html', project = current_project,
-        history  =            work.get('project_id', project_id),
-        likes    = [],#   project_like.get('project_id', project_id),
-        comments = project_comment.get('project_id', project_id)
-    )
+    return render_template('project.html', project = __project__)
