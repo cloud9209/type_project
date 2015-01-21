@@ -6,7 +6,7 @@ class Author(db.Model) :
     password        = db.Column(db.String(100))
     name            = db.Column(db.String(45))
     profile_image   = db.Column(db.String(100), default = "")
-    projects        = db.relationship('TypeProject', backref='Author', lazy='dynamic')
+    projects        = db.relationship('TypeProject', backref='Author', lazy='dynamic', cascade='all, delete-orphan')
 
 class TypeProject(db.Model) :
     id              = db.Column(db.Integer, primary_key = True)
@@ -16,8 +16,9 @@ class TypeProject(db.Model) :
     thumbnail       = db.Column(db.String(100), default = "")
     author_id       = db.Column(db.Integer, db.ForeignKey('author.id'))
     author          = db.relationship('Author', foreign_keys = [author_id])
-    history         = db.relationship('TypeWork', backref='type_project', lazy='dynamic')
-    comments        = db.relationship('TypeProjectComment', backref='type_project', lazy='dynamic')
+    history         = db.relationship('TypeWork', backref='type_project', lazy='dynamic', cascade='all, delete-orphan')
+    comments        = db.relationship('TypeProjectComment', backref='type_project', lazy='dynamic', cascade='all, delete-orphan')
+    likes           = db.relationship('TypeProjectLike', backref='type_project', lazy='dynamic', cascade='all, delete-orphan')
 
 class TypeProjectComment(db.Model) :
     id              = db.Column(db.Integer, primary_key = True)
@@ -46,7 +47,8 @@ class TypeWork(db.Model) :
     author          = db.relationship('Author', foreign_keys = [author_id])
     project_id      = db.Column(db.Integer, db.ForeignKey('type_project.id'))
     project         = db.relationship('TypeProject', foreign_keys = [project_id])
-    comments        = db.relationship('TypeWorkComment', backref='type_work', lazy='dynamic')
+    comments        = db.relationship('TypeWorkComment', backref='type_work', lazy='dynamic', cascade='all, delete-orphan')
+    likes           = db.relationship('TypeWorkLike', backref='type_work', lazy='dynamic', cascade='all, delete-orphan')
 
 class TypeWorkComment(db.Model) :
     id              = db.Column(db.Integer, primary_key = True)
