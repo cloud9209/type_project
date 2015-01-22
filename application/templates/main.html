@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main_style.css')}}" />
+  <script type="text/javascript" src="{{url_for('static', filename = 'js/main.js')}}"></script>
 {% endblock%}
 {% block body%}
 
@@ -33,7 +34,7 @@
       </div>
       <div class = "proj_body">
         <div class="font_profile_image into_the_proj">
-          <a href="{{url_for ('type_project', project_id = project.id) }}"><!-- #modal_inside_proj_item> -->
+          <a href="{{url_for ('type_project', project_id = project.id) }}">
             <img class="thumbnail" src="{{ url_for('static', filename = project.thumbnail) }}" alt="Image Not Available"/>
             <div class="thumbnail_gradi_cover"></div>
           </a>
@@ -41,8 +42,20 @@
         <div class="font_description">
           <p>{{ project.description }}</p>
         </div>
+        <!-- <div class="reactions_to_proj row">
+          <div class="col-md-4">
+            <span class="glyphicon glyphicon-heart-empty"></span>{{ project.likes.count() }}
+          </div>
+          <div class="col-md-4">
+            <span class="glyphicon glyphicon-comment"></span>{{ project.comments.count() }}
+          </div>
+          <div class="col-md-4">
+            <span class="glyphicon glyphicon-share-alt"></span>
+          </div>
+        </div> -->
         <div class="reactions_to_proj">
-          <a href="#">
+          <a class="project_like" href="#"><!-- => Make it a-tag to div -->
+            <div data="{{project.id}}" style="display:none"></div>
             <span class="glyphicon glyphicon-heart-empty"></span>{{ project.likes.count() }}
           </a>
           <a href="#">

@@ -22,12 +22,11 @@
           <span class="glyphicon glyphicon-heart-empty"></span>
           <div id="like_paper_users_div">
             {% if work.likes.count() %}
-            {% for like in work.likes %}
-            <a href="#">{{ like.target }}</a>
-            {% if not loop.last %}
-            <p>, </p>
-            {% endif %}
-            {% endfor %}
+            <p>
+              {% for like in work.likes %}
+              <a href="#">{{ like.liker.name }}</a>{% if not loop.last %}, {% endif %}
+              {% endfor %}
+            </p>
             <p id="like_on_paper_closing_ment">님이 좋아합니다.</p>
             {% endif %}
           </div>

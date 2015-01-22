@@ -118,7 +118,7 @@
         <div id="like_users_div">
           {% if project.likes.count() %}
             {% for like in project.likes %}
-              <a href="#">{{ like.target }}</a>
+              <a href="#">{{ like.liker.name }}</a>
               {% if not loop.last %}
                 <p>, </p>
               {% endif %}

@@ -1,8 +1,8 @@
 
 #-*- coding:utf-8 -*-
 from application import app
-from flask import render_template, session, url_for, request, redirect, abort
-from application.models import project, auth, work, project_comment
+from flask import render_template, session, url_for, request, redirect, abort, jsonify
+from application.models import project, auth, work, project_comment, project_like
 import logging
 
 @app.route('/project/<int:project_id>/register', methods = ['POST'])
@@ -12,6 +12,18 @@ def register_project(project_id) :
     _project = project.get('id', project_id, 1)
     work.add_project_copy(_project) # -> work.add(data)
     return redirect(url_for('type_project', project_id = project_id))
+
+@app.route('/project/<int:project_id>/like', methods = ['POST'])
+@auth.required # 404 if not authorized
+def like_project(project_id) :
+    success = False
+    try :
+        project_like.toggle(session['id'], project_id)
+        success = True
+    except :
+        logging.debug("Like Assertion Failed")
+        pass
+    return jsonify(is_success = success, like_count = len(project_like.get('project_id', project_id)))
 
 @app.route('/project/<int:project_id>/delete', methods = ['POST'])
 @auth.required # 404 if not authorized
