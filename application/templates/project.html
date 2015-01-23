@@ -28,7 +28,7 @@
           <img id="thumbnail" src="{{url_for('static', filename = project.thumbnail)}}" alt="Image Not Available"/>
           <div id="img_control_div">
             <input type="submit" value="삭제"> <!-- Delete Project : make it similar to that of github -->
-            <form role="form" action="{{ url_for('register_project', project_id = session['project-id']) }}" method="POST">
+            <form role="form" action="{{ url_for('register_project', project_id = session.project_id) }}" method="POST">
               <div class="form-group">
                 <input id="comment_on_proj_submit" type="submit" value="등록">
               </div>
@@ -52,24 +52,9 @@
             <p>{{project.description}}</p>
           </div>
           <div id="text_control_div"> 
-            <input type="submit" value="수정"> <!-- Modify project description -->
+            <input type="submit" value="수정">
           </div>
         </div>
-        <!-- <div id="font_sale_div">
-          <div id="request_info">
-            <p>구매/작업 요청</p>
-          </div>
-          <div id="price_info_div">
-            <div id="price_info_fix">
-              <p style="color: gray;">낱자 당</p>
-              <p style="color: gray; font-size: 23pt;">₩</p>
-            </div>
-            <div id="price_per_char">
-              <p style="color: gray; font-size: 23pt;">2,000</p>
-            </div>
-          </div>
-          <input id="send_request" type="submit" value="요청 보내기">  
-        </div> -->
       </div>
       <div id="process_label">
         <p>작업 과정</p>
@@ -99,10 +84,10 @@
             </div>
             <div class="reactions_to_paper">
               <a href="#">
-                <span class="glyphicon glyphicon-heart-empty"></span>{{ work.likes.count() }}
+                <span class="glyphicon glyphicon-heart-empty"> {{ work.likes.count() }}</span>
               </a>
               <a href="{{ url_for('type_work', work_id = work.id) }}">
-                <span class="glyphicon glyphicon-comment"></span>{{ work.comments.count() }}
+                <span class="glyphicon glyphicon-comment"> {{ work.comments.count() }}</span>
               </a>
               <a href="#">
                 <span class="glyphicon glyphicon-share-alt"></span>
@@ -117,13 +102,12 @@
         <span class="glyphicon glyphicon-heart-empty"></span>
         <div id="like_users_div">
           {% if project.likes.count() %}
+            <p>
             {% for like in project.likes %}
               <a href="#">{{ like.liker.name }}</a>
-              {% if not loop.last %}
-                <p>, </p>
-              {% endif %}
+              {%- if not loop.last -%}, {%- endif -%}
             {% endfor %}
-            <p id="like_on_proj_closing_ment">님이 좋아합니다.</p>
+            님이 좋아합니다.</p>
           {% endif %}
         </div>
       </div>
@@ -136,42 +120,42 @@
 
         {% for comment in project.comments %}
         <div class="comment_on_proj">
-          <div class="comment_user">
+          <div class="comment_on_proj_user">
             <a href="#">
-              <img class="comment_user_img" src="{{ url_for('static', filename = comment.writer.profile_image )}}" alt="Image Not Available"/>
-              <p class = "comment_user_name">{{comment.writer.name}}</p>
+              <img class="comment_on_proj_user_img" src="{{ url_for('static', filename = comment.writer.profile_image )}}" alt="Image Not Available"/>
+              <p class = "comment_on_proj_user_name">{{comment.writer.name}}</p>
             </a>
           </div>
 
-          <div class="comment_body">
-            <div class="comment_content">
+          <div class="comment_on_proj_body">
+            <div class="comment_on_proj_content">
               <p>{{comment.body}}</p>
             </div>
-            <div class="comment_date">
+            <div class="comment_on_proj_date">
               <p>{{comment.creation_time}}</p>
             </div>
           </div>
-          <div class="comment_manage_btn">
-            <span class="glyphicon glyphicon-pencil"></span><!-- TODO : MODIFY -->
-            <span class="glyphicon glyphicon-trash"></span> <!-- TODO : DELETE -->
+          <div class="comment_on_proj_manage_btn">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-trash"></span>
           </div>
         </div>
         {% endfor %}
         <div class="comment_on_proj">
           <div class="comment_on_proj_user">
-            <a href="#"><!-- to ??? -->
+            <a href="#">
               <img class="comment_on_proj_user_img" src="{{ url_for('static', filename = '')}}" alt="Image Not Available"/>
-              <p class = "comment_on_proj_user_name">{{session.name}}</p>
+              <p class = "comment_on_proj_user_name">{{session.author_name}}</p>
             </a>
           </div>
-          <div class="comment_on_proj_body">
-            <form role="form" action="{{url_for('submit_project_comment')}}" method="POST">
-              <div class="form-group">
-                <input type="text" name="body" placecholder="써라." required/>
-                <input id="comment_on_proj_submit" type="submit" value="등록">
-              </div>
-            </form>
+          <form role="form" action="{{url_for('submit_project_comment')}}" method="POST">
+          <div class="comment_on_proj_body form-group">
+            <input type="text" name="body" placecholder="써라." required/>
           </div>
+          <div class="comment_on_proj_manage_btn">
+            <input id="comment_on_proj_submit" type="submit" value="등록">
+          </div>
+          </form>
         </div>
       </div>
     </div>

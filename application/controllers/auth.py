@@ -14,9 +14,9 @@ def sign_in() :
         return redirect(url_for('index'))
     logging.info("LOGIN SUCCESS")
     _author = author.get('email', request.form['email'], 1)
-    session['id'] = _author.id
-    session['name'] = _author.name
-    session['email'] = _author.email
+    session['author_id'] = _author.id
+    session['author_name'] = _author.name
+    session['author_email'] = _author.email
     return redirect(url_for('main', category = 'all'))
 
 @app.route('/sign_up', methods=['GET', 'POST'])

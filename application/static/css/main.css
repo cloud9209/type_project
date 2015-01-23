@@ -1,9 +1,6 @@
 body{
 	background-color: #e9e9e9;
 }
-.nav>li{
-	margin-left : 80px;
-}
 
 #join{
 	margin-top: 15px;
@@ -15,33 +12,6 @@ body{
 		padding-top: 25px;
 		color : gray;
 	}
-
-a:hover{text-decoration:none;}
-#above_proj_items{
-	display: inline-block;	
-	width: 90%;
-	heigth: 45px;
-	border-bottom: 1px solid #a7a7a7;
-	margin-left: 60px;
-
-}
-	#search_box{
-		float: left;
-		margin: 9px 0px;			
-	}	
-	#btn_create_proj{
-		float: right;
-		margin-top: 15px;
-		font-family: 'Noto Sans', sans-serif;
-	}
-		#btn_create_proj>a{
-			color: gray;
-			text-decoration: none;
-		}
-		#btn_create_proj>a>span{
-			font-size: 15pt;
-			margin-right: 10px;
-		}
 
 #main{
 	min-width: 400px;
@@ -265,9 +235,8 @@ a:hover{text-decoration:none;}
 		height: 40px;
 		text-align:center;
 	}
-	
 		.reactions_to_proj>a>span{
-			font-size: 18pt;
+			font-size: 12pt;
 			color: gray;
 			margin : 10px 25px;
 		}

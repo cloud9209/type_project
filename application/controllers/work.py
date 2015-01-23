@@ -1,4 +1,4 @@
-#-*- coding:utf-8 -*-
+#_*_ coding:utf_8 _*_
 from application import app
 from flask import render_template, session, url_for, request, redirect, abort
 from application.models import work, auth, work_comment
@@ -7,7 +7,7 @@ import logging
 @app.route('/work/<int:work_id>', methods = ['GET', 'POST'])
 @auth.required # 404 if not authorized
 def type_work(work_id) :
-    session['work-id'] = work_id
+    session['work_id'] = work_id
 
     __work__ = work.get('id', work_id, 1)
     if __work__ is None : abort(404)

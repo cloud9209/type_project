@@ -16,7 +16,7 @@ class TypeWork(db.Model) :
 def add(data) :
     db.session.add(TypeWork(
         description = data['description'],
-        project_id = session['project-id']
+        project_id = session['project_id']
     ))
     db.session.commit()
 
@@ -28,10 +28,15 @@ def add_project_copy(prj) :
     ))
     db.session.commit()
 
-def get(attr = None, value = None, limit = -1) :
+def get(attr = None, value = None, limit = -1, with_author = False, default = None) :
     type_works = None
-    if (attr, value) == (None, None) : type_works = TypeWork.query.filter()
-    else                             : type_works = TypeWork.query.filter(getattr(TypeWork, attr) == value)
+    
+    if with_author : 
+        if (attr, value) == (None, None) : type_works = TypeWork.query.filter(getattr(TypeWork, 'author_id') == session['author_id'])
+        else                             : type_works = TypeWork.query.filter(getattr(TypeWork, 'author_id') == session['author_id'], getattr(TypeWork, attr) == value)    
+    else :
+        if (attr, value) == (None, None) : type_works = TypeWork.query.filter()
+        else                             : type_works = TypeWork.query.filter(getattr(TypeWork, attr) == value)
 
     works = []
     try :
@@ -39,7 +44,7 @@ def get(attr = None, value = None, limit = -1) :
         if limit >  1 : works = type_works.limit(limit)
         else          : works = type_works.all()
     except :
-        return None
+        return default
 
     for work in works :
         work.date += datetime.timedelta(hours=9)
