@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block head %}
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main_style.css')}}" />
-  <script type="text/javascript" src="{{url_for('static', filename = 'js/main.js')}}"></script>
+  <link   href="{{ url_for('static', filename = 'css/main.css')}}" type="text/css" rel="stylesheet"/>
+  <script src ="{{ url_for('static', filename =  'js/main.js' )}}" type="text/javascript"></script>
 {% endblock%}
 {% block body%}
 
-<div id="main"> 
+<div id="main">
   <div id="columns">
   {% for project in projects %}
     <div class="proj_item">
@@ -18,7 +18,7 @@
             {% elif project.category == "DISPLAYING" %}
               <span class="glyphicon glyphicon-eye-open"></span>
             {% else %}
-              <span class="glyphicon glyphicon-remove"></span>            
+              <span class="glyphicon glyphicon-remove"></span>
             {% endif %}
             <a href="{{url_for ('type_project', project_id = project.id) }}">
               <p class="font_name into_the_proj">{{ project.title }}</p>
@@ -54,7 +54,7 @@
           </div>
         </div> -->
         <div class="reactions_to_proj">
-          <a class="project_like" href="#"><!-- => Make it a-tag to div -->
+          <a class="project_like" href="#">
             <div data="{{project.id}}" style="display:none"></div>
             <span class="glyphicon glyphicon-heart-empty"></span>{{ project.likes.count() }}
           </a>
