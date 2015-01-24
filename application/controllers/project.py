@@ -6,7 +6,7 @@ from application.models import project, auth, work, project_comment, project_lik
 import logging
 
 @app.route('/project/<int:project_id>/register', methods = ['POST'])
-@auth.requires(auth.type.project) # 404 if not authorized
+@auth.requires(auth.type.author)
 def register_project(project_id) :
     if session['project_id'] != project_id : abort(404) # invalid project number
     _project = project.get('id', project_id, 1)
@@ -14,7 +14,7 @@ def register_project(project_id) :
     return redirect(url_for('type_project', project_id = project_id))
 
 @app.route('/project/<int:project_id>/like', methods = ['POST'])
-@auth.requires(auth.type.signed_in) # 404 if not authorized
+@auth.requires(auth.type.author)
 def like_project(project_id) :
     success = False
     try :
@@ -26,14 +26,14 @@ def like_project(project_id) :
     return jsonify(is_success = success, like_count = len(project_like.get('project_id', project_id)))
 
 @app.route('/project/<int:project_id>/delete', methods = ['POST'])
-@auth.requires(auth.type.signed_in) # 404 if not authorized
+@auth.requires(auth.type.author)
 def delete_project(project_id) :
     if session['project_id'] != project_id : abort(404) # invalid project number
     _project = project.remove('id', project_id, 1)
     return redirect(url_for('type_project', project_id = project_id))
 
 @app.route('/project/<int:project_id>', methods = ['GET', 'POST'])
-@auth.requires(auth.type.signed_in) # 404 if not authorized
+@auth.requires(auth.type.author)
 def type_project(project_id) :
     session['project_id'] = project_id
 

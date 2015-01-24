@@ -14,7 +14,7 @@ def index() :
     return render_template('index.html', message = message)
 
 @app.route('/main/<string:category>')
-@auth.requires(auth.type.signed_in) # 404 if not authorized
+@auth.requires(auth.type.author)
 def main(category) :
     projects = None
     if   category == 'all'                    : projects = project.get(limit = 10)

@@ -1,5 +1,7 @@
 from application import db
 from schema import Author
+from flask import session
+from attrdict import attrdict
 import logging, auth
 
 def add(data) :
@@ -64,5 +66,8 @@ def verified(form) :
 #         author.profile_image = new_path
 #     db.session.commit()
 
-
-
+def secure() :
+    safe, action, body = None, None, None
+    safe = 'author_id' in session and 'author_email' in session and 'author_name' in session
+    action = 'abort'
+    return attrdict( safe = safe, action = action, body = body )

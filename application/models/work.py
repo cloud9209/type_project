@@ -2,6 +2,7 @@ from application import db
 from schema import TypeWork
 from flask import session
 import datetime
+from attrdict import attrdict
 
 '''
 class TypeWork(db.Model) :
@@ -28,15 +29,11 @@ def add_project_copy(prj) :
     ))
     db.session.commit()
 
-def get(attr = None, value = None, limit = -1, with_author = False, default = None) :
+def get(attr = None, value = None, limit = -1, default = None) :
     type_works = None
     
-    if with_author : 
-        if (attr, value) == (None, None) : type_works = TypeWork.query.filter(getattr(TypeWork, 'author_id') == session['author_id'])
-        else                             : type_works = TypeWork.query.filter(getattr(TypeWork, 'author_id') == session['author_id'], getattr(TypeWork, attr) == value)    
-    else :
-        if (attr, value) == (None, None) : type_works = TypeWork.query.filter()
-        else                             : type_works = TypeWork.query.filter(getattr(TypeWork, attr) == value)
+    if (attr, value) == (None, None) : type_works = TypeWork.query.filter()
+    else                             : type_works = TypeWork.query.filter(getattr(TypeWork, attr) == value)
 
     works = []
     try :
@@ -60,3 +57,19 @@ def remove(attr, value) :
     db.session.delete(_target)
     db.session.commit()
     return True
+
+def secure() :
+    safe, action, body = None, 'abort', None
+    if 'work_id' not in session :
+        safe = False
+    else :
+        try :
+            _work = TypeWork.query.filter(
+                getattr(TypeWork, 'author_id') == session['author_id'],
+                getattr(TypeWork,        'id') == session['work_id']
+            ).one()
+            safe = _work is not None
+        except :
+            safe = False
+            body = 'could not find proper work obj'
+    return attrdict( safe = safe, action = action, body = body )

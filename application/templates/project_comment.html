@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="comment_on_proj_manage_btn">
-    <span class="glyphicon glyphicon-pencil"></span>
-    <span class="glyphicon glyphicon-trash"></span>
+    <span class="glyphicon glyphicon-pencil modify-comment" target="{{url_for('project_comment_modify', comment_id = comment.id)}}"></span>
+    <span class="glyphicon glyphicon-trash remove-comment"  target="{{url_for('project_comment_remove', comment_id = comment.id)}}"></span>
   </div>
 </div>

@@ -114,11 +114,12 @@
       </div>
 <!-- COMMENTS  -->
       <div id="comment_on_proj_div">
+        <!-- label -->
         <div id="comment_on_proj_label">
           <span class="glyphicon glyphicon-comment"></span>
           <p id="comment_on_proj_num_count">{{ project.comments.count() }}</p>
         </div>
-
+        <!-- comment loop -->
         {% for comment in project.comments %}
         <div class="comment_on_proj">
           <div class="comment_on_proj_user">
@@ -137,12 +138,13 @@
             </div>
           </div>
           <div class="comment_on_proj_manage_btn">
-            <span class="glyphicon glyphicon-pencil"></span>
-            <span class="glyphicon glyphicon-trash"></span>
+            <span class="glyphicon glyphicon-pencil modify-comment" target="{{url_for('project_comment_modify', comment_id = comment.id)}}"></span>
+            <span class="glyphicon glyphicon-trash remove-comment"  target="{{url_for('project_comment_remove', comment_id = comment.id)}}"></span>
           </div>
         </div>
         {% endfor %}
-        <div class="comment_on_proj" target="{{url_for('submit_project_comment')}}">
+        <!-- write comment -->
+        <div class="comment_on_proj">
           <div class="comment_on_proj_user">
             <a href="{{ url_for( 'author_page', author_id = session.author_id ) }}">
               <img class="comment_on_proj_user_img" src="{{ url_for('static', filename = '')}}" alt="Image Not Available"/>
@@ -153,7 +155,7 @@
             <input type="text" name="body" placecholder="써라." required/>
           </div>
           <div class="comment_on_proj_manage_btn">
-            <button id="comment_on_proj_submit">등록</button>
+            <button class="new-comment" target="{{url_for('project_comment_new')}}">등록</button>
           </div>
         </div>
       </div>

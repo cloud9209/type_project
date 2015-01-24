@@ -2,6 +2,7 @@ from application import db
 from schema import Author, TypeProjectLike
 from flask import session
 import datetime
+from attrdict import attrdict
 
 '''
 class TypeProjectLike(db.Model) :
@@ -49,3 +50,28 @@ def get(attr = None, value = None, limit = -1) :
 
     if limit == 1 : return likes[0]
     else          : return likes
+
+def secure() :
+    safe, action, body = None, None, None
+    return attrdict( safe = safe, action = action, body = body )
+
+
+def secure() :
+    safe, action, body = None, None, None
+    if 'project_id' not in session :
+        safe = False
+    elif 'like_id' not in request.form :
+        safe = False
+        body = 'like_id not exist'
+    else :
+        try :
+            _like = TypeProjectComment.query.filter(
+                getattr(TypeProjectComment,         'id') == request.form['like_id'],
+                getattr(TypeProjectComment, 'project_id') == session['project_id'],
+                getattr(TypeProjectComment,  'writer_id') == session['author_id']
+            ).one()
+            safe = _like is not None
+        except :
+            safe = False
+            body = 'could not find proper project_like object'
+    return attrdict( safe = safe, action = action, body = body )

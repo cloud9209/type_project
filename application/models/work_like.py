@@ -2,6 +2,7 @@ from application import db
 from schema import Author, TypeWorkLike
 from flask import session
 import datetime
+from attrdict import attrdict
 
 '''
 class TypeWorkLike(db.Model) :
@@ -44,3 +45,23 @@ def get(attr = None, value = None, limit = -1) :
 
     if limit == 1 : return likes[0]
     else          : return likes
+
+def secure() :
+    safe, action, body = None, None, None
+    if 'work_id' not in session :
+        safe = False
+    elif 'like_id' not in request.form :
+        safe = False
+        body = 'like_id not exist'
+    else :
+        try :
+            _like = TypeWorkLike.query.filter(
+                getattr(TypeWorkLike, 'id'        ) == request.form['like_id'],
+                getattr(TypeWorkLike, 'work_id') == session['work_id'],
+                getattr(TypeWorkLike, 'writer_id' ) == session['author_id'],
+            ).one()
+            safe = _like is not None
+        except :
+            safe = False
+            body = 'could not find proper work_like object'
+    return attrdict( safe = safe, action = action, body = body )

@@ -5,7 +5,7 @@ from application.models import work, auth, work_comment
 import logging
 
 @app.route('/work/<int:work_id>', methods = ['GET', 'POST'])
-@auth.requires(auth.type.signed_in)
+@auth.requires(auth.type.author)
 def type_work(work_id) :
     session['work_id'] = work_id
 

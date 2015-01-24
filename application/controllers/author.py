@@ -5,7 +5,7 @@ from application.models import author, auth
 import logging
 
 @app.route('/<int:author_id>')
-@auth.requires(auth.type.signed_in)
+@auth.requires(auth.type.author)
 def author_page(author_id) :
     authors = author.get()
     return render_template('author_page.html', authors = authors)

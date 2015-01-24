@@ -2,6 +2,7 @@ from application import db
 from schema import Author, TypeWorkComment
 from flask import session
 import datetime
+from attrdict import attrdict
 
 '''
 class TypeWorkComment(db.Model) :
@@ -42,3 +43,23 @@ def get(attr = None, value = None, limit = -1) :
 
     if limit == 1 : return comments[0]
     else          : return comments
+
+def secure() :
+    safe, action, body = None, None, None
+    if 'work_id' not in session :
+        safe = False
+    elif 'comment_id' not in request.form :
+        safe = False
+        body = 'comment_id not exist'
+    else :
+        try :
+            _comment = TypeWorkComment.query.filter(
+                getattr(TypeWorkComment, 'id'        ) == request.form['comment_id'],
+                getattr(TypeWorkComment, 'work_id') == session['work_id'],
+                getattr(TypeWorkComment, 'writer_id' ) == session['author_id'],
+            ).one()
+            safe = _comment is not None
+        except :
+            safe = False
+            body = 'could not find proper work_comment object'
+    return attrdict( safe = safe, action = action, body = body )
