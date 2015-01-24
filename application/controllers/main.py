@@ -7,13 +7,14 @@ import logging
 @app.route('/')
 def index() :
     # secure : logged-in // TODO : main/all -> if possible, return where it was.
-    if auth.secure() : return redirect(url_for('main', category = 'all'))
+    if 'author_id' in session and 'author_email' in session and 'author_name' in session :
+        return redirect(url_for('main', category = 'all'))
 
     message = session.pop('msg-index', "")
     return render_template('index.html', message = message)
 
 @app.route('/main/<string:category>')
-@auth.required # 404 if not authorized
+@auth.requires(auth.type.signed_in) # 404 if not authorized
 def main(category) :
     projects = None
     if   category == 'all'                    : projects = project.get(limit = 10)

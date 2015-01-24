@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block head %}
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main_style.css')}}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main.css')}}" />
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/modal_inside_proj_style.css')}}" />
 {% endblock%}
 {% block body %}
@@ -41,7 +41,7 @@
               <p>제작 의도</p>
             </div>
             <div id = "proj_credit">
-              <a href="#">
+              <a href="{{ url_for( 'author_page', author_id = project.author_id ) }}">
                 <p id = "artist_name">{{project.author.name}}</p>
                 <img id="artist_profile_image" src="{{ url_for('static', filename = project.author.profile_image )}}" alt="Image Not Available"/>
               </a>
@@ -121,7 +121,7 @@
         {% for comment in project.comments %}
         <div class="comment_on_proj">
           <div class="comment_on_proj_user">
-            <a href="#">
+            <a href="{{ url_for( 'author_page', author_id = comment.writer_id ) }}">
               <img class="comment_on_proj_user_img" src="{{ url_for('static', filename = comment.writer.profile_image )}}" alt="Image Not Available"/>
               <p class = "comment_on_proj_user_name">{{comment.writer.name}}</p>
             </a>

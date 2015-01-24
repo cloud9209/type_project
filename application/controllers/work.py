@@ -5,7 +5,7 @@ from application.models import work, auth, work_comment
 import logging
 
 @app.route('/work/<int:work_id>', methods = ['GET', 'POST'])
-@auth.required # 404 if not authorized
+@auth.requires(auth.type.signed_in)
 def type_work(work_id) :
     session['work_id'] = work_id
 
