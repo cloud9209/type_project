@@ -1,0 +1,21 @@
+<div class="comment_on_proj">
+  <div class="comment_on_proj_user">
+    <a href="{{ url_for( 'author_page', author_id = comment.writer_id ) }}">
+      <img class="comment_on_proj_user_img" src="{{ url_for('static', filename = comment.writer.profile_image )}}" alt="Image Not Available"/>
+      <p class = "comment_on_proj_user_name">{{comment.writer.name}}</p>
+    </a>
+  </div>
+
+  <div class="comment_on_proj_body">
+    <div class="comment_on_proj_content">
+      <p>{{comment.body}}</p>
+    </div>
+    <div class="comment_on_proj_date">
+      <p>{{comment.creation_time}}</p>
+    </div>
+  </div>
+  <div class="comment_on_proj_manage_btn">
+    <span class="glyphicon glyphicon-pencil"></span>
+    <span class="glyphicon glyphicon-trash"></span>
+  </div>
+</div>

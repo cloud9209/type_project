@@ -35,6 +35,4 @@ def main(category) :
 
 @app.errorhandler(404)
 def page_not_found(e):
-    authors = []
-    if auth.secure() : authors = author.get()
-    return render_template('404.html', authors = authors)
+    return render_template('404.html')

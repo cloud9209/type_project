@@ -2,6 +2,7 @@
 {% block head %}
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main.css')}}" />
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/modal_inside_proj_style.css')}}" />
+  <script type="text/javascript" src="{{url_for('static', filename='js/project.js')}}"></script>
 {% endblock%}
 {% block body %}
 
@@ -30,7 +31,7 @@
             <input type="submit" value="삭제"> <!-- Delete Project : make it similar to that of github -->
             <form role="form" action="{{ url_for('register_project', project_id = session.project_id) }}" method="POST">
               <div class="form-group">
-                <input id="comment_on_proj_submit" type="submit" value="등록">
+                <input type="submit" value="등록">
               </div>
             </form>
           </div>
@@ -141,25 +142,22 @@
           </div>
         </div>
         {% endfor %}
-        <div class="comment_on_proj">
+        <div class="comment_on_proj" target="{{url_for('submit_project_comment')}}">
           <div class="comment_on_proj_user">
-            <a href="#">
+            <a href="{{ url_for( 'author_page', author_id = session.author_id ) }}">
               <img class="comment_on_proj_user_img" src="{{ url_for('static', filename = '')}}" alt="Image Not Available"/>
               <p class = "comment_on_proj_user_name">{{session.author_name}}</p>
             </a>
           </div>
-          <form role="form" action="{{url_for('submit_project_comment')}}" method="POST">
-          <div class="comment_on_proj_body form-group">
+          <div class="comment_on_proj_body">
             <input type="text" name="body" placecholder="써라." required/>
           </div>
           <div class="comment_on_proj_manage_btn">
-            <input id="comment_on_proj_submit" type="submit" value="등록">
+            <button id="comment_on_proj_submit">등록</button>
           </div>
-          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 {% endblock %}

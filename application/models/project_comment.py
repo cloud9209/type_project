@@ -16,12 +16,14 @@ class TypeProjectComment(db.Model) :
 '''
 
 def add(writer_id, project_id, body) :
-    db.session.add( TypeProjectComment (
+    _comment = TypeProjectComment (
         writer_id = writer_id,
         project_id = project_id,
         body = body
-    ))
+    )
+    db.session.add( _comment )
     db.session.commit()
+    return _comment
 
 def get(attr = None, value = None, limit = -1) :
     project_comments = None

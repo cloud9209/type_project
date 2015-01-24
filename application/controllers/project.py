@@ -2,7 +2,7 @@
 #-*- coding:utf-8 -*-
 from application import app
 from flask import render_template, session, url_for, request, redirect, abort, jsonify
-from application.models import project, auth, work, project_comment, project_like
+from application.models import project, auth, work, project_comment, project_like, author
 import logging
 
 @app.route('/project/<int:project_id>/register', methods = ['POST'])
@@ -40,4 +40,5 @@ def type_project(project_id) :
     __project__ = project.get('id', project_id, 1)
     if __project__ is None : abort(404)
 
-    return render_template('project.html', project = __project__)
+    authors = author.get()
+    return render_template('project.html', project = __project__, authors = authors)
