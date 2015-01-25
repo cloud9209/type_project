@@ -1,5 +1,5 @@
-/* ---------------- show process paper content by modal start--------------- */
-#modal_paper_item{
+/* ---------------- show process work content by modal start--------------- */
+#modal_work_item{
 	position: fixed;
 	font-family: Arial, Helvetica, sans-serif;
 	top: 0;
@@ -14,12 +14,12 @@
 	transition: opacity 400ms ease-in;
 	pointer-events: none;	
 }
-#modal_paper_item:target {
+#modal_work_item:target {
 	opacity:1;
 	pointer-events: auto;
 }
 
-#close_modal_paper_item {
+#close_modal_work_item {
 	background: red;
 	color: #ffffff;
 	line-height: 35px;
@@ -41,10 +41,10 @@
 	opacity: 1;
 }
 
-#close_modal_paper_item:hover { background: #00d9ff; }
+#close_modal_work_item:hover { background: #00d9ff; }
 
 
-	#modal_page_div{
+	#modal_work_div{
 		position: absolute;
 		width: 80%;
 		height: 80%;
@@ -58,7 +58,7 @@
 	    border-radius: 6px;
 
 	}
-		#page_div_left{
+		#work_div_left{
 			float:left;
 			width : 40%;
 			height: 80%;
@@ -68,7 +68,7 @@
 			box-shadow : 0 1px 2px 0 rgba(0, 0, 0, 0.22);
 			position:fixed;
 		}
-			#paper_img{
+			#work_img{
 				margin:auto;
 				max-width: 95%;
 				max-height: 95%;
@@ -82,61 +82,61 @@
 				vertical-align: middle;
 			}
 
-		#page_div_right{
+		#work_div_right{
 			padding: 10px;
 			width : 50%;
 			height: 100%;
 			float: right;
 		}
-			#label_paper_description{
+			#label_work_description{
 				padding-bottom: -10px;
 				color: gray;
 				border-bottom: 1px solid #e7e7e7;	
 			}
-			#paper_description{
+			#work_description{
 				padding: 10px;
 				height: 200px;
 				font-family: 'Noto Sans', sans-serif;
 				font-size: 10pt;
 						
 			}
-			#like_on_paper_div{
+			#like_on_work_div{
 				width: 100%;
 				height: 40px;
 				padding: 10px 5px;
 				border-top: 1px solid #e7e7e7;
 			}
-				#like_on_paper_div>span{
+				#like_on_work_div>span{
 					float: left;
 					font-size: 14pt;
 					color: gray;
 				}
-				#like_paper_users_div{
+				#like_work_users_div{
 					float: left;
 					margin-left : 7px;
 					padding-top: 1px;
 				}
-					#like_paper_users_div>*{
+					#like_work_users_div>*{
 						font-family: 'Noto Sans', sans-serif;
 						font-size: 10pt;
 						display: inline;
 					}
-			#comment_on_paper_div{
+			#comment_on_work_div{
 				width: 100%;
 				padding: 10px 5px;
 				border-top: 1px solid #e7e7e7;
 			}
-				#comment_on_paper_label{
+				#comment_on_work_label{
 					display: inline-block;
 					height: 30px;
 					width: 100%;
 				}
-					#comment_on_paper_label>span{
+					#comment_on_work_label>span{
 						float:left;
 						font-size: 14pt;
 						color: gray;
 					}
-					#comment_on_paper_num_count{
+					#comment_on_work_num_count{
 						display: inline;
 						margin-left: 5px;
 						font-family: 'Noto Sans', sans-serif;
@@ -144,71 +144,71 @@
 					}
 
 
-			.comment_on_paper{
+			.comment_on_work{
 				width: 100%;
 				height: 43px;
 				padding: 5px 0px;
 				display: inline-block;
 				border-top: 1px dashed #d7d7d7;
 			}
-				.comment_on_paper_user{
+				.comment_on_work_user{
 					margin: 5px 0px;
 					float: left;
 					padding-right: 10px;
 					border-right: 2px solid #e7e7e7;
 				}	
-					.comment_on_paper_user>a>*{
+					.comment_on_work_user>a>*{
 						display: inline;
 					}
-					.comment_on_paper_user_img{
+					.comment_on_work_user_img{
 						border-radius: 3px;
 						width:27px;
 						height: 27px;
 					}
-					.comment_on_paper_user_name{
+					.comment_on_work_user_name{
 						margin-left: 5px;
 						font-family: 'Noto Sans', sans-serif;
 						font-size: 10pt;
 					}
 
-				.comment_on_paper_body{
+				.comment_on_work_body{
 					margin: 7px 0px;
 					padding-left: 5px;
 					width: 69%;
 					float: left;
 				}
-					.comment_on_paper_body>div{
+					.comment_on_work_body>div{
 						font-family: 'Noto Sans', sans-serif;
 					}
-					.comment_on_paper_content{
+					.comment_on_work_content{
 						padding-top: 3px;
 						font-size: 10pt;
 						float: left;
 					}
-					.comment_on_paper_date{
+					.comment_on_work_date{
 						font-size: 9pt;
 						margin: 5px 0px;
 						float: right;
 					}
-				.comment_on_paper_manage_btn{
+				.comment_on_work_manage_btn{
 					margin-top: 10px;
 					float: right;	
 					border-left: 2px solid #e7e7e7;
 				}
-					.comment_on_paper_manage_btn>span{
+					.comment_on_work_manage_btn>span{
 						font-size: 14pt;
 						padding-left: 10px;
 						display: inline;
 					}
-					.comment_on_paper_manage_btn>span:hover{
+					.comment_on_work_manage_btn>span:hover{
 						cursor:pointer;
 					}
-				.comment_on_paper_body>input{
+				.comment_on_work_body>input{
 					padding-left: 10px;
 					width: 100%;
 				}	
 
-				#comment_on_paper_submit{
+				#comment_on_work_submit{
 					width: 50px;
 					background-color: white;
 					border-radius: 3px;
@@ -220,4 +220,4 @@
 
 
 
-/* ---------------- show process paper content by modal end--------------- */
+/* ---------------- show process work content by modal end--------------- */

@@ -1,6 +1,6 @@
 from application import db
 from schema import Author, TypeWorkComment
-from flask import session
+from flask import session, request
 import datetime
 from attrdict import attrdict
 
@@ -18,12 +18,26 @@ class TypeWorkComment(db.Model) :
 '''
 
 def add(writer_id, work_id, body) :
-    db.session.add( TypeWorkComment (
+    _work = TypeWorkComment (
         writer_id = writer_id,
         work_id = work_id,
         body = body
-    ))
+    )
+    db.session.add( _work )
     db.session.commit()
+    return _work
+
+def modify(comment_id, body) :
+    _comment = get('id', comment_id, 1)
+    _comment.body = body
+    db.session.commit()
+    return _comment
+
+def remove(comment_id) :
+    _comment = get('id', comment_id, 1)
+    db.session.delete(_comment)
+    db.session.commit()
+    return _comment
 
 def get(attr = None, value = None, limit = -1) :
     work_comments = None

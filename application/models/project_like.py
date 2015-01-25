@@ -1,6 +1,6 @@
 from application import db
 from schema import Author, TypeProjectLike
-from flask import session
+from flask import session, request
 import datetime
 from attrdict import attrdict
 

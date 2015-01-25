@@ -1,4 +1,4 @@
-#modal_inside_proj_item{
+#modal_inside_project_item{
 	position: fixed;
 	font-family: Arial, Helvetica, sans-serif;
 	top: 0;
@@ -14,12 +14,12 @@
 	pointer-events: none;
 }
 
-#modal_inside_proj_item:target {
+#modal_inside_project_item:target {
 	opacity:1;
 	pointer-events: auto;
 }
 
-	#inside_proj_item{
+	#inside_project_item{
 		/*margin: auto;*/
 		/*max-width: 100%;
 		max-height: 100%;
@@ -34,7 +34,7 @@
 	    right:0;
 	    overflow: auto;
 	}
-	#close_modal_inside_proj_item {
+	#close_modal_inside_project_item {
 		background: red;
 		color: #ffffff;
 		line-height: 35px;
@@ -56,16 +56,16 @@
 		opacity: 1;
 	}
 
-	#close_modal_inside_proj_item:hover { background: #00d9ff; }
+	#close_modal_inside_project_item:hover { background: #00d9ff; }
 
 
 
-#inside_proj_head{		
+#inside_project_head{		
 	display: inline-block;
 	height: 43px;
 	width: 100%;
 }
-	#inside_proj_title {
+	#inside_project_title {
 		float:left;		
 		height : 30px;
 	}
@@ -98,7 +98,7 @@
 			font-family: 'Noto Sans', sans-serif;
 		}
 
-#inside_proj_body{
+#inside_project_body{
 	display: inline-block;
 	margin-top : -5px;
 	box-shadow : 0 1px 2px 0 rgba(0, 0, 0, 0.22);
@@ -168,7 +168,7 @@
 				height: 30px;
 				color: gray;
 			}
-			#inside_proj_credit{
+			#inside_project_credit{
 				float: right;
 				height: 30px;
 			}
@@ -258,7 +258,7 @@
 /*-------------------font sale part*/
 /*-----------------------------promotion img & text about font ends*/
 
-#proj_papers{
+#project_works{
 	width: 100%;
 	padding: 10px 20px;
 	background-color: #f1f1f1;
@@ -274,48 +274,48 @@
 			font-family: 'Noto Sans', sans-serif;
 			font-size: 12pt;
 		}
-	.above_paper_div{
+	.above_work_div{
 		display: inline-block;
 		width: 100%;
 	}
-		.paper_date_div{
+		.work_date_div{
 			float: left;
 		}
-			.paper_date{
+			.work_date{
 				margin : 3px 10px;
 				font-family: 'Noto Sans', sans-serif;
 				font-size: 9pt;
 				color: gray;
 				line-height: 175%;
 			}
-		.btn_paper_manage{
+		.btn_work_manage{
 			float:right;
 			padding-top: 3px;
 		}
-			.btn_paper_manage>span{
+			.btn_work_manage>span{
 				font-size: 10pt;
 				margin-left: 9px;
 				display: inline;
 			}		
-			.btn_paper_manage>span:hover{
+			.btn_work_manage>span:hover{
 				cursor:pointer;
 			}
-#columns_proj_papers{
+#columns_project_works{
 	width: 95%;
 	margin: auto;
 }
-	.paper_item{
+	.work_item{
 		display: inline-block;
 		margin: 20px 15px;
 	}
-		.paper_body{
+		.work_body{
 			box-shadow : 2px 2px 2px 2px rgba(0, 0, 0, 0.22);
 			width: 240px;
 			height: 420px;
 			border-radius: 6px;
 			background-color: white;
 		}
-			.paper_image{
+			.work_image{
 				width : 240px;
 				height: 240px;
 				background-color: #f0f0f0;
@@ -325,7 +325,7 @@
 				position:relative;
 				/*padding:5px;*/
 			}
-				.paper_img_thumbnail{
+				.work_img_thumbnail{
 					margin:auto;
 					max-width: 95%;
 					max-height: 95%;
@@ -339,7 +339,7 @@
 					vertical-align: middle;
 				}
 			
-			.paper_description{
+			.work_description{
 				height : 110px;
 				margin : 10px;
 				padding : 10px;
@@ -348,128 +348,128 @@
 				line-height: 175%;
 			}
 
-		.reactions_to_paper{
+		.reactions_to_work{
 			margin-top: 15px;
 			border-top: 1px solid #e7e7e7;
 			height: 40px;
 			text-align:center;
 		}
-			.reactions_to_paper>a>span{
+			.reactions_to_work>a>span{
 				font-size: 12pt;
 				color: gray;
 				margin : 10px 25px;
 			}
 
-		#like_on_proj_div{
+		#like_on_project_div{
 			width: 100%;
 			height: 40px;
 			padding: 10px 20px;
 			border-top: 1px solid #e7e7e7;
 		}
-			#like_on_proj_div>span{
+			#like_on_project_div>span{
 				float: left;
 				font-size: 14pt;
 				color: gray;
 			}
-			#like_proj_users_div{
+			#like_project_users_div{
 				float: left;
 				margin-left : 7px;
 				padding-top: 1px;
 			}
-				#like_proj_users_div>*{
+				#like_project_users_div>*{
 					font-family: 'Noto Sans', sans-serif;
 					font-size: 10pt;
 					display: inline;
 				}
 			
-		#comment_on_proj_div{
+		#comment_on_project_div{
 			width: 100%;
 			padding: 10px 20px;
 			border-top: 1px solid #e7e7e7;
 		}
-			#comment_on_proj_label{
+			#comment_on_project_label{
 				display: inline-block;
 				height: 30px;
 				width: 100%;
 			}
-				#comment_on_proj_label>span{
+				#comment_on_project_label>span{
 					float:left;
 					font-size: 14pt;
 					color: gray;
 				}
-				#comment_on_proj_num_count{
+				#comment_on_project_num_count{
 					display: inline;
 					margin-left: 5px;
 					font-family: 'Noto Sans', sans-serif;
 					font-size: 11pt;
 				}
 
-			.comment_on_proj{
+			.comment_on_project{
 				width: 100%;
 				height: 43px;
 				padding: 5px 0px;
 				display: inline-block;
 				border-top: 1px dashed #d7d7d7;
 			}
-				.comment_on_proj_user{
+				.comment_on_project_user{
 					margin: 5px 0px;
 					float: left;
 					padding-right: 10px;
 					border-right: 2px solid #e7e7e7;
 				}	
-					.comment_on_proj_user>a>*{
+					.comment_on_project_user>a>*{
 						display: inline;
 					}
-					.comment_on_proj_user_img{
+					.comment_on_project_user_img{
 						border-radius: 3px;
 						width:27px;
 						height: 27px;
 					}
-					.comment_on_proj_user_name{
+					.comment_on_project_user_name{
 						margin-left: 5px;
 						font-family: 'Noto Sans', sans-serif;
 						font-size: 10pt;
 					}
 
-				.comment_on_proj_body{
+				.comment_on_project_body{
 					margin: 7px 0px;
 					padding-left: 10px;
 					width: 85%;
 					float: left;
 				}
-					.comment_on_proj_body>div{
+					.comment_on_project_body>div{
 						font-family: 'Noto Sans', sans-serif;
 					}
-					.comment_on_proj_content{
+					.comment_on_project_content{
 						padding-top: 3px;
 						font-size: 10pt;
 						float: left;
 					}
-					.comment_on_proj_date{
+					.comment_on_project_date{
 						font-size: 9pt;
 						margin: 5px 0px;
 						padding-right: 10px;
 						float: right;
 					}
-				.comment_on_proj_manage_btn{
+				.comment_on_project_manage_btn{
 					margin-top: 10px;
 					float: right;	
 					border-left: 2px solid #e7e7e7;
 				}
-					.comment_on_proj_manage_btn>span{
+					.comment_on_project_manage_btn>span{
 						font-size: 14pt;
 						padding-left: 10px;
 						display: inline;
 					}
-					.comment_on_proj_manage_btn>span:hover{
+					.comment_on_project_manage_btn>span:hover{
 						cursor:pointer;
 					}
-				.comment_on_proj_body>input{
+				.comment_on_project_body>input{
 					padding-left: 10px;
 					width: 100%;
 				}	
 
-				#comment_on_proj_submit{
+				#comment_on_project_submit{
 					width: 50px;
 					background-color: white;
 					border-radius: 3px;

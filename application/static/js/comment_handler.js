@@ -14,16 +14,13 @@ $(document).on("click", '.new-comment', function(event) {
                 input.val('');
                 _this_.parent().parent().before( response.body );
             } else {
-                console.log('not authenticated');
+                console.log('not authorized');
             }
             _this_.attr('disabled', false);
         },
         error : function() {
             console.log('error : ' + _this_);
             _this_.attr('disabled', false);
-        },
-        complete : function() {
-            console.log('completed : ' + _this_);
         }
     });
 });
@@ -39,15 +36,12 @@ $(document).on("click", '.remove-comment', function(event) {
             if ( response.success ) {
                 _this_.parent().parent().remove();
             } else {
-                console.log('not authenticated');
+                console.log('not authorized');
             }
         },
         error : function() {
             console.log('error : ' + _this_);
             _this_.attr('disabled', false);
-        },
-        complete : function() {
-            console.log('completed : ' + _this_);
         }
     });
 });
@@ -63,15 +57,12 @@ $(document).on("click", '.modify-comment', function(event) {
             if ( response.success ) {
                 _this_.parent().parent().replaceWith(response.body);
             } else {
-                console.log('not authenticated');
+                console.log('not authorized');
             }
         },
         error : function() {
             console.log('error : ' + _this_);
             _this_.attr('disabled', false);
-        },
-        complete : function() {
-            console.log('completed : ' + _this_);
         }
     });
 });
@@ -88,15 +79,12 @@ $(document).on("click", '.submit-modified-comment', function(event) {
             if ( response.success ) {
                 _this_.parent().parent().replaceWith(response.body);
             } else {
-                console.log('not authenticated');
+                console.log('not authorized');
             }
         },
         error : function() {
             console.log('error : ' + _this_);
             _this_.attr('disabled', false);
-        },
-        complete : function() {
-            console.log('completed : ' + _this_);
         }
     });
 });

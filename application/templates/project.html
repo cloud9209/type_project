@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block head %}
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main.css')}}" />
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/modal_inside_proj_style.css')}}" />
-  <script type="text/javascript" src="{{url_for('static', filename='js/project.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/project.css')}}" />
+<script type="text/javascript" src="{{url_for('static', filename='js/comment_handler.js')}}"></script>
 {% endblock%}
 {% block body %}
 
 <div id="main"> 
-  <div id="proj_item">
-    <div id = "proj_head">
-      <div id = "proj_title">
+  <div id="project_item">
+    <div id = "project_head">
+      <div id = "project_title">
         <div id = "font_name_div">
           <img id="font_name_back" src="{{ url_for('static', filename = 'res/images/project_title_background.png')}}" alt="Image Not Available"/>
           {% if project.category == "READING" %}
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div id = "proj_body">
+    <div id = "project_body">
       <div id="font_profile_div">
         <div id="font_profile_image">
           <img id="thumbnail" src="{{url_for('static', filename = project.thumbnail)}}" alt="Image Not Available"/>
@@ -41,7 +41,7 @@
             <div id ="concept_label">
               <p>제작 의도</p>
             </div>
-            <div id = "proj_credit">
+            <div id = "project_credit">
               <a href="{{ url_for( 'author_page', author_id = project.author_id ) }}">
                 <p id = "artist_name">{{project.author.name}}</p>
                 <img id="artist_profile_image" src="{{ url_for('static', filename = project.author.profile_image )}}" alt="Image Not Available"/>
@@ -62,28 +62,28 @@
       </div>
 
 <!-- PROJECT History -->
-      <div id="proj_papers">  
+      <div id="project_works">  
         {% for work in project.history %}
-        <div class="paper_item">
-          <div class="above_paper_div">
-            <div class="paper_date_div">
-              <p class="paper_date">{{ work.date }}</p>
+        <div class="work_item">
+          <div class="above_work_div">
+            <div class="work_date_div">
+              <p class="work_date">{{ work.date }}</p>
             </div>  
-            <div class="btn_paper_manage">
+            <div class="btn_work_manage">
               <span class="glyphicon glyphicon-pencil"></span> <!-- Edit work -->
               <span class="glyphicon glyphicon-trash"></span>  <!-- Delete work -->
             </div>
           </div>
-          <div class = "paper_body">
-            <div class="paper_image">
+          <div class = "work_body">
+            <div class="work_image">
               <a href="{{ url_for('type_work', work_id = work.id) }}">
-                <img class="paper_img_thumbnail" src="{{ url_for('static', filename = work.image ) }}" alt="Image Not Available"/>
+                <img class="work_img_thumbnail" src="{{ url_for('static', filename = work.image ) }}" alt="Image Not Available"/>
               </a>
             </div>
-            <div class="paper_description">
+            <div class="work_description">
               <p>{{ work.description }}</p>
             </div>
-            <div class="reactions_to_paper">
+            <div class="reactions_to_work">
               <a href="#">
                 <span class="glyphicon glyphicon-heart-empty"> {{ work.likes.count() }}</span>
               </a>
@@ -99,7 +99,7 @@
         {% endfor %}
       </div>
 <!-- LIKES -->
-      <div id="like_on_proj_div">
+      <div id="like_on_project_div">
         <span class="glyphicon glyphicon-heart-empty"></span>
         <div id="like_users_div">
           {% if project.likes.count() %}
@@ -113,48 +113,48 @@
         </div>
       </div>
 <!-- COMMENTS  -->
-      <div id="comment_on_proj_div">
+      <div id="comment_on_project_div">
         <!-- label -->
-        <div id="comment_on_proj_label">
+        <div id="comment_on_project_label">
           <span class="glyphicon glyphicon-comment"></span>
-          <p id="comment_on_proj_num_count">{{ project.comments.count() }}</p>
+          <p id="comment_on_project_num_count">{{ project.comments.count() }}</p>
         </div>
         <!-- comment loop -->
         {% for comment in project.comments %}
-        <div class="comment_on_proj">
-          <div class="comment_on_proj_user">
+        <div class="comment_on_project">
+          <div class="comment_on_project_user">
             <a href="{{ url_for( 'author_page', author_id = comment.writer_id ) }}">
-              <img class="comment_on_proj_user_img" src="{{ url_for('static', filename = comment.writer.profile_image )}}" alt="Image Not Available"/>
-              <p class = "comment_on_proj_user_name">{{comment.writer.name}}</p>
+              <img class="comment_on_project_user_img" src="{{ url_for('static', filename = comment.writer.profile_image )}}" alt="Image Not Available"/>
+              <p class = "comment_on_project_user_name">{{comment.writer.name}}</p>
             </a>
           </div>
 
-          <div class="comment_on_proj_body">
-            <div class="comment_on_proj_content">
+          <div class="comment_on_project_body">
+            <div class="comment_on_project_content">
               <p>{{comment.body}}</p>
             </div>
-            <div class="comment_on_proj_date">
+            <div class="comment_on_project_date">
               <p>{{comment.creation_time}}</p>
             </div>
           </div>
-          <div class="comment_on_proj_manage_btn">
+          <div class="comment_on_project_manage_btn">
             <span class="glyphicon glyphicon-pencil modify-comment" target="{{url_for('project_comment_modify', comment_id = comment.id)}}"></span>
             <span class="glyphicon glyphicon-trash remove-comment"  target="{{url_for('project_comment_remove', comment_id = comment.id)}}"></span>
           </div>
         </div>
         {% endfor %}
         <!-- write comment -->
-        <div class="comment_on_proj">
-          <div class="comment_on_proj_user">
+        <div class="comment_on_project">
+          <div class="comment_on_project_user">
             <a href="{{ url_for( 'author_page', author_id = session.author_id ) }}">
-              <img class="comment_on_proj_user_img" src="{{ url_for('static', filename = '')}}" alt="Image Not Available"/>
-              <p class = "comment_on_proj_user_name">{{session.author_name}}</p>
+              <img class="comment_on_project_user_img" src="{{ url_for('static', filename = '')}}" alt="Image Not Available"/>
+              <p class = "comment_on_project_user_name">{{session.author_name}}</p>
             </a>
           </div>
-          <div class="comment_on_proj_body">
+          <div class="comment_on_project_body">
             <input type="text" name="body" placecholder="써라." required/>
           </div>
-          <div class="comment_on_proj_manage_btn">
+          <div class="comment_on_project_manage_btn">
             <button class="new-comment" target="{{url_for('project_comment_new')}}">등록</button>
           </div>
         </div>
