@@ -12,7 +12,7 @@
       <div class = "proj_head">
         <div class = "proj_title">
           <div class = "font_name_div">
-            <img class="font_name_back" src="{{ url_for('static', filename = 'res/images/project_title_background.png')}}" alt="Image Not Available"/>
+            <img class="font_name_back" src="{{ url_for('static', filename = 'res/images/project_title_background.png') }}" alt="Image Not Available"/>
             {% if project.category == "READING" %}
               <span class="glyphicon glyphicon-book"></span>
             {% elif project.category == "DISPLAYING" %}
@@ -28,14 +28,14 @@
         <div class = "proj_credit">
           <a href="{{url_for ('main', category = project.author.id) }}">
             <p class = "artist_name">{{ project.author.name }}</p>
-            <img class="artist_profile_image" src="{{ url_for('static', filename = project.author.profile_image )}}" alt="Image Not Available"/>
+            <img class="artist_profile_image" src="{{ url_for('load_author_image', filename = project.author.thumbnail) }}" alt="Image Not Available"/>
           </a>
         </div>
       </div>
       <div class = "proj_body">
         <div class="font_profile_image into_the_proj">
           <a href="{{url_for ('type_project', project_id = project.id) }}">
-            <img class="thumbnail" src="{{ url_for('static', filename = project.thumbnail) }}" alt="Image Not Available"/>
+            <img class="thumbnail" src="{{url_for('load_project_image', filename = project.thumbnail)}}" alt="Image Not Available"/>
             <div class="thumbnail_gradi_cover"></div>
           </a>
         </div>

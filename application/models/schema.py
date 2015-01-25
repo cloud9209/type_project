@@ -5,7 +5,8 @@ class Author(db.Model) :
     email           = db.Column(db.String(60)) # -> to Unique
     password        = db.Column(db.String(100))
     name            = db.Column(db.String(45))
-    profile_image   = db.Column(db.String(100), default = "")
+    image           = db.Column(db.String(100), default = "")
+    thumbnail       = db.Column(db.String(100), default = "")
     projects        = db.relationship('TypeProject', backref='Author', lazy='dynamic', cascade='all, delete-orphan')
 
 class TypeProject(db.Model) :
@@ -13,6 +14,7 @@ class TypeProject(db.Model) :
     category        = db.Column(db.Enum('READING', 'DISPLAYING'))
     title           = db.Column(db.String(40))
     description     = db.Column(db.Text())
+    image           = db.Column(db.String(100), default = "")
     thumbnail       = db.Column(db.String(100), default = "")
     author_id       = db.Column(db.Integer, db.ForeignKey('author.id'))
     author          = db.relationship('Author', foreign_keys = [author_id])
@@ -40,7 +42,8 @@ class TypeProjectLike(db.Model) :
 
 class TypeWork(db.Model) :
     id              = db.Column(db.Integer, primary_key = True)
-    image           = db.Column(db.String(100))
+    image           = db.Column(db.String(100), default = "")
+    thumbnail       = db.Column(db.String(100), default = "")
     description     = db.Column(db.Text())
     date            = db.Column(db.DateTime, default=db.func.now())
     author_id       = db.Column(db.Integer, db.ForeignKey('author.id'))

@@ -27,13 +27,13 @@
     <div id = "project_body">
       <div id="font_profile_div">
         <div id="font_profile_image">
-          <img id="thumbnail" src="{{url_for('static', filename = project.thumbnail)}}" alt="Image Not Available"/>
+          <img id="thumbnail" src="{{url_for('load_project_image', filename = project.thumbnail)}}" alt="Image Not Available"/>
           <div id="img_control_div">
-            <input type="submit" value="삭제"> <!-- Delete Project : make it similar to that of github -->
-            <form role="form" action="{{ url_for('register_project', project_id = session.project_id) }}" method="POST">
-              <div class="form-group">
-                <input type="submit" value="등록">
-              </div>
+            <input type="submit" value="삭제"> <!-- Delete Thumbnail : make it similar to that of github -->
+
+            <form enctype="multipart/form-data" action=" {{ url_for('upload_project_image', project_id = project.id) }}" method="POST">
+              <input type="file" name="project-image">
+              <button type="submit">등록</button>
             </form>
           </div>
         </div>
@@ -45,7 +45,7 @@
             <div id = "project_credit">
               <a href="{{ url_for( 'author_page', author_id = project.author_id ) }}">
                 <p id = "artist_name">{{project.author.name}}</p>
-                <img id="artist_profile_image" src="{{ url_for('static', filename = project.author.profile_image )}}" alt="Image Not Available"/>
+                <img id="artist_profile_image" src="{{url_for('load_author_image', filename = project.author.thumbnail)}}" alt="Image Not Available"/>
               </a>
             </div>
           </div>
@@ -78,7 +78,7 @@
           <div class = "work_body">
             <div class="work_image">
               <a href="{{ url_for('type_work', work_id = work.id) }}">
-                <img class="work_img_thumbnail" src="{{ url_for('static', filename = work.image ) }}" alt="Image Not Available"/>
+                <img class="work_img_thumbnail" src="{{url_for('load_work_image', filename = work.thumbnail)}}" alt="Image Not Available"/>
               </a>
             </div>
             <div class="work_description">
@@ -125,7 +125,7 @@
         <div class="comment_on_project">
           <div class="comment_on_project_user">
             <a href="{{ url_for( 'author_page', author_id = comment.writer_id ) }}">
-              <img class="comment_on_project_user_img" src="{{ url_for('static', filename = comment.writer.profile_image )}}" alt="Image Not Available"/>
+              <img class="comment_on_project_user_img" src="{{url_for('load_author_image', filename = comment.writer.thumbnail)}}" alt="Image Not Available"/>
               <p class = "comment_on_project_user_name">{{comment.writer.name}}</p>
             </a>
           </div>
@@ -148,7 +148,7 @@
         <div class="comment_on_project">
           <div class="comment_on_project_user">
             <a href="{{ url_for( 'author_page', author_id = session.author_id ) }}">
-              <img class="comment_on_project_user_img" src="{{ url_for('static', filename = '')}}" alt="Image Not Available"/>
+              <img class="comment_on_project_user_img" src="{{url_for('load_author_image', filename = session.author_thumbnail)}}" alt="Image Not Available"/>
               <p class = "comment_on_project_user_name">{{session.author_name}}</p>
             </a>
           </div>

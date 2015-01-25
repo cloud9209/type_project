@@ -9,7 +9,7 @@
   <div id="work_item">
     <div id="work_div">
       <div id="work_div_left">
-        <img id="work_img" src="{{ url_for('static', filename = work.image)}}" alt="Image Not Available"/>
+        <img id="work_img" src="{{url_for('load_work_image', filename = work.image)}}" alt="Image Not Available"/>
       </div>
       <div id="work_div_right">
         <div id="label_work_description">
@@ -42,7 +42,7 @@
           <div class="comment_on_work">
             <div class="comment_on_work_user">
               <a href="{{ url_for( 'author_page', author_id = comment.writer_id ) }}">
-                <img class="comment_on_work_user_img" src="{{ url_for('static', filename = comment.writer.profile_image )}}" alt="Image Not Available"/>
+                <img class="comment_on_work_user_img" src="{{url_for('load_author_image', filename = comment.writer.thumbnail)}}" alt="Image Not Available"/>
                 <p class = "comment_on_work_user_name">{{comment.writer.name}}</p>
               </a>
             </div>
@@ -64,7 +64,7 @@
           <div class="comment_on_work">
             <div class="comment_on_work_user">
               <a href="{{ url_for( 'author_page', author_id = session.author_id ) }}">
-                <img class="comment_on_work_user_img" src="{{ url_for('static', filename = '')}}" alt="Image Not Available"/>
+                <img class="comment_on_work_user_img" src="{{url_for('load_author_image', filename = session.author_thumbnail)}}" alt="Image Not Available"/>
                 <p class = "comment_on_work_user_name">{{session.author_name}}</p>
               </a>
             </div>

@@ -17,6 +17,7 @@ def sign_in() :
     session['author_id'] = _author.id
     session['author_name'] = _author.name
     session['author_email'] = _author.email
+    session['author_thumbnail'] = _author.thumbnail
     return redirect(url_for('main', category = 'all'))
 
 @app.route('/sign_up', methods=['GET', 'POST'])
