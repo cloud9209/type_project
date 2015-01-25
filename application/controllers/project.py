@@ -6,7 +6,7 @@ from application.models import project, auth, work, project_comment, project_lik
 import logging
 
 @app.route('/project/<int:project_id>/register', methods = ['POST'])
-@auth.requires(auth.type.author)
+@auth.requires(auth.type.project)
 def register_project(project_id) :
     if session['project_id'] != project_id : abort(404) # invalid project number
     _project = project.get('id', project_id, 1)
