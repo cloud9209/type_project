@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/main.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/project.css')}}" />
 <script type="text/javascript" src="{{url_for('static', filename='js/comment_handler.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/like_handler.js')}}"></script>
 {% endblock%}
 {% block body %}
 
@@ -83,17 +84,17 @@
             <div class="work_description">
               <p>{{ work.description }}</p>
             </div>
-            <div class="reactions_to_work">
-              <a href="#">
-                <span class="glyphicon glyphicon-heart-empty"> {{ work.likes.count() }}</span>
+            <div class="reactions_to_proj">
+              <a class="work_like" href="javascript:void(0)">
+                <span class="glyphicon glyphicon-heart-empty like" target="{{url_for('like_work', work_id = work.id)}}">{{ work.likes.count() }}</span>
               </a>
               <a href="{{ url_for('type_work', work_id = work.id) }}">
-                <span class="glyphicon glyphicon-comment"> {{ work.comments.count() }}</span>
+                <span class="glyphicon glyphicon-comment">{{ work.comments.count() }}</span>
               </a>
               <a href="#">
                 <span class="glyphicon glyphicon-share-alt"></span>
               </a>
-            </div>  
+            </div>
           </div>
         </div>
         {% endfor %}

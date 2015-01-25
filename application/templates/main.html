@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block head %}
   <link   href="{{ url_for('static', filename = 'css/main.css')}}" type="text/css" rel="stylesheet"/>
-  <script src ="{{ url_for('static', filename =  'js/main.js' )}}" type="text/javascript"></script>
+  <script src ="{{ url_for('static', filename =  'js/like_handler.js' )}}" type="text/javascript"></script>
 {% endblock%}
 {% block body%}
 
@@ -42,24 +42,12 @@
         <div class="font_description">
           <p>{{ project.description }}</p>
         </div>
-        <!-- <div class="reactions_to_proj row">
-          <div class="col-md-4">
-            <span class="glyphicon glyphicon-heart-empty"></span>{{ project.likes.count() }}
-          </div>
-          <div class="col-md-4">
-            <span class="glyphicon glyphicon-comment"></span>{{ project.comments.count() }}
-          </div>
-          <div class="col-md-4">
-            <span class="glyphicon glyphicon-share-alt"></span>
-          </div>
-        </div> -->
         <div class="reactions_to_proj">
-          <a class="project_like" href="#">
-            <div data="{{project.id}}" style="display:none"></div>
-            <span class="glyphicon glyphicon-heart-empty"> {{ project.likes.count() }}</span>
+          <a class="project_like" href="javascript:void(0)">
+            <span class="glyphicon glyphicon-heart-empty like" target="{{url_for('like_project', project_id = project.id)}}">{{ project.likes.count() }}</span>
           </a>
-          <a href="#">
-            <span class="glyphicon glyphicon-comment"> {{ project.comments.count() }}</span>
+          <a href="{{ url_for('type_project', project_id = project.id) }}">
+            <span class="glyphicon glyphicon-comment">{{ project.comments.count() }}</span>
           </a>
           <a href="#">
             <span class="glyphicon glyphicon-share-alt"></span>

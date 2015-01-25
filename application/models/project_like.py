@@ -22,18 +22,20 @@ def add(liker_id, project_id) :
 
 # IS THERE ANY TIMING ISSUE ON THIS???
 def toggle(liker_id, project_id) :
-    like_count = TypeProjectLike.query.filter(
-        TypeProjectLike.liker_id == liker_id,
-        TypeProjectLike.project_id == project_id
-    ).count()
+    try :
+        _like = TypeProjectLike.query.filter(
+            getattr(TypeProjectLike, 'liker_id') == liker_id,
+            getattr(TypeProjectLike, 'project_id') == project_id
+        ).first()
+        if _like is None :
+            add(liker_id, project_id)
+        else :
+            db.session.delete(_like)
+            db.session.commit()
+    except :
+        raise
 
-    if like_count :
-        TypeProjectLike.query.filter(
-            TypeProjectLike.liker_id == liker_id,
-            TypeProjectLike.project_id == project_id
-        ).delete()
-    else :
-        add(liker_id, project_id)
+    return len(get('project_id', project_id))
 
 def get(attr = None, value = None, limit = -1) :
     project_likes = None
@@ -50,11 +52,6 @@ def get(attr = None, value = None, limit = -1) :
 
     if limit == 1 : return likes[0]
     else          : return likes
-
-def secure() :
-    safe, action, body = None, None, None
-    return attrdict( safe = safe, action = action, body = body )
-
 
 def secure() :
     safe, action, body = None, None, None

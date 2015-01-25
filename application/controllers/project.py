@@ -16,14 +16,12 @@ def register_project(project_id) :
 @app.route('/project/<int:project_id>/like', methods = ['POST'])
 @auth.requires(auth.type.author)
 def like_project(project_id) :
-    success = False
     try :
-        project_like.toggle(session['author_id'], project_id)
-        success = True
+        like_count = project_like.toggle(liker_id = session['author_id'], project_id = project_id)
+        return jsonify( success = True, count = like_count)
     except :
-        logging.debug("Like Assertion Failed")
-        pass
-    return jsonify(is_success = success, like_count = len(project_like.get('project_id', project_id)))
+        raise
+        return jsonify( success = False )
 
 @app.route('/project/<int:project_id>/delete', methods = ['POST'])
 @auth.requires(auth.type.author)

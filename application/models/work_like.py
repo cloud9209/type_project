@@ -12,24 +12,29 @@ class TypeWorkLike(db.Model) :
     liker_id        = db.Column(db.Integer, db.ForeignKey('author.id'))
     liker           = db.relationship('Author', foreign_keys = [liker_id])
 '''
-def add(writer_id, work_id) :
+def add(liker_id, work_id) :
     db.session.add( TypeWorkLike (
-        writer_id = writer_id,
+        liker_id = liker_id,
         work_id = work_id
     ))
     db.session.commit()
 
-def toggle(liker_id, project_id) :
+def toggle(liker_id, work_id) :
     try :
         _like = TypeWorkLike.query.filter(
-            TypeWorkLike.liker_id == liker_id,
-            TypeWorkLike.project_id == project_id
-        ).one()
-        db.session.delete(_like)
-        db.session.commit()
-    except : # NoResult -> add, MultipleResult -> HAZARD!!
-        add(liker_id, project_id)
+            getattr(TypeWorkLike, 'liker_id') == liker_id,
+            getattr(TypeWorkLike, 'work_id') == work_id
+        ).first()
+        if _like is None :
+            add(liker_id, work_id)
+        else :
+            db.session.delete(_like)
+            db.session.commit()
+    except :
+        raise
 
+    return len(get('work_id', work_id))
+    
 def get(attr = None, value = None, limit = -1) :
     work_likes = None
     if (attr, value) == (None, None) : work_likes = TypeWorkLike.query.filter()
@@ -58,7 +63,7 @@ def secure() :
             _like = TypeWorkLike.query.filter(
                 getattr(TypeWorkLike, 'id'        ) == request.form['like_id'],
                 getattr(TypeWorkLike, 'work_id') == session['work_id'],
-                getattr(TypeWorkLike, 'writer_id' ) == session['author_id'],
+                getattr(TypeWorkLike, 'liker_id' ) == session['author_id'],
             ).one()
             safe = _like is not None
         except :
