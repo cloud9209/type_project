@@ -1,8 +1,9 @@
 from application import db
 from schema import TypeWork
-from flask import session
+from flask import session, request
 import datetime
 from attrdict import attrdict
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
 '''
 class TypeWork(db.Model) :
@@ -40,7 +41,7 @@ def get(attr = None, value = None, limit = -1, default = None) :
         if limit == 1 : works =[type_works.one()]
         if limit >  1 : works = type_works.limit(limit)
         else          : works = type_works.all()
-    except :
+    except  :
         return default
 
     for work in works :
@@ -59,7 +60,7 @@ def remove(attr, value) :
     return True
 
 def secure() :
-    safe, action, body = None, 'abort', None
+    safe, action, body = None, [None, 'abort'][request.method=='GET'], None
     if 'work_id' not in session :
         safe = False
     else :
@@ -69,7 +70,10 @@ def secure() :
                 getattr(TypeWork,        'id') == session['work_id']
             ).one()
             safe = _work is not None
-        except :
+        except NoResultFound :
             safe = False
-            body = 'could not find proper work obj'
+            body = 'No Project Object found.'
+        except MultipleResultsFound :
+            safe = False
+            body = 'Multiple Project Object found.'
     return attrdict( safe = safe, action = action, body = body )

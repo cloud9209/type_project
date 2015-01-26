@@ -1,7 +1,8 @@
 from application import db
 from schema import Author, TypeProject
-from flask import session
+from flask import session, request
 from attrdict import attrdict
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
 def add(data) :
     db.session.add( TypeProject (
@@ -33,7 +34,7 @@ def remove(attr, value) :
     return True
 
 def secure() :
-    safe, action, body = None, 'abort', None
+    safe, action, body = None, [None, 'abort'][request.method=='GET'], None
     if 'project_id' not in session :
         safe = False
     else :
@@ -43,7 +44,10 @@ def secure() :
                 getattr(TypeProject,        'id') == session['project_id']
             ).one()
             safe = _project is not None
-        except :
+        except NoResultFound :
             safe = False
-            body = 'could not fine proper project obj'
+            body = 'No Project Object found.'
+        except MultipleResultsFound :
+            safe = False
+            body = 'Multiple Project Object found.'
     return attrdict( safe = safe, action = action, body = body )

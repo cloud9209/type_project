@@ -69,7 +69,7 @@ def secure() :
         try :
             _comment = TypeWorkComment.query.filter(
                 getattr(TypeWorkComment, 'id'        ) == request.form['comment_id'],
-                getattr(TypeWorkComment, 'work_id') == session['work_id'],
+                getattr(TypeWorkComment, 'work_id'   ) == session['work_id'],
                 getattr(TypeWorkComment, 'writer_id' ) == session['author_id'],
             ).one()
             safe = _comment is not None

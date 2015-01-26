@@ -36,6 +36,6 @@ def verified(form) :
 
 def secure() :
     safe, action, body = None, None, None
-    safe = 'author_id' in session and 'author_email' in session and 'author_name' in session and 'author_thumbnail' in session
+    safe   = 'author_id' in session and 'author_email' in session and 'author_name' in session and 'author_thumbnail' in session
     action = 'abort'
     return attrdict( safe = safe, action = action, body = body )
