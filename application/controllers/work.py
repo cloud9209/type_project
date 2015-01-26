@@ -23,12 +23,3 @@ def like_work(work_id) :
     except :
         raise
         return jsonify( success = False )
-
-@app.route('/work/<int:work_id>/upload', methods = ['POST'])
-def upload_work_image(work_id) :
-    image_storage.store('work', work_id, request.files['uploading-image'])
-    return redirect(url_for('type_work', work_id = work_id))
-
-@app.route('/image/work/<path:filename>')
-def load_work_image(filename) :
-    return image_storage.load('work', filename)

@@ -1,7 +1,7 @@
 <div class="comment_on_work">
   <div class="comment_on_work_user">
     <a href="{{ url_for( 'author_page', author_id = comment.writer.id ) }}">
-      <img class="comment_on_work_user_img" src="{{url_for('load_author_image', filename = comment.writer.thumbnail)}}" alt="Image Not Available"/>
+      <img class="comment_on_work_user_img" src="{{url_for('load_image', filename = comment.writer.thumbnail)}}" alt="Image Not Available"/>
       <p class = "comment_on_work_user_name">{{ comment.writer.name }}</p>
     </a>
   </div>

@@ -1,7 +1,7 @@
 
 #-*- coding:utf-8 -*-
 from application import app
-from flask import render_template, session, url_for, request, redirect, abort, jsonify
+from flask import render_template, session, url_for, request, redirect, abort, jsonify, send_file
 from application.models import project, auth, work, project_comment, project_like, author, image_storage
 import logging
 
@@ -41,12 +41,3 @@ def type_project(project_id) :
     authors = author.get()
     return render_template('project.html', project = _project_, authors = authors)
 
-@app.route('/project/<int:project_id>/upload', methods = ['POST'])
-def upload_project_image(project_id) :
-    image_storage.store('project', project_id, request.files['project-image'])
-    return redirect(url_for('type_project', project_id = project_id))
-
-@app.route('/image/project/<path:filename>')
-def load_project_image(filename) :
-    logging.debug(filename)
-    return image_storage.load('project', filename)
