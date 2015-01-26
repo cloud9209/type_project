@@ -18,13 +18,10 @@ def get(attr = None, value = None, limit = -1, default = None) :
     else                             : projects = TypeProject.query.filter(getattr(TypeProject, attr) == value)
 
     if limit == 1 :
-        try :
-            return projects.one()
-        except :
-            return default
-            
-    elif  limit >  1 : return projects.limit(limit)
-    else             : return projects.all()
+        try    : return projects.one()
+        except : return default
+    elif limit > 1 : return projects.limit(limit)
+    else           : return projects.all()
 
 def remove(attr, value) :
     try :

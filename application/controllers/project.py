@@ -2,7 +2,7 @@
 #-*- coding:utf-8 -*-
 from application import app
 from flask import render_template, session, url_for, request, redirect, abort, jsonify
-from application.models import project, auth, work, project_comment, project_like, author, storage_handler
+from application.models import project, auth, work, project_comment, project_like, author, image_storage
 import logging
 
 @app.route('/project/<int:project_id>/register', methods = ['POST'])
@@ -35,18 +35,18 @@ def delete_project(project_id) :
 def type_project(project_id) :
     session['project_id'] = project_id
 
-    __project__ = project.get('id', project_id, 1)
-    if __project__ is None : abort(404)
+    _project_ = project.get('id', project_id, 1)
+    if _project_ is None : abort(404)
 
     authors = author.get()
-    return render_template('project.html', project = __project__, authors = authors)
+    return render_template('project.html', project = _project_, authors = authors)
 
 @app.route('/project/<int:project_id>/upload', methods = ['POST'])
 def upload_project_image(project_id) :
-    storage_handler.store_project_image(project_id, request.files['project-image'])
+    image_storage.store('project', project_id, request.files['project-image'])
     return redirect(url_for('type_project', project_id = project_id))
 
 @app.route('/image/project/<path:filename>')
 def load_project_image(filename) :
     logging.debug(filename)
-    return storage_handler.load_project_image(filename)
+    return image_storage.load('project', filename)

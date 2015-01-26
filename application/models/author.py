@@ -13,13 +13,9 @@ def add(data) :
     db.session.commit()
 
 def add_exclusive(data) :
-    _author = get('email', data['email'])
-    logging.info("_author length : " + str(len(_author)))
-    if len(_author) :
-        return False
-    else :
-        add(data)
-        return True
+    if len(get('email', data['email'])) : return False    
+    add(data)
+    return True
 
 def get (attr = None, value = None, limit = -1) :
     authors = None
@@ -27,47 +23,19 @@ def get (attr = None, value = None, limit = -1) :
     else                             : authors = Author.query.filter(getattr(Author, attr) == value)
 
     if limit == 1 :
-        try :
-            return authors.one()
-        except :
-            return None        
+        try    : return authors.one()
+        except : return None        
     elif limit >  1 : return authors.limit(limit)
     else            : return authors.all()
 
-# """ TODO : Solve Circular import """
-# def get_secure (attr, value, limit = -1) :
-#     if not auth.secure() : return None
-#     authors = Author.query.filter(getattr(Author, attr) == value)
-#     if   limit == 1 : return authors.one()
-#     elif limit >  1 : return authors.limit(limit)
-#     else            : return authors.all()
-
-# form has 'email' & 'password' attribute
 def verified(form) : 
     return Author.query.filter(
-        Author.email == form['email'],
+        Author.email    == form['email'],
         Author.password == db.func.md5(form['password'])
     ).count() != 0
 
-# def set_profile_image(author_id, new_path) :
-#     author = Author.query.get(Author.id == author_id)
-#     old_path = author.profile_image
-#     if new_path == old_path :
-#         # Does Nothing
-#         return
-#     elif new_path == "" :
-#         # New
-#         author.profile_image = new_path
-#     else :
-#         # Clean-up old profile data & set new
-        
-#         # CODE : CLEANUP
-
-#         author.profile_image = new_path
-#     db.session.commit()
-
 def secure() :
     safe, action, body = None, None, None
-    safe = 'author_id' in session and 'author_email' in session and 'author_name' in session
+    safe = 'author_id' in session and 'author_email' in session and 'author_name' in session and 'author_thumbnail' in session
     action = 'abort'
     return attrdict( safe = safe, action = action, body = body )
