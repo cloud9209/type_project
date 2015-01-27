@@ -3,6 +3,7 @@ from schema import Author, TypeProjectLike
 from flask import session, request
 import datetime
 from attrdict import attrdict
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
 '''
 class TypeProjectLike(db.Model) :
@@ -23,18 +24,25 @@ def add(liker_id, project_id) :
 # IS THERE ANY TIMING ISSUE ON THIS???
 def toggle(liker_id, project_id) :
     try :
-        _like = TypeProjectLike.query.filter(
+        _like_ = TypeProjectLike.query.filter(
             getattr(TypeProjectLike, 'liker_id') == liker_id,
             getattr(TypeProjectLike, 'project_id') == project_id
-        ).first()
-        if _like is None :
-            add(liker_id, project_id)
-        else :
-            db.session.delete(_like)
-            db.session.commit()
+        ).one()
+        db.session.delete(_like_)
+    except NoResultFound :
+        db.session.add( TypeProjectLike (
+            liker_id = liker_id,
+            project_id = project_id
+        ))
+    except MultipleResultsFound :
+        _likes_ = TypeProjectLike.query.filter(
+            getattr(TypeProjectLike, 'liker_id') == liker_id,
+            getattr(TypeProjectLike, 'project_id') == project_id
+        ).all()
+        for _like_ in _likes_ : db.session.delete(_like_)
     except :
         raise
-
+    db.session.commit()
     return len(get('project_id', project_id))
 
 def get(attr = None, value = None, limit = -1) :

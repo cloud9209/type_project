@@ -3,6 +3,7 @@ from schema import Author, TypeWorkLike
 from flask import session, request
 import datetime
 from attrdict import attrdict
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
 '''
 class TypeWorkLike(db.Model) :
@@ -21,18 +22,25 @@ def add(liker_id, work_id) :
 
 def toggle(liker_id, work_id) :
     try :
-        _like = TypeWorkLike.query.filter(
+        _like_ = TypeWorkLike.query.filter(
             getattr(TypeWorkLike, 'liker_id') == liker_id,
             getattr(TypeWorkLike, 'work_id') == work_id
-        ).first()
-        if _like is None :
-            add(liker_id, work_id)
-        else :
-            db.session.delete(_like)
-            db.session.commit()
+        ).one()
+        db.session.delete(_like_)
+    except NoResultFound :
+        db.session.add(TypeWorkLike(
+            liker_id = liker_id,
+            work_id = work_id
+        ))
+    except MultipleResultsFound :
+        _likes_ = TypeWorkLike.query.filter(
+            getattr(TypeWorkLike, 'liker_id') == liker_id,
+            getattr(TypeWorkLike, 'work_id') == work_id
+        ).all()
+        for _like_ in _likes_ : db.session.delete(_like_)
     except :
         raise
-
+    db.session.commit()
     return len(get('work_id', work_id))
     
 def get(attr = None, value = None, limit = -1) :
