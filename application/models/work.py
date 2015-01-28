@@ -72,8 +72,11 @@ def secure() :
             safe = _work is not None
         except NoResultFound :
             safe = False
-            body = 'No Project Object found.'
+            body = 'Not Authorized'
         except MultipleResultsFound :
             safe = False
-            body = 'Multiple Project Object found.'
+            body = 'DB Error : Multiple Result Found'
+        except :
+            safe = False
+            body = 'Unexpected Error'
     return attrdict( safe = safe, action = action, body = body )

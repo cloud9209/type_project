@@ -3,6 +3,7 @@ from schema import Author, TypeWorkComment
 from flask import session, request
 import datetime
 from attrdict import attrdict
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
 '''
 class TypeWorkComment(db.Model) :
@@ -59,7 +60,7 @@ def get(attr = None, value = None, limit = -1) :
     else          : return comments
 
 def secure() :
-    safe, action, body = None, None, None
+    safe, action, body = None, 'alert', None
     if 'work_id' not in session :
         safe = False
     elif 'comment_id' not in request.form :
@@ -68,12 +69,18 @@ def secure() :
     else :
         try :
             _comment = TypeWorkComment.query.filter(
-                getattr(TypeWorkComment, 'id'        ) == request.form['comment_id'],
-                getattr(TypeWorkComment, 'work_id'   ) == session['work_id'],
+                getattr(TypeWorkComment,        'id' ) == request.form['comment_id'],
+                getattr(TypeWorkComment,   'work_id' ) == session['work_id'],
                 getattr(TypeWorkComment, 'writer_id' ) == session['author_id'],
             ).one()
             safe = _comment is not None
+        except NoResultFound :
+            safe = False
+            body = 'Not Authorized'
+        except MultipleResultsFound :
+            safe = False
+            body = 'DB Error : Multiple Result Found'
         except :
             safe = False
-            body = 'could not find proper work_comment object'
+            body = 'Unexpected Error'
     return attrdict( safe = safe, action = action, body = body )

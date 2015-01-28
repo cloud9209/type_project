@@ -62,7 +62,7 @@ def get(attr = None, value = None, limit = -1) :
     else          : return likes
 
 def secure() :
-    safe, action, body = None, None, None
+    safe, action, body = None, 'alert', None
     if 'project_id' not in session :
         safe = False
     elif 'like_id' not in request.form :

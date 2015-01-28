@@ -1,4 +1,3 @@
-
 #-*- coding:utf-8 -*-
 from application import app
 from flask import render_template, session, url_for, request, redirect, abort, jsonify, send_file
@@ -20,8 +19,7 @@ def like_project(project_id) :
         like_count = project_like.toggle(liker_id = session['author_id'], project_id = project_id)
         return jsonify( success = True, count = like_count)
     except :
-        raise
-        return jsonify( success = False )
+        return jsonify( success = False, action = 'alert', body = 'Like Action Failed' )
 
 @app.route('/project/<int:project_id>/delete', methods = ['POST'])
 @auth.requires(auth.type.author)

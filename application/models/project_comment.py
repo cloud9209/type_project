@@ -3,6 +3,8 @@ from schema import Author, TypeProjectComment
 from flask import session, request
 import datetime
 from attrdict import attrdict
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
+
 '''
 class TypeProjectComment(db.Model) :
     id                  = db.Column(db.Integer, primary_key = True)
@@ -58,7 +60,7 @@ def get(attr = None, value = None, limit = -1) :
     else          : return comments
 
 def secure() :
-    safe, action, body = None, None, None
+    safe, action, body = None, 'alert', None
     if 'project_id' not in session :
         safe = False
     elif 'comment_id' not in request.form :
@@ -72,7 +74,13 @@ def secure() :
                 getattr(TypeProjectComment,  'writer_id') == session['author_id'],
             ).one()
             safe = _comment is not None
+        except NoResultFound :
+            safe = False
+            body = 'Not Authorized'
+        except MultipleResultsFound :
+            safe = False
+            body = 'DB Error : Multiple Result Found'
         except :
             safe = False
-            body = 'could not find proper project_comment object'
+            body = 'Unexpected Error'
     return attrdict( safe = safe, action = action, body = body )

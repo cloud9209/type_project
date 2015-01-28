@@ -21,5 +21,4 @@ def like_work(work_id) :
         like_count = work_like.toggle(liker_id = session['author_id'], work_id = work_id)
         return jsonify( success = True, count = like_count)
     except :
-        raise
-        return jsonify( success = False )
+        return jsonify( success = False, action = 'alert', body = 'Like Failed' )

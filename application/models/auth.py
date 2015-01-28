@@ -34,7 +34,7 @@ def requires(auth_type) :
             response = secure(auth_type)
             logging.info(response)
             # SyntaxError : response == None
-            if response is None : return jsonify(success = False, message = "SyntaxError While exec")
+            if response is None : return jsonify(success = False, action = 'alert', body = "SyntaxError While exec")
 
             # Successfully received response via eval
             if response.safe :
@@ -42,7 +42,9 @@ def requires(auth_type) :
                 return _function_(*args, **kwargs)
             elif response.action == 'abort' :
                 abort(404)
+            elif response.action == 'alert' :
+                return jsonify(success = False, action = 'alert', body = response.body)
             else :
-                return jsonify(success = False, message = response.body)
+                return jsonify(success = False, body = response.body)
         return argument_wrapper
     return function_wrapper

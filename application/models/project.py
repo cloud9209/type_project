@@ -34,7 +34,7 @@ def remove(attr, value) :
     return True
 
 def secure() :
-    safe, action, body = None, [None, 'abort'][request.method=='GET'], None
+    safe, action, body = None, ['alert', 'abort'][request.method=='GET'], None
     if 'project_id' not in session :
         safe = False
     else :
@@ -46,8 +46,11 @@ def secure() :
             safe = _project is not None
         except NoResultFound :
             safe = False
-            body = 'No Project Object found.'
+            body = 'Not Authorized'
         except MultipleResultsFound :
             safe = False
-            body = 'Multiple Project Object found.'
+            body = 'DB Error : Multiple Result Found'
+        except :
+            safe = False
+            body = 'Unexpected Error'
     return attrdict( safe = safe, action = action, body = body )
