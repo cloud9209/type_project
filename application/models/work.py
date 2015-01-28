@@ -60,7 +60,7 @@ def remove(attr, value) :
     return True
 
 def secure() :
-    safe, action, body = None, [None, 'abort'][request.method=='GET'], None
+    safe, action, body = None, ['alert', 'abort'][request.method=='GET'], None
     if 'work_id' not in session :
         safe = False
     else :
