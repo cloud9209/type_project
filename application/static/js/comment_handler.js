@@ -3,7 +3,7 @@ $(document).on("click", '.new-comment', function(event) {
     var input = $(_this_.parent().parent().children()[1]).find('input');
     if (input.val() == "") return;
     _this_.attr('disabled', true);
-    AjaxWithAlertDialog({
+    $.ajaxWithAlert({
         type : 'POST',
         url  : _this_.attr('target'),
         data : { body : input.val() },
@@ -22,7 +22,7 @@ $(document).on("click", '.new-comment', function(event) {
 $(document).on("click", '.remove-comment', function(event) { 
     var _this_ = $(this);
     _this_.attr('disabled', true);
-    AjaxWithAlertDialog ({
+    $.ajaxWithAlert ({
         type : 'POST',
         url  : _this_.attr('target'),
         data : { 'comment_id' : _this_.attr('target').split('/')[2] },
@@ -38,7 +38,7 @@ $(document).on("click", '.remove-comment', function(event) {
 $(document).on("click", '.modify-comment', function(event) { 
     var _this_ = $(this);
     _this_.attr('disabled', true);
-    AjaxWithAlertDialog({
+    $.ajaxWithAlert({
         type : 'POST',
         url  : _this_.attr('target'),
         data : { 'comment_id' : _this_.attr('target').split('/')[2] },
@@ -55,7 +55,7 @@ $(document).on("click", '.submit-modified-comment', function(event) {
     var _this_ = $(this);
     var body = $(_this_.parent().parent().children()[1]).find('input').val();
     _this_.attr('disabled', true);
-    AjaxWithAlertDialog({
+    $.ajaxWithAlert({
         type : 'POST',
         url  : _this_.attr('target'),
         data : { 'comment_id' : _this_.attr('target').split('/')[2] , 'body' : body },

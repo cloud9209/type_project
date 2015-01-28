@@ -7,11 +7,8 @@ import logging
 @app.route('/')
 def index() :
     # secure : logged-in // TODO : main/all -> if possible, return where it was.
-    if 'author_id' in session and 'author_email' in session and 'author_name' in session :
-        return redirect(url_for('main', category = 'all'))
-
-    message = session.pop('msg-index', "")
-    return render_template('index.html', message = message)
+    if author.secure().safe : return redirect(url_for('main', category = 'all'))
+    return render_template('index.html')
 
 @app.route('/main/<string:category>')
 @auth.requires(auth.type.author)
@@ -19,13 +16,11 @@ def main(category) :
     projects = None
     if   category == 'all'                    : projects = project.get(limit = 10)
     elif category in ['reading','displaying'] : projects = project.get('category', category.upper(), 10)
-    else : # category is author_id
+    else :
         try :
             author.get('id', int(category), 1)
             projects = project.get('author_id', int(category), 10)
             logging.info("Success : " + category)
-        except ValueError :
-            pass
         except : # sqlalchemy.orm.exc.NoResultFound or MultipleResultFound
             pass
     if projects == None : abort(404)
