@@ -23,7 +23,7 @@ def main(category) :
             logging.info("Success : " + category)
         except : # sqlalchemy.orm.exc.NoResultFound or MultipleResultFound
             pass
-    if projects == None : abort(404)
+    if projects is None : abort(404)
 
     authors = author.get()
     return render_template('main.html', projects = projects, authors = authors)

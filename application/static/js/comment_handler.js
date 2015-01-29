@@ -67,3 +67,16 @@ $(document).on("click", '.submit-modified-comment', function(event) {
         }
     });
 });
+
+// Enter-Triggered POST Request for Comments
+var downKeyCode;
+$(document).on('keydown', 'input[type="text"]', function(event) {
+    downKeyCode = event.keyCode;
+});
+$(document).on('keyup', 'input[type="text"]', function(event) {
+    if (downKeyCode == 13 && event.keyCode == 13) {
+        var root = $(this).parent().parent();
+        if (root.find('.new-comment')) root.find('.new-comment').click();
+        if (root.find('.submit-modified-comment')) root.find('.submit-modified-comment').click();
+    } downKeyCode = undefined;
+});

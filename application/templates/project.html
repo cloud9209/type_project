@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/project.css')}}" />
 <script type="text/javascript" src="{{url_for('static', filename='js/comment_handler.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/like_handler.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/description_handler.js')}}"></script>
 {% endblock%}
 {% block body %}
 
@@ -50,11 +51,11 @@
             </div>
           </div>
 
-          <div id="font_description">
+          <div id="description">
             <p>{{project.description}}</p>
           </div>
           <div id="text_control_div"> 
-            <input type="submit" value="수정">
+            <input id="btn-description" target="{{url_for('project_description', project_id = project.id)}}" type="submit" value="수정">
           </div>
         </div>
       </div>

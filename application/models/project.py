@@ -24,6 +24,20 @@ def get(attr = None, value = None, limit = -1, default = None) :
     elif limit > 1 : return projects.limit(limit)
     else           : return projects.all()
 
+def set(id, attr, value) :
+    _project = None
+    try :
+        _project = get('id', id, 1)
+        setattr(_project, attr, value)
+        db.session.commit()
+    except NoResultFound :
+        raise
+    except MultipleResultsFound :
+        raise
+    except :
+        raise
+    return _project
+
 def remove(attr, value) :
     try :
         _target = TypeProject.query.filter(getattr(TypeProject, attr) == value).one()

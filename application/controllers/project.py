@@ -39,3 +39,12 @@ def type_project(project_id) :
     authors = author.get()
     return render_template('project.html', project = _project_, authors = authors)
 
+@app.route('/project/<int:project_id>/description', methods=['POST'])
+#@auth.requires(auth.type.project)
+def project_description(project_id) :
+    if 'body' in request.form : # modify
+        _project_ = project.set(project_id, 'description', request.form['body'])
+        return jsonify( success = True, action = None, body = render_template('description.html', input_mode = False, description = _project_.description))
+    else :
+        _project_ = project.get('id', project_id, 1)
+        return jsonify( success = True, action = None, body = render_template('description.html', input_mode = True, description = _project_.description))

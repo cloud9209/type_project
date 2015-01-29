@@ -63,3 +63,12 @@ $(document).ready(function(){
         return false;
     });
 })
+$(document).on('change', 'input[type="file"]', function(){
+    if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#thumbnail').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0])
+    }
+});

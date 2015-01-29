@@ -25,19 +25,19 @@ def load_image(filename) :
 @auth.requires(auth.type.author)
 def upload_author_image(author_id) :
     success = image_storage.store('author', author_id, request.files['author-image'])
-    if success : return redirect(url_for('type_author', author_id = author_id))
-    else : return jsonify( success = False, action = 'alert', body = 'Failed to upload author profile-image' )
+    if success : return jsonify( success = True , action = 'redirect', body = url_for('type_author', author_id = author_id))
+    else       : return jsonify( success = False, action = 'alert', body = 'Failed to upload author profile-image' )
 
 @app.route('/project/<int:project_id>/upload', methods = ['POST'])
-@auth.requires(auth.type.project)
+#@auth.requires(auth.type.project)
 def upload_project_image(project_id) :
     success = image_storage.store('project', project_id, request.files['project-image'])
-    if success : return redirect(url_for('type_project', project_id = project_id))
-    else : return jsonify( success = False, action = 'alert', body = 'Failed to upload project image' )
+    if success : return jsonify( success = True , action = 'redirect', body = url_for('type_project', project_id = project_id))
+    else       : return jsonify( success = False, action = 'alert', body = 'Failed to upload project image' )
 
 @app.route('/work/<int:work_id>/upload', methods = ['POST'])
 @auth.requires(auth.type.work)
 def upload_work_image(work_id) :
     success = image_storage.store('work', work_id, request.files['work-image'])
-    if success : return redirect(url_for('type_work', work_id = work_id))
-    else : return jsonify( success = False, action = 'alert', body = 'Failed to upload work image' )
+    if success : return jsonify( success = True , action = 'redirect', body = url_for('type_work', work_id = work_id))
+    else       : return jsonify( success = False, action = 'alert', body = 'Failed to upload work image' )
