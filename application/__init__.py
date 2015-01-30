@@ -10,6 +10,9 @@ from flask.ext.script import Manager
 # Create Flask Application Instance
 app = Flask('application')
 
+# Jinja Extension
+app.jinja_env.add_extension('jinja2.ext.do')
+
 # Import application configuration file
 import config
 

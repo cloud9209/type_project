@@ -18,7 +18,8 @@ def type_work(work_id) :
 @auth.requires(auth.type.author)
 def like_work(work_id) :
     try :
-        like_count = work_like.toggle(liker_id = session['author_id'], work_id = work_id)
-        return jsonify( success = True, count = like_count)
+        like_now   = work_like.toggle(liker_id = session['author_id'], work_id = work_id)
+        like_count = len(work_like.get('work_id', work_id))
+        return jsonify( success = True, count = like_count, like = like_now)
     except :
-        return jsonify( success = False, action = 'alert', body = 'Like Failed' )
+        return jsonify( success = False, action = 'alert', body = 'Like Action Failed' )

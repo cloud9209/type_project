@@ -23,6 +23,7 @@ def add(liker_id, project_id) :
 
 # IS THERE ANY TIMING ISSUE ON THIS???
 def toggle(liker_id, project_id) :
+    _is_liking_ = False
     try :
         _like_ = TypeProjectLike.query.filter(
             getattr(TypeProjectLike, 'liker_id') == liker_id,
@@ -34,6 +35,7 @@ def toggle(liker_id, project_id) :
             liker_id = liker_id,
             project_id = project_id
         ))
+        _is_liking_ = True
     except MultipleResultsFound :
         _likes_ = TypeProjectLike.query.filter(
             getattr(TypeProjectLike, 'liker_id') == liker_id,
@@ -43,7 +45,7 @@ def toggle(liker_id, project_id) :
     except :
         raise
     db.session.commit()
-    return len(get('project_id', project_id))
+    return _is_liking_
 
 def get(attr = None, value = None, limit = -1) :
     project_likes = None

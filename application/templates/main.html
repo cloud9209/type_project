@@ -44,7 +44,13 @@
         </div>
         <div class="reactions_to_proj">
           <a class="project_like" href="javascript:void(0)">
-            <span class="glyphicon glyphicon-heart-empty like" target="{{url_for('like_project', project_id = project.id)}}">{{ project.likes.count() }}</span>
+            {% set found = [] %}
+            {% for like in project.likes %}
+              {% if session.author_id == like.liker_id %}
+                {% do found.append(1) %}
+              {% endif %}
+            {% endfor %}
+            <span class="glyphicon glyphicon-heart-empty like {%- if found -%}{{' user-like'}}{%-endif-%}" target="{{url_for('like_project', project_id = project.id)}}">{{ project.likes.count() }}</span>
           </a>
           <a href="{{ url_for('type_project', project_id = project.id) }}">
             <span class="glyphicon glyphicon-comment">{{ project.comments.count() }}</span>

@@ -16,8 +16,9 @@ def register_project(project_id) :
 @auth.requires(auth.type.author)
 def like_project(project_id) :
     try :
-        like_count = project_like.toggle(liker_id = session['author_id'], project_id = project_id)
-        return jsonify( success = True, count = like_count)
+        like_now   = project_like.toggle(liker_id = session['author_id'], project_id = project_id)
+        like_count = len(project_like.get('project_id', project_id))
+        return jsonify( success = True, count = like_count, like = like_now)
     except :
         return jsonify( success = False, action = 'alert', body = 'Like Action Failed' )
 

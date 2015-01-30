@@ -21,6 +21,7 @@ def add(liker_id, work_id) :
     db.session.commit()
 
 def toggle(liker_id, work_id) :
+    _is_liking_ = False
     try :
         _like_ = TypeWorkLike.query.filter(
             getattr(TypeWorkLike, 'liker_id') == liker_id,
@@ -28,10 +29,11 @@ def toggle(liker_id, work_id) :
         ).one()
         db.session.delete(_like_)
     except NoResultFound :
-        db.session.add(TypeWorkLike(
+        db.session.add( TypeWorkLike (
             liker_id = liker_id,
             work_id = work_id
         ))
+        _is_liking_ = True
     except MultipleResultsFound :
         _likes_ = TypeWorkLike.query.filter(
             getattr(TypeWorkLike, 'liker_id') == liker_id,
@@ -41,7 +43,8 @@ def toggle(liker_id, work_id) :
     except :
         raise
     db.session.commit()
-    return len(get('work_id', work_id))
+    return _is_liking_
+
     
 def get(attr = None, value = None, limit = -1) :
     work_likes = None
