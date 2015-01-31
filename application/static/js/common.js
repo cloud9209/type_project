@@ -1,5 +1,36 @@
-//var defaultStyle, $.alert, $.ajaxWithAlert;
 $(document).ready(function(){
+    // Loading Sprite
+    var sprite_image = $('<img src="/static/res/images/loading.gif"></img>')
+    sprite_image
+    .css('width', '200px')
+    .css('height', '200px')
+    sprite_image
+    .css('left', ($(window).width() - sprite_image.width())/2)
+    .css('top', ($(window).height() - sprite_image.height())/2)
+    .css('padding', '0px')
+    .css('margin', '0px')
+    .css('position', 'fixed')
+    
+    $.sprite = $('<div id="loading" position="absolute"></div>');
+    $.sprite
+    .width($(window).width())
+    .height($(window).height())
+    .css('background-color', 'rgba(255,255,255,0.5)')
+    .css('z-index', '9999')
+    .css('padding', '0px')
+    .css('margin', '0px')
+    .css('position', 'fixed')
+    .css('left', '0')
+    .css('top', '0')
+    .append(sprite_image);
+
+    $.sprite_on = function(src_url) {
+        $('body').append($.sprite);
+    }
+    $.sprite_off = function(Src_url) {
+        if($('#loading').length > 0) $('#loading').remove();
+    }
+
     // TODO : BETTER UI
     var defaultStyle = {
         color       :'white',
@@ -22,11 +53,15 @@ $(document).ready(function(){
 
     // TODO : DEFAULT VALUE FOR EACH DATA
     $.ajaxWithAlert = function(data) {
+        $.sprite_on();
         $.ajax({
             type : data.type,
             url  : data.url,
             data : data.data,
-            error : data.on_error,
+            error : function() {
+                data.on_error();
+                $.sprite_off();
+            },
             success : function(response) {
                 if (response.success) {
                     data.on_success(response);
@@ -36,6 +71,7 @@ $(document).ready(function(){
                     console.log('Unexpected Failure : ' + response);
                 }
                 if(data.on_finish) data.on_finish();
+                $.sprite_off();
             }
         })
     };
@@ -62,7 +98,7 @@ $(document).ready(function(){
         });
         return false;
     });
-})
+});
 $(document).on('change', 'input[type="file"]', function(){
     if (this.files && this.files[0]) {
         var reader = new FileReader();
