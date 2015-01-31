@@ -32,7 +32,7 @@
           <div id="img_control_div">
             <input type="submit" value="삭제"> <!-- Delete Thumbnail : make it similar to that of github -->
 
-            <form enctype="multipart/form-data" action=" {{ url_for('upload_project_image', project_id = project.id) }}" method="POST">
+            <form class="file-upload" enctype="multipart/form-data" action="{{ url_for('upload_project_image', project_id = project.id) }}" method="POST">
               <input type="file" name="project-image">
               <button type="submit">등록</button>
             </form>

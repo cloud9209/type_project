@@ -1,6 +1,5 @@
 $(document).on("click", '.like', function(event) { 
     var _this_ = $(this);
-    console.log( _this_.attr('target') );
     _this_.attr('disabled', true);
     $.ajaxWithAlert({
         type : 'POST',
@@ -18,7 +17,6 @@ $(document).on("click", '.like', function(event) {
             _this_.attr('disabled', false);
         },
         on_error : function() {
-            console.log('error : ' + _this_);
             _this_.attr('disabled', false);
         }
     });

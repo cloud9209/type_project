@@ -47,7 +47,7 @@ $(document).ready(function(){
         else {
             var dialog = '<div id="alert_dialog" style="text-align:center;position:fixed;bottom:20%;width:100%;padding:0px;maring:0px;display:none;z-index:9999;"><span>'+message+'</span></div>';
             $('body').append(dialog);
-            $('div#alert_dialog').css(defaultStyle).css('background-color','red').fadeIn(250).delay(duration).fadeOut(250, function(){ $('div#alert_dialog').remove() });
+            $('div#alert_dialog').css(defaultStyle).css('background-color','red').fadeIn(500).delay(duration).fadeOut(500, function(){ $('div#alert_dialog').remove() });
         }
     };
 
@@ -58,6 +58,8 @@ $(document).ready(function(){
             type : data.type,
             url  : data.url,
             data : data.data,
+            processData : data.processData,
+            contentType : data.contentType,
             error : function() {
                 data.on_error();
                 $.sprite_off();
@@ -66,17 +68,40 @@ $(document).ready(function(){
                 if (response.success) {
                     data.on_success(response);
                 } else if (response.action == 'alert') {
-                    $.alert(response.body, 1500);
+                    $.alert(response.body, 1000);
                 } else {
                     console.log('Unexpected Failure : ' + response);
                 }
                 if(data.on_finish) data.on_finish();
                 $.sprite_off();
             }
-        })
+        });
     };
-
-    $("form").submit(function(e){
+    $("form.file-upload").submit(function(e){
+        var form = $(this);
+        var submit_btn = $(this).find('[type="submit"]');
+        submit_btn.attr('disabled', true);
+        $.ajaxWithAlert({
+            url   : form.attr('action'),
+            type  : form.attr('method'),
+            data  : new FormData(this),
+            processData: false,
+            contentType: false,
+            on_success: function(response){
+                if (response.action == 'redirect') {
+                    window.location.href = response.body;
+                }
+            },
+            on_finish : function(){
+                submit_btn.attr('disabled', false)
+            },
+            on_error  : function(){
+                submit_btn.attr('disabled', false)
+            }
+        });
+        return false;
+    });
+    $("form:not('.file-upload')").submit(function(e){
         var form = $(this);
         var submit_btn = $(this).find('[type="submit"]');
         submit_btn.attr('disabled', true);
