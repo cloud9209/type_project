@@ -1,6 +1,7 @@
 from flask import Flask
 import os
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.debugtoolbar import DebugToolbarExtension
 
 #migrate
 from flask.ext.migrate import Migrate, MigrateCommand
@@ -10,17 +11,21 @@ from flask.ext.script import Manager
 # Create Flask Application Instance
 app = Flask('application')
 
-# Jinja Extension
-app.jinja_env.add_extension('jinja2.ext.do')
-
 # Import application configuration file
 import config
 
-db = SQLAlchemy(app)
+# Jinja Extension
+app.jinja_env.add_extension('jinja2.ext.do')
 
+# [Flask Extension] SQLAlchemy
+db = SQLAlchemy(app)
 manager = Manager(app)
 migrate = Migrate(app, db)
 manager.add_command('db', MigrateCommand)
+# [Flask Extension] DebugToolbar
+app.config['DEBUG_TB_PROFILER_ENABLED'] = True
+toolbar = DebugToolbarExtension(app)
+
 
 
 from application.models import schema
