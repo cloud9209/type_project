@@ -8,13 +8,12 @@ ROOT = '/gs/type-storage'
 def store(category, id, raw_image) :
     ''' extension check '''
     ext = raw_image.filename.split('.')[-1].lower()
-    if ext not in ['png', 'jpg', 'jpeg'] : return False
-
-    # VALID EXTENSION BELOW
-    image = raw_image.read()
+    if ext not in ['png', 'jpg', 'jpeg'] : return False # Verify extension
+    
     _target_ = eval("%s.get('id', %d, 1)" % (category, id))
 
     ''' image '''
+    image = raw_image.read()
     image_name = '%s/%s/%d.%s' % (category, 'image', id, ext)
     if _target_.image != image_name : files.delete('%s/%s' % (ROOT, _target_.image))
     path_writable = files.gs.create('%s/%s' % (ROOT, image_name), mime_type = raw_image.content_type, acl='public-read')
@@ -39,6 +38,9 @@ def store(category, id, raw_image) :
 
 def load(filename) :
     path = '%s/%s' % (ROOT, filename)
-    with files.open(path, 'r') as _file_ :
-        data = _file_.read()
-    return data
+    try :
+        with files.open(path, 'r') as _file_ :
+            data = _file_.read()
+        return data
+    except : #ExistenceError
+        return ''

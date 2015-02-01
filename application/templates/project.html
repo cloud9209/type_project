@@ -28,7 +28,7 @@
     <div id = "project_body">
       <div id="font_profile_div">
         <div id="font_profile_image">
-          <img id="thumbnail" src="{{url_for('load_image', filename = project.thumbnail)}}" alt="Image Not Available"/>
+          <img id="thumbnail" src="{%- if config.DEBUG -%}{{project.thumbnail}}{%- else -%}{{url_for('load_image', filename = project.thumbnail)}}{%- endif -%}" alt="Image Not Available"/>
           <div id="img_control_div">
             <input type="submit" value="삭제"> <!-- Delete Thumbnail : make it similar to that of github -->
 
