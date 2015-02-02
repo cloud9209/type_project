@@ -13,7 +13,9 @@ def sign_in() :
     session['user_name'     ] = _author.name
     session['user_email'    ] = _author.email
     session['user_thumbnail'] = _author.thumbnail
-    return jsonify( success = True, action = 'redirect', body = url_for('main', category = 'all'))
+    next_url = request.referrer
+    if next_url is None : raise # Initial Setting to Catch a BUG
+    return jsonify( success = True, action = 'redirect', body = next_url)
 
 @app.route('/sign_up', methods=['POST'])
 def sign_up() :
