@@ -1,6 +1,6 @@
 from application import db
 from google.appengine.api import files, images
-import author, project, work, logging
+import author, project, work, logging, base64
 
 ROOT = '/gs/type-storage'
 
@@ -44,3 +44,12 @@ def load(filename) :
         return data
     except : #ExistenceError
         return ''
+
+def load_base64(filename) :
+    path, data = '%s/%s' % (ROOT, filename), ''    
+    try :
+        with files.open(path, 'r') as _file_ :
+            data = _file_.read()
+    except : pass
+    mime_type = 'image/%s' % (['png', 'jpeg'][filename.split('.')[-1] in ['jpeg', 'jpg']])
+    return 'data:%s;base64,%s' % (mime_type, base64.b64encode(data))

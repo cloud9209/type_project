@@ -69,10 +69,3 @@ def secure() :
             safe = False
             body = 'Unexpected Error'
     return attrdict( safe = safe, action = action, body = body )
-
-def base64ify(projects) :
-    if projects is not list : projects = [projects]
-    for project in projects :
-        mime_type = 'image/%s' % (['png', 'jpeg'][project.image.split('.')[-1] in ['jpeg', 'jpg']])
-        project.image = 'data:%s;base64,%s' % (mime_type, base64.b64encode(image_storage.load(project.image)))
-        project.thumbnail = 'data:%s;base64,%s' % (mime_type, base64.b64encode(image_storage.load(project.thumbnail)))

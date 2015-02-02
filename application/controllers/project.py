@@ -38,7 +38,6 @@ def type_project(project_id) :
     if _project_ is None : abort(404)
 
     authors = author.get()
-    if app.debug == True : project.base64ify(_project_)
     return render_template('project.html', project = _project_, authors = authors)
 
 @app.route('/project/<int:project_id>/description', methods=['POST'])
