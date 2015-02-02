@@ -89,7 +89,7 @@
               <a class="work_like" href="javascript:void(0)">
                 {% set found = [] %}
                 {% for like in work.likes %}
-                  {% if session.author_id == like.liker_id %}
+                  {% if session.user_id == like.liker_id %}
                     {% do found.append(1) %}
                   {% endif %}
                 {% endfor %}
@@ -154,9 +154,9 @@
         <!-- write comment -->
         <div class="comment_on_project">
           <div class="comment_on_project_user">
-            <a href="{{ url_for( 'author_page', author_id = session.author_id ) }}">
-              <img class="comment_on_project_user_img" src="{{ img_src(session.author_thumbnail)}}" alt="Image Not Available"/>
-              <p class = "comment_on_project_user_name">{{session.author_name}}</p>
+            <a href="{{ url_for( 'author_page', author_id = session.user_id ) }}">
+              <img class="comment_on_project_user_img" src="{{ img_src(session.user_thumbnail)}}" alt="Image Not Available"/>
+              <p class = "comment_on_project_user_name">{{session.user_name}}</p>
             </a>
           </div>
           <div class="comment_on_project_body">

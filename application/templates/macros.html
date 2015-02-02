@@ -1,0 +1,15 @@
+{% macro img_src(path, type='thumbnail') -%}
+  {%- if path == '' -%}
+    {%- if type == 'image' -%}
+      {{ url_for('static', filename = 'res/images/default_image.png') }}
+    {%- else -%}
+      {{ url_for('static', filename = 'res/images/default_thumbnail.png') }}
+    {%- endif -%}
+  {%- else -%}
+    {%- if config.DEBUG -%}
+      {{ load_base64(path) }}
+    {%- else -%}
+      {{ url_for('load_image', filename = path) }}
+    {%- endif -%}
+  {%- endif -%}
+{%- endmacro %}

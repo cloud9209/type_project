@@ -64,21 +64,22 @@ def get(attr = None, value = None, limit = -1) :
     else          : return likes
 
 def secure() :
-    safe, action, body = None, 'alert', None
-    if 'project_id' not in session :
-        safe = False
-    elif 'like_id' not in request.form :
-        safe = False
-        body = 'like_id not exist'
-    else :
-        try :
-            _like = TypeProjectComment.query.filter(
-                getattr(TypeProjectComment,         'id') == request.form['like_id'],
-                getattr(TypeProjectComment, 'project_id') == session['project_id'],
-                getattr(TypeProjectComment,  'writer_id') == session['author_id']
-            ).one()
-            safe = _like is not None
-        except :
-            safe = False
-            body = 'could not find proper project_like object'
-    return attrdict( safe = safe, action = action, body = body )
+    return attrdict( safe = False, action = 'alert', body = 'Authentication Function Not Implemented')
+    # safe, action, body = None, 'alert', None
+    # if 'project_id' not in session :
+    #     safe = False
+    # elif 'like_id' not in request.form :
+    #     safe = False
+    #     body = 'like_id not exist'
+    # else :
+    #     try :
+    #         _like = TypeProjectComment.query.filter(
+    #             getattr(TypeProjectComment,         'id') == request.form['like_id'],
+    #             getattr(TypeProjectComment, 'project_id') == session['project_id'],
+    #             getattr(TypeProjectComment,  'writer_id') == session['user_id']
+    #         ).one()
+    #         safe = _like is not None
+    #     except :
+    #         safe = False
+    #         body = 'could not find proper project_like object'
+    # return attrdict( safe = safe, action = action, body = body )

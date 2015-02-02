@@ -1,6 +1,6 @@
 from flask import session, abort, request, jsonify
 from functools import wraps
-import author, project, project_comment, project_like, work, work_comment, work_like
+import signin, author, project, project_comment, project_like, work, work_comment, work_like
 import logging, sys
 
 """ enum declaration """
@@ -11,7 +11,7 @@ def enum(*sequential, **named):
     return type('Enum', (), enums)
 
 """ type of authentication : will override type keyword from here. """
-type = enum('author', 'project', 'project_comment', 'project_like', 'work', 'work_comment', 'work_like')
+type = enum('signin', 'author', 'project', 'project_comment', 'project_like', 'work', 'work_comment', 'work_like')
 def secure(auth_type) :
     response = None
     target = type.reverse_mapping[auth_type] + ".secure()"

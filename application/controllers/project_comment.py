@@ -4,10 +4,10 @@ from application.models import project_comment, auth
 import logging
 
 @app.route('/project_comment/new', methods = ['POST'])
-@auth.requires(auth.type.author)
+@auth.requires(auth.type.signin)
 def project_comment_new() :
     try :
-        comment = project_comment.add(writer_id = session['author_id'], project_id = session['project_id'], body = request.form['body'])
+        comment = project_comment.add(writer_id = session['user_id'], project_id = session['project_id'], body = request.form['body'])
         return jsonify( success = True, body = render_template('project_comment.html', comment = comment))
     except :
         return jsonify( success = False, action = 'alert', body = 'Could not append new comment' )

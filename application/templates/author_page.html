@@ -1,11 +1,30 @@
 {% extends "base.html" %}
 
 {% block head %}
-
 {% endblock %}
 
 {% block body %}
 <div>
-	{{session.author_name}} 님의 마이페이지 입니다.
+  <div id="info">
+    <div id="title">
+      {{author.name}} 님의 마이페이지 입니다.
+    </div>
+    <div id="email">
+      <span>
+        Email : {{author.email}}    
+      </span>
+    </div>
+  </div>
+  <div id="profile_image">
+    <img id="thumbnail" src="{{ img_src(author.thumbnail) }}" alt="Image Not Available"/>
+    <div id="img_control_div">
+      <input type="submit" value="삭제"/> <!-- Delete Thumbnail : make it similar to that of github -->
+
+      <form class="file-upload" enctype="multipart/form-data" action="{{ url_for('upload_author_image', author_id = author.id) }}" method="POST">
+        <input type="file" name="author-image">
+        <button type="submit">등록</button>
+      </form>
+    </div>
+  </div>
 </div>
 {% endblock %}

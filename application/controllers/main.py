@@ -1,17 +1,17 @@
 #-*- coding:utf-8 -*-
 from application import app
 from flask import render_template, session, url_for, request, redirect, abort
-from application.models import author, project, auth, work
+from application.models import signin, author, project, auth, work
 import logging
 
 @app.route('/')
 def index() :
     # secure : logged-in // TODO : main/all -> if possible, return where it was.
-    if author.secure().safe : return redirect(url_for('main', category = 'all'))
+    if signin.secure().safe : return redirect(url_for('main', category = 'all'))
     return render_template('index.html')
 
 @app.route('/main/<string:category>')
-@auth.requires(auth.type.author)
+@auth.requires(auth.type.signin)
 def main(category) :
     projects = None
     if   category == 'all'                    : projects = project.get(limit = 10)

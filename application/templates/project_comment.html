@@ -1,3 +1,4 @@
+{% from "macros.html" import img_src %}
 <div class="comment_on_project">
   <div class="comment_on_project_user">
     <a href="{{ url_for( 'author_page', author_id = comment.writer.id ) }}">

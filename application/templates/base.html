@@ -1,18 +1,4 @@
-{% macro img_src(path, type='thumbnail') -%}
-  {%- if path == '' -%}
-    {%- if type == 'image' -%}
-      {{ url_for('static', filename = 'res/images/default_image.png') }}
-    {%- else -%}
-      {{ url_for('static', filename = 'res/images/default_thumbnail.png') }}
-    {%- endif -%}
-  {%- else -%}
-    {%- if config.DEBUG -%}
-      {{ load_base64(path) }}
-    {%- else -%}
-      {{ url_for('load_image', filename = path) }}
-    {%- endif -%}
-  {%- endif -%}
-{%- endmacro %}
+{% from "macros.html" import img_src %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,12 +56,12 @@
               </ul>
             </li>
           {% endif %}
-          {% if 'author_name' in session %}
-          <li><a href="{{url_for('author_page', author_id = session.author_id)}}">{{ session.author_name }}, 환영하네</a></li>
+          {% if 'user_name' in session %}
+          <li><a href="{{url_for('author_page', author_id = session.user_id)}}">{{ session.user_name }}, 환영하네</a></li>
           {% endif %}
         </ul>
 
-        {% if 'author_name' in session %}
+        {% if 'user_name' in session %}
         <a class="navbar-form navbar-right" href="{{url_for('sign_out')}}">
           <button class="btn btn-default">Sign Out</button>
         </a>

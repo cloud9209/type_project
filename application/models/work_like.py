@@ -63,21 +63,22 @@ def get(attr = None, value = None, limit = -1) :
     else          : return likes
 
 def secure() :
-    safe, action, body = None, 'alert', None
-    if 'work_id' not in session :
-        safe = False
-    elif 'like_id' not in request.form :
-        safe = False
-        body = 'like_id not exist'
-    else :
-        try :
-            _like = TypeWorkLike.query.filter(
-                getattr(TypeWorkLike, 'id'        ) == request.form['like_id'],
-                getattr(TypeWorkLike, 'work_id') == session['work_id'],
-                getattr(TypeWorkLike, 'liker_id' ) == session['author_id'],
-            ).one()
-            safe = _like is not None
-        except :
-            safe = False
-            body = 'could not find proper work_like object'
-    return attrdict( safe = safe, action = action, body = body )
+    return attrdict( safe = False, action = 'alert', body = 'Authentication Function Not Implemented')
+    # safe, action, body = None, 'alert', None
+    # if 'work_id' not in session :
+    #     safe = False
+    # elif 'like_id' not in request.form :
+    #     safe = False
+    #     body = 'like_id not exist'
+    # else :
+    #     try :
+    #         _like = TypeWorkLike.query.filter(
+    #             getattr(TypeWorkLike, 'id'        ) == request.form['like_id'],
+    #             getattr(TypeWorkLike, 'work_id') == session['work_id'],
+    #             getattr(TypeWorkLike, 'liker_id' ) == session['user_id'],
+    #         ).one()
+    #         safe = _like is not None
+    #     except :
+    #         safe = False
+    #         body = 'could not find proper work_like object'
+    # return attrdict( safe = safe, action = action, body = body )

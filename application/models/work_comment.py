@@ -71,7 +71,7 @@ def secure() :
             _comment = TypeWorkComment.query.filter(
                 getattr(TypeWorkComment,        'id' ) == request.form['comment_id'],
                 getattr(TypeWorkComment,   'work_id' ) == session['work_id'],
-                getattr(TypeWorkComment, 'writer_id' ) == session['author_id'],
+                getattr(TypeWorkComment, 'writer_id' ) == session['user_id'],
             ).one()
             safe = _comment is not None
         except NoResultFound :

@@ -5,7 +5,7 @@ from application.models import work, auth, work_comment, work_like, image_storag
 import logging
 
 @app.route('/work/<int:work_id>', methods = ['GET', 'POST'])
-@auth.requires(auth.type.author)
+@auth.requires(auth.type.signin)
 def type_work(work_id) :
     session['work_id'] = work_id
 
@@ -15,10 +15,10 @@ def type_work(work_id) :
     return render_template('work.html', work = _work_)
 
 @app.route('/work/<int:work_id>/like', methods = ['POST'])
-@auth.requires(auth.type.author)
+@auth.requires(auth.type.signin)
 def like_work(work_id) :
     try :
-        like_now   = work_like.toggle(liker_id = session['author_id'], work_id = work_id)
+        like_now   = work_like.toggle(liker_id = session['user_id'], work_id = work_id)
         like_count = len(work_like.get('work_id', work_id))
         return jsonify( success = True, count = like_count, like = like_now)
     except :

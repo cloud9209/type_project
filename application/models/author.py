@@ -1,6 +1,6 @@
 from application import db
 from schema import Author
-from flask import session
+from flask import session, request
 from attrdict import attrdict
 import logging, auth
 
@@ -28,14 +28,17 @@ def get (attr = None, value = None, limit = -1) :
     elif limit >  1 : return authors.limit(limit)
     else            : return authors.all()
 
-def verified(form) : 
-    return Author.query.filter(
-        Author.email    == form['email'],
-        Author.password == db.func.md5(form['password'])
-    ).count() != 0
-
 def secure() :
-    safe, action, body = None, None, None
-    safe   = 'author_id' in session and 'author_email' in session and 'author_name' in session and 'author_thumbnail' in session
-    action = 'abort'
+    safe, action, body = None, ['alert', 'abort'][request.method=='GET'], None
+    if 'author_id' not in session :
+        safe = False
+        body = 'Not Authorized : Invalid Access Sequence'
+    else :
+        logging.info('author id : ' + str(session['author_id']))
+        logging.info('user id : ' + str(session['user_id']))
+        if session['author_id'] == session['user_id'] :
+            safe = True
+        else :
+            safe = False
+            body = 'Not Authorized'
     return attrdict( safe = safe, action = action, body = body )

@@ -13,24 +13,24 @@ def register_project(project_id) :
     return redirect(url_for('type_project', project_id = project_id))
 
 @app.route('/project/<int:project_id>/like', methods = ['POST'])
-@auth.requires(auth.type.author)
+@auth.requires(auth.type.signin)
 def like_project(project_id) :
     try :
-        like_now   = project_like.toggle(liker_id = session['author_id'], project_id = project_id)
+        like_now   = project_like.toggle(liker_id = session['user_id'], project_id = project_id)
         like_count = len(project_like.get('project_id', project_id))
         return jsonify( success = True, count = like_count, like = like_now)
     except :
         return jsonify( success = False, action = 'alert', body = 'Like Action Failed' )
 
 @app.route('/project/<int:project_id>/delete', methods = ['POST'])
-@auth.requires(auth.type.author)
+@auth.requires(auth.type.signin)
 def delete_project(project_id) :
     if session['project_id'] != project_id : abort(404) # invalid project number
     _project = project.remove('id', project_id, 1)
     return redirect(url_for('type_project', project_id = project_id))
 
 @app.route('/project/<int:project_id>', methods = ['GET', 'POST'])
-@auth.requires(auth.type.author)
+@auth.requires(auth.type.signin)
 def type_project(project_id) :
     session['project_id'] = project_id
 

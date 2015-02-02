@@ -10,7 +10,7 @@ def add(data) :
         category    = data['category'],
         title       = data['project_title'],
         description = data['description'],
-        author_id   = session['author_id']
+        author_id   = session['user_id']
     ))
     db.session.commit()
 
@@ -55,7 +55,7 @@ def secure() :
     else :
         try :
             _project = TypeProject.query.filter(
-                getattr(TypeProject, 'author_id') == session['author_id'],
+                getattr(TypeProject, 'author_id') == session['user_id'],
                 getattr(TypeProject,        'id') == session['project_id']
             ).one()
             safe = _project is not None

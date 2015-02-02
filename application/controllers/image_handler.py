@@ -5,12 +5,12 @@ import logging
 
 ''' Download'''
 @app.route('/image/')
-@auth.requires(auth.type.author)
+@auth.requires(auth.type.signin)
 def load_default_image() :
     return app.send_static_file('res/images/default_thumbnail.png')
 
 @app.route('/image/<path:filename>')
-@auth.requires(auth.type.author)
+@auth.requires(auth.type.signin)
 def load_image(filename) : 
     if filename.split('/')[0] not in ['author', 'project', 'work'] :
         logging.error('Inavalid image path : ' + filename)
@@ -22,10 +22,11 @@ def load_image(filename) :
 
 ''' Upload '''
 @app.route('/author/<int:author_id>/upload', methods = ['POST'])
+@auth.requires(auth.type.signin)
 @auth.requires(auth.type.author)
 def upload_author_image(author_id) :
     success = image_storage.store('author', author_id, request.files['author-image'])
-    if success : return jsonify( success = True , action = 'redirect', body = url_for('type_author', author_id = author_id))
+    if success : return jsonify( success = True , action = 'redirect', body = url_for('author_page', author_id = author_id))
     else       : return jsonify( success = False, action = 'alert', body = 'Failed to upload author profile-image' )
 
 @app.route('/project/<int:project_id>/upload', methods = ['POST'])

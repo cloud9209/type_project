@@ -66,7 +66,7 @@ def secure() :
     else :
         try :
             _work = TypeWork.query.filter(
-                getattr(TypeWork, 'author_id') == session['author_id'],
+                getattr(TypeWork, 'author_id') == session['user_id'],
                 getattr(TypeWork,        'id') == session['work_id']
             ).one()
             safe = _work is not None
