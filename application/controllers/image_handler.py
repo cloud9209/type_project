@@ -4,18 +4,13 @@ from application.models import auth, image_storage
 import logging
 
 ''' Download'''
-# @app.route('/image/')
-# @auth.requires(auth.type.signin)
-# def load_default_image() :
-#     return app.send_static_file('res/images/default_thumbnail.png')
-
 @app.route('/image/<path:filename>')
 @auth.requires(auth.type.signin)
 def load_image(filename) : 
     if request.referrer is None : abort(404) # referrer handling
 
     if filename.split('/')[0] not in ['author', 'project', 'work'] :
-        logging.error('Inavalid image path : ' + filename)
+        logging.critical('Inavalid image path : ' + filename)
         abort(404)
         
     return image_storage.load(filename)

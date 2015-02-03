@@ -2,7 +2,6 @@
 from application import app
 from flask import render_template, session
 from application.models import author, auth
-import logging
 
 @app.route('/<int:author_id>')
 @auth.requires(auth.type.signin)

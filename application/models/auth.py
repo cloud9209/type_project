@@ -18,10 +18,10 @@ def secure(auth_type) :
     try :
         response = eval( target )
     except SyntaxError :
-        logging.error("Tried to call " + target + ", failed with SyntaxError. ")
+        logging.critical("Tried to call " + target + ", failed with SyntaxError. ")
         raise
     except :
-        logging.error("Unexpected error:", sys.exc_info()[0])
+        logging.critical("Unexpected error:", sys.exc_info()[0])
         raise
     return response
 

@@ -1,8 +1,7 @@
 #-*- coding:utf-8 -*-
 from application import app
 from flask import render_template, session, url_for, request, redirect, abort, jsonify, send_file
-from application.models import project, auth, work, project_comment, project_like, author, image_storage
-import logging
+from application.models import project, auth, work, project_comment, project_like, author
 
 @app.route('/project/<int:project_id>/register', methods = ['POST'])
 @auth.requires(auth.type.project)

@@ -1,8 +1,7 @@
 #_*_ coding:utf_8 _*_
 from application import app
 from flask import render_template, session, url_for, request, redirect, abort, jsonify
-from application.models import work, auth, work_comment, work_like, image_storage
-import logging
+from application.models import work, auth, work_comment, work_like
 
 @app.route('/work/<int:work_id>', methods = ['GET', 'POST'])
 @auth.requires(auth.type.signin)

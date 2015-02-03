@@ -2,7 +2,6 @@
 from application import app
 from flask import render_template, session, url_for, request, redirect, jsonify
 from application.models import author, signin
-import logging
 
 @app.route('/sign_in', methods=['POST'])
 def sign_in() :

@@ -1,7 +1,6 @@
 from application import app
 from flask import session, request, redirect, url_for, jsonify, render_template
 from application.models import work_comment, auth
-import logging
 
 @app.route('/work_comment/new', methods = ['POST'])
 @auth.requires(auth.type.signin)

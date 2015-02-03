@@ -2,7 +2,6 @@ from application import db
 from schema import Author
 from flask import session, request
 from attrdict import attrdict
-import logging, auth
 
 def add(data) :
     db.session.add( Author (
@@ -34,8 +33,6 @@ def secure() :
         safe = False
         body = 'Not Authorized : Invalid Access Sequence'
     else :
-        logging.info('author id : ' + str(session['author_id']))
-        logging.info('user id : ' + str(session['user_id']))
         if session['author_id'] == session['user_id'] :
             safe = True
         else :

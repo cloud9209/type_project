@@ -25,7 +25,7 @@ app.jinja_env.globals.update(load_base64=load_base64)
 # [Jinja] Unicode String Truncator : WILL CHANGE ALL WHITESPACE TO SPACE
 import unicodedata
 def u_width(u_str) :
-    return sum( 1 + (unicodedata.east_asian_width(unicode_char) in "WF") for unicode_char in u_str )
+    return sum( 1 + (unicodedata.east_asian_width(u_char) in "WF") for u_char in u_str )
 
 def truncate_unicode(u_str, max_width, encoding = 'utf-8', ending = '...') :
     if u_width(u_str) < max_width : return u_str

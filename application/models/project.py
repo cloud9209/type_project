@@ -3,7 +3,6 @@ from schema import Author, TypeProject
 from flask import session, request
 from attrdict import attrdict
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
-import image_storage, base64
 
 def add(data) :
     db.session.add( TypeProject (

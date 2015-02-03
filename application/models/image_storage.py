@@ -1,6 +1,6 @@
 from application import db
 from google.appengine.api import files, images
-import author, project, work, logging, base64
+import author, project, work, base64
 
 ROOT = '/gs/type-storage'
 
