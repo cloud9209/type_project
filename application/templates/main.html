@@ -40,7 +40,7 @@
           </a>
         </div>
         <div class="font_description">
-          <p>{{ project.description }}</p>
+          <p>{{ truncate_u(project.description, config.STRING_TRUNCATE_LENGTH) }}</p>
         </div>
         <div class="reactions_to_proj">
           <a class="project_like" href="javascript:void(0)">
