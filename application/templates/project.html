@@ -30,7 +30,9 @@
         <div id="font_profile_image">
           <img id="thumbnail" src="{{ img_src(project.thumbnail) }}" alt="Image Not Available"/>
           <div id="img_control_div">
-            <input type="submit" value="삭제"> <!-- Delete Thumbnail : make it similar to that of github -->
+            <form class="file-delete" action="{{ url_for('remove_project_image', project_id = project.id) }}" method = "POST">
+              <input type="submit" value="삭제"/>
+            </form>
 
             <form class="file-upload" enctype="multipart/form-data" action="{{ url_for('upload_project_image', project_id = project.id) }}" method="POST">
               <input type="file" name="project-image">

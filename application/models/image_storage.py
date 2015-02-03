@@ -53,3 +53,17 @@ def load_base64(filename) :
     except : pass
     mime_type = 'image/%s' % (['png', 'jpeg'][filename.split('.')[-1] in ['jpeg', 'jpg']])
     return 'data:%s;base64,%s' % (mime_type, base64.b64encode(data))
+
+import logging, sys
+def remove(category, id) :
+    if category not in ['author', 'project', 'work'] : return False
+
+    _target_ = eval('%s.get("id", %d, 1)' % (category, id))
+    if _target_ is None : return False
+
+    files.delete('%s/%s' % (ROOT, _target_.image))
+    files.delete('%s/%s' % (ROOT, _target_.thumbnail))
+    _target_.image = ''
+    _target_.thumbnail = ''
+    db.session.commit()
+    return True
