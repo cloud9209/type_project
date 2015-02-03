@@ -15,14 +15,13 @@ type = enum('signin', 'author', 'project', 'project_comment', 'project_like', 'w
 def secure(auth_type) :
     response = None
     target = type.reverse_mapping[auth_type] + ".secure()"
-    logging.debug(target)
     try :
         response = eval( target )
     except SyntaxError :
-        logging.debug("Tried to call " + target + ", failed with SyntaxError. ")
+        logging.error("Tried to call " + target + ", failed with SyntaxError. ")
         raise
     except :
-        logging.debug ("Unexpected error:", sys.exc_info()[0])
+        logging.error("Unexpected error:", sys.exc_info()[0])
         raise
     return response
 
@@ -32,13 +31,12 @@ def requires(auth_type) :
         @wraps(_function_)
         def argument_wrapper(*args, **kwargs) :
             response = secure(auth_type)
-            logging.info(response)
+            logging.info('%s.secure returns : %r' %(type.reverse_mapping[auth_type], response))
             # SyntaxError : response == None
             if response is None : return jsonify(success = False, action = 'alert', body = "SyntaxError While exec")
 
             # Successfully received response via eval
             if response.safe :
-                logging.info('entering ' + _function_.__name__)
                 return _function_(*args, **kwargs)
             elif response.action == 'abort' :
                 abort(404)
