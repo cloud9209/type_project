@@ -18,7 +18,7 @@ def secure(auth_type) :
     try :
         response = eval( target )
     except SyntaxError :
-        logging.critical("Tried to call " + target + ", failed with SyntaxError. ")
+        logging.critical("%s has Syntax Error" % target)
         raise
     except :
         logging.critical("Unexpected error:", sys.exc_info()[0])
@@ -31,7 +31,7 @@ def requires(auth_type) :
         @wraps(_function_)
         def argument_wrapper(*args, **kwargs) :
             response = secure(auth_type)
-            logging.info('%s.secure returns : %r' %(type.reverse_mapping[auth_type], response))
+            logging.info('%s.secure() : %r' %(type.reverse_mapping[auth_type], response))
             # SyntaxError : response == None
             if response is None : return jsonify(success = False, action = 'alert', body = "SyntaxError While exec")
 

@@ -19,26 +19,26 @@ class TypeProjectComment(db.Model) :
 '''
 
 def add(writer_id, project_id, body) :
-    _comment = TypeProjectComment (
+    comment = TypeProjectComment (
         writer_id = writer_id,
         project_id = project_id,
         body = body
     )
-    db.session.add( _comment )
+    db.session.add( comment )
     db.session.commit()
-    return _comment
+    return comment
 
 def modify(comment_id, body) :
-    _comment = get('id', comment_id, 1)
-    _comment.body = body
+    comment = get('id', comment_id, 1)
+    comment.body = body
     db.session.commit()
-    return _comment
+    return comment
 
 def remove(comment_id) :
-    _comment = get('id', comment_id, 1)
-    db.session.delete(_comment)
+    comment = get('id', comment_id, 1)
+    db.session.delete(comment)
     db.session.commit()
-    return _comment
+    return comment
 
 def get(attr = None, value = None, limit = -1) :
     project_comments = None
@@ -68,12 +68,12 @@ def secure() :
         body = 'comment_id not exist'
     else :
         try :
-            _comment = TypeProjectComment.query.filter(
+            comment = TypeProjectComment.query.filter(
                 getattr(TypeProjectComment,         'id') == request.form['comment_id'],
                 getattr(TypeProjectComment, 'project_id') == session['project_id'],
                 getattr(TypeProjectComment,  'writer_id') == session['user_id'],
             ).one()
-            safe = _comment is not None
+            safe = comment is not None
         except NoResultFound :
             safe = False
             body = 'Not Authorized'

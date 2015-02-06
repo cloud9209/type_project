@@ -25,18 +25,12 @@ def get(attr = None, value = None, limit = -1, default = None) :
     else           : return projects.all()
 
 def set(id, attr, value) :
-    _project = None
-    try :
-        _project = get('id', id, 1)
-        setattr(_project, attr, value)
-        db.session.commit()
-    except NoResultFound :
-        raise
-    except MultipleResultsFound :
-        raise
-    except :
-        raise
-    return _project
+    _project_ = get('id', id, 1)
+    if _project_ is None : return None
+
+    setattr(_project_, attr, value)
+    db.session.commit()
+    return _project_
 
 def remove(attr, value) :
     try :

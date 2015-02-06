@@ -3,6 +3,7 @@ from application import app
 from flask import render_template, session
 from application.models import author, auth
 
+# is the author page for owner, or for everyone??
 @app.route('/<int:author_id>')
 @auth.requires(auth.type.signin)
 def author_page(author_id) :

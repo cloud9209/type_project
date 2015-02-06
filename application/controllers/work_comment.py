@@ -12,6 +12,7 @@ def work_comment_new() :
         return jsonify( success = False, action = 'alert', body = 'Failed to append a new comment' )
 
 @app.route('/work_comment/<int:comment_id>/modify', methods = ['POST'])
+@auth.requires(auth.type.signin)
 @auth.requires(auth.type.work_comment)
 def work_comment_modify(comment_id) :
     try :
@@ -21,6 +22,7 @@ def work_comment_modify(comment_id) :
         return jsonify( success = False, action = 'alert', body = 'mode change failure' )
 
 @app.route('/work_comment/<int:comment_id>/submit', methods = ['POST'])
+@auth.requires(auth.type.signin)
 @auth.requires(auth.type.work_comment)
 def work_comment_submit(comment_id) :
     try :
@@ -30,6 +32,7 @@ def work_comment_submit(comment_id) :
         return jsonify( success = False, action = 'alert', body = 'Failed to submit comment' )
 
 @app.route('/work_comment/<int:comment_id>/remove', methods = ['POST'])
+@auth.requires(auth.type.signin)
 @auth.requires(auth.type.work_comment)
 def work_comment_remove(comment_id) :
     try :

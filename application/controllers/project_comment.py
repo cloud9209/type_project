@@ -12,6 +12,7 @@ def project_comment_new() :
         return jsonify( success = False, action = 'alert', body = 'Could not append new comment' )
 
 @app.route('/project_comment/<int:comment_id>/modify', methods = ['POST'])
+@auth.requires(auth.type.signin)
 @auth.requires(auth.type.project_comment)
 def project_comment_modify(comment_id) :
     try :
@@ -21,6 +22,7 @@ def project_comment_modify(comment_id) :
         return jsonify( success = False, action = 'alert', body = 'Could not Change to Modify-mode' )
 
 @app.route('/project_comment/<int:comment_id>/submit', methods = ['POST'])
+@auth.requires(auth.type.signin)
 @auth.requires(auth.type.project_comment)
 def project_comment_submit(comment_id) :
     try :
@@ -30,6 +32,7 @@ def project_comment_submit(comment_id) :
         return jsonify( success = False, action = 'alert', body = 'Could not submit comment' )
 
 @app.route('/project_comment/<int:comment_id>/remove', methods = ['POST'])
+@auth.requires(auth.type.signin)
 @auth.requires(auth.type.project_comment)
 def project_comment_remove(comment_id) :
     try :

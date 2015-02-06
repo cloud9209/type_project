@@ -10,6 +10,7 @@ def index() :
     if signin.secure().safe : return redirect(url_for('main', category = 'all'))
     return render_template('index.html')
 
+# TODO : Default Setting & Add Lettering Category
 @app.route('/main/<string:category>')
 @auth.requires(auth.type.signin)
 def main(category) :
