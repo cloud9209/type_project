@@ -41,23 +41,10 @@
     <center>
       <div class="collapse navbar-collapse" id="base-navbar">
         <ul class="nav navbar-nav">
-            {% if authors %}
-            <li><a href="{{url_for('main', category=   'reading')}}">읽는 서체</a></li>
-            <li><a href="{{url_for('main', category='displaying')}}">보는 서체</a></li>
-            <li><a href="{{url_for('main', category= 'lettering')}}">레터링</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">작가별<span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                {% for author in authors %}
-                  <li><a href="{{url_for('main', category = author.id )}}">{{author.name}}</a></li>
-                  {% if not loop.last %}
-                    <li class="divider"></li>
-                  {% endif %}
-                {% endfor %}
-              </ul>
-            </li>
-          {% endif %}
           {% if 'user_name' in session %}
+          <li><a href="{{url_for('main', category=   'reading')}}">읽는 서체</a></li>
+          <li><a href="{{url_for('main', category='displaying')}}">보는 서체</a></li>
+          <li><a href="{{url_for('main', category= 'lettering')}}">레터링</a></li>
           <li><a href="{{url_for('author_page', author_id = session.user_id)}}">{{ session.user_name }}, 환영하네</a></li>
           {% endif %}
         </ul>

@@ -6,29 +6,20 @@ import logging
 
 @app.route('/')
 def index() :
-    # secure : logged-in // TODO : main/all -> if possible, return where it was.
-    if signin.secure().safe : return redirect(url_for('main', category = 'all'))
+    if signin.secure().safe : return redirect(url_for('main'))
     return render_template('index.html')
 
-# TODO : Default Setting & Add Lettering Category
 project_category = ['reading', 'displaying', 'lettering']
+@app.route('/main/', defaults = {'category' : 'all'})
 @app.route('/main/<string:category>')
 @auth.requires(auth.type.signin)
 def main(category) :
     projects = None
     if   category == 'all'            : projects = project.get(limit = 10)
     elif category in project_category : projects = project.get('category', category.upper(), 10)
-    else :
-        try :
-            author.get('id', int(category), 1)
-            projects = project.get('author_id', int(category), 10)
-            logging.info("Success : " + category)
-        except : # sqlalchemy.orm.exc.NoResultFound or MultipleResultFound
-            pass
+    else                              : projects = project.get('author_id', int(category), 10)
     if projects is None : abort(404)
-
-    authors = author.get()
-    return render_template('main.html', projects = projects, authors = authors)
+    return render_template('main.html', projects = projects)
 
 @app.errorhandler(404)
 def page_not_found(e):

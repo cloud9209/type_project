@@ -8,6 +8,5 @@ from application.models import author, auth
 @auth.requires(auth.type.signin)
 def author_page(author_id) :
     session['author_id'] = author_id
-    authors = author.get() # for navbar
     _author_ = author.get('id', author_id, 1)
-    return render_template('author_page.html', author = _author_, authors = authors)
+    return render_template('author_page.html', author = _author_)

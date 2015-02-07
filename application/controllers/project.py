@@ -10,8 +10,7 @@ def type_project(project_id) :
     if _project_ is None : abort(404)
 
     session['project_id'] = project_id
-    authors = author.get()
-    return render_template('project.html', project = _project_, authors = authors)
+    return render_template('project.html', project = _project_)
 
 
 @app.route('/project/<int:project_id>/register', methods = ['POST'])
