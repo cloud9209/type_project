@@ -13,3 +13,15 @@
     {%- endif -%}
   {%- endif -%}
 {%- endmacro %}
+
+{% macro project_icon(category = '') -%}
+  {%- if   category == "READING" -%}
+    <span class="glyphicon glyphicon-book"></span>
+  {%- elif category == "DISPLAYING" -%}
+    <span class="glyphicon glyphicon-eye-open"></span>
+  {%- elif category == "LETTERING" -%}
+    <span class="glyphicon glyphicon-text-color"></span>
+  {%- else -%}
+    <span class="glyphicon glyphicon-remove"></span>
+  {%- endif -%}  
+{%- endmacro %}

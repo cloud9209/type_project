@@ -13,15 +13,7 @@
         <div class = "proj_title">
           <div class = "font_name_div">
             <img class="font_name_back" src="{{ url_for('static', filename = 'res/images/project_title_background.png') }}" alt="Image Not Available"/>
-            {% if project.category == "READING" %}
-              <span class="glyphicon glyphicon-book"></span>
-            {% elif project.category == "DISPLAYING" %}
-              <span class="glyphicon glyphicon-eye-open"></span>
-            {% elif project.category == "LETTERING" %}
-              <span class="glyphicon glyphicon-text-color"></span>
-            {% else %}
-              <span class="glyphicon glyphicon-remove"></span>
-            {% endif %}
+            {{ project_icon(project.category) | safe }}
             <a href="{{url_for ('type_project', project_id = project.id) }}">
               <p class="font_name into_the_proj">{{ project.title }}</p>
             </a>

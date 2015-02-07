@@ -14,13 +14,7 @@
       <div id = "project_title">
         <div id = "font_name_div">
           <img id="font_name_back" src="{{ url_for('static', filename = 'res/images/project_title_background.png')}}" alt="Image Not Available"/>
-          {% if project.category == "READING" %}
-            <span class="glyphicon glyphicon-book"></span>
-          {% elif project.category == "DISPLAYING" %}
-            <span class="glyphicon glyphicon-eye-open"></span>
-          {% else %}
-            <span class="glyphicon glyphicon-remove"></span>
-          {% endif %}
+          {{ project_icon(project.category) | safe }}
           <a href='#'><p id= "font_name">{{project.title}}</p></a>
         </div>
       </div>
