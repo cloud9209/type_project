@@ -85,7 +85,7 @@
               </a>
             </div>
             <div class="work_description">
-              <p>{{ work.description }}</p>
+              <p>{{ u_truncate(work.description, config.STRING_TRUNCATE_LENGTH) }}</p>
             </div>
             <div class="reactions_to_proj">
               <a class="work_like" href="javascript:void(0)">

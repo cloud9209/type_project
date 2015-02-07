@@ -1,7 +1,12 @@
-# Flask Instance
 from flask import Flask
+
+# Flask Instance & Config
 app = Flask('application')
 import config
+app.config.update(dict(
+    DEBUG = True,
+    ENABLE_FLASK_DEBUG_TB = True
+))
 
 # Jinja Extension
 app.jinja_env.add_extension('jinja2.ext.do')
@@ -16,18 +21,19 @@ migrate = Migrate(app, db)
 manager.add_command('db', MigrateCommand)
 
 # [Flask Extension] DebugToolbar
-from flask.ext.debugtoolbar import DebugToolbarExtension
-from application.models.image_storage import load_base64
-app.config['DEBUG_TB_PROFILER_ENABLED'] = True
-toolbar = DebugToolbarExtension(app)
-app.jinja_env.globals.update(load_base64=load_base64)
+if app.config['ENABLE_FLASK_DEBUG_TB'] == True :
+    from flask.ext.debugtoolbar import DebugToolbarExtension
+    from application.models.image_storage import load_base64
+    app.config['DEBUG_TB_PROFILER_ENABLED'] = True
+    toolbar = DebugToolbarExtension(app)
+    app.jinja_env.globals.update(load_base64=load_base64)
 
 # [Jinja] Unicode String Truncator : WILL CHANGE ALL WHITESPACE TO SPACE
 import unicodedata
 def u_width(u_str) :
     return sum( 1 + (unicodedata.east_asian_width(u_char) in "WF") for u_char in u_str )
 
-def truncate_unicode(u_str, max_width, encoding = 'utf-8', ending = '...') :
+def u_truncate(u_str, max_width, encoding = 'utf-8', ending = '...') :
     if u_width(u_str) < max_width : return u_str
     max_width -= len(ending)
     _unicode_, _width_ = u'', 0
@@ -36,11 +42,11 @@ def truncate_unicode(u_str, max_width, encoding = 'utf-8', ending = '...') :
         _word_width_ = u_width(word)
         if _word_width_ + _width_ > max_width :
             return _unicode_ + ending
-        _unicode_ += '%s '%word
+        _unicode_ += '%s ' % word
         _width_ += _word_width_ + 1
     return _unicode_
+app.jinja_env.globals.update(u_truncate = u_truncate)
 
-app.jinja_env.globals.update(truncate_u = truncate_unicode)
 # Import Every function in 'controllers' directory
 from application.models import schema
 import os

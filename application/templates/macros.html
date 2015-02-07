@@ -6,7 +6,7 @@
       {{ url_for('static', filename = 'res/images/default_thumbnail.png') }}
     {%- endif -%}
   {%- else -%}
-    {%- if config.DEBUG -%}
+    {%- if config.ENABLE_FLASK_DEBUG_TB -%}
       {{ load_base64(path) }}
     {%- else -%}
       {{ url_for('load_image', filename = path) }}
