@@ -11,12 +11,13 @@ def index() :
     return render_template('index.html')
 
 # TODO : Default Setting & Add Lettering Category
+project_category = ['reading', 'displaying', 'lettering']
 @app.route('/main/<string:category>')
 @auth.requires(auth.type.signin)
 def main(category) :
     projects = None
-    if   category == 'all'                    : projects = project.get(limit = 10)
-    elif category in ['reading','displaying'] : projects = project.get('category', category.upper(), 10)
+    if   category == 'all'            : projects = project.get(limit = 10)
+    elif category in project_category : projects = project.get('category', category.upper(), 10)
     else :
         try :
             author.get('id', int(category), 1)

@@ -11,7 +11,7 @@ class Author(db.Model) :
 
 class TypeProject(db.Model) :
     id              = db.Column(db.Integer, primary_key = True)
-    category        = db.Column(db.Enum('READING', 'DISPLAYING'))
+    category        = db.Column(db.Enum('READING', 'DISPLAYING', 'LETTERING'))
     title           = db.Column(db.String(40))
     description     = db.Column(db.Text())
     image           = db.Column(db.String(100), default = "")

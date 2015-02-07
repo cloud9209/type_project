@@ -42,8 +42,9 @@
       <div class="collapse navbar-collapse" id="base-navbar">
         <ul class="nav navbar-nav">
             {% if authors %}
-            <li><a href="{{url_for('main', category=  'reading' )}}">읽는 서체</a></li>
+            <li><a href="{{url_for('main', category=   'reading')}}">읽는 서체</a></li>
             <li><a href="{{url_for('main', category='displaying')}}">보는 서체</a></li>
+            <li><a href="{{url_for('main', category= 'lettering')}}">레터링</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">작가별<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
