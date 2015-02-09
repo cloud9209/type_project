@@ -3,7 +3,7 @@ from functools import wraps
 import signin, author, project, project_comment, project_like, work, work_comment, work_like
 import logging, sys
 
-""" enum declaration """
+""" Enum Declaration : Referenced from http://stackoverflow.com/questions/36932/how-can-i-represent-an-enum-in-python """
 def enum(*sequential, **named):
     enums = dict(zip(sequential, range(len(sequential))), **named)
     reverse = dict((value, key) for key, value in enums.iteritems())
