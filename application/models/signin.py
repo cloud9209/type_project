@@ -2,12 +2,24 @@ from attrdict import attrdict
 from application import db
 from flask import session
 from schema import Author
-
-def verified(form) : 
-    return Author.query.filter(
-        Author.email    == form['email'],
-        Author.password == db.func.md5(form['password'])
-    ).count() != 0
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
+import logging
+def get_verified_user(form) : 
+    author = None
+    try :
+        author = Author.query.filter(
+            Author.email    == form['email'],
+            Author.password == db.func.md5(form['password'])
+        ).one()
+    except NoResultFound :
+        pass
+    except MultipleResultsFound :
+        logging.critical("Multiple User has same ID & PASSWD")
+        raise
+    except :
+        logging.critical("Unextected Error")
+        raise
+    return author        
 
 def secure() :
     safe, action, body = None, None, None

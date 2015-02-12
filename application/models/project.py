@@ -47,11 +47,10 @@ def secure() :
         safe = False
     else :
         try :
-            _project = TypeProject.query.filter(
+            safe = TypeProject.query.filter(
                 getattr(TypeProject, 'author_id') == session['user_id'],
                 getattr(TypeProject,        'id') == session['project_id']
-            ).one()
-            safe = _project is not None
+            ).one() is not None
         except NoResultFound :
             safe = False
             body = 'Not Authorized'

@@ -29,16 +29,16 @@ def add(writer_id, work_id, body) :
     return _work
 
 def modify(comment_id, body) :
-    _comment = get('id', comment_id, 1)
-    _comment.body = body
+    comment = get('id', comment_id, 1)
+    comment.body = body
     db.session.commit()
-    return _comment
+    return comment
 
 def remove(comment_id) :
-    _comment = get('id', comment_id, 1)
-    db.session.delete(_comment)
+    comment = get('id', comment_id, 1)
+    db.session.delete(comment)
     db.session.commit()
-    return _comment
+    return comment
 
 def get(attr = None, value = None, limit = -1) :
     work_comments = None
@@ -68,12 +68,11 @@ def secure() :
         body = 'comment_id not exist'
     else :
         try :
-            _comment = TypeWorkComment.query.filter(
+            safe = TypeWorkComment.query.filter(
                 getattr(TypeWorkComment,        'id' ) == request.form['comment_id'],
                 getattr(TypeWorkComment,   'work_id' ) == session['work_id'],
                 getattr(TypeWorkComment, 'writer_id' ) == session['user_id'],
-            ).one()
-            safe = _comment is not None
+            ).one() is not None
         except NoResultFound :
             safe = False
             body = 'Not Authorized'

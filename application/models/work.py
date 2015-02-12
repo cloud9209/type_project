@@ -65,11 +65,10 @@ def secure() :
         safe = False
     else :
         try :
-            _work = TypeWork.query.filter(
+            safe = TypeWork.query.filter(
                 getattr(TypeWork, 'author_id') == session['user_id'],
                 getattr(TypeWork,        'id') == session['work_id']
-            ).one()
-            safe = _work is not None
+            ).one() is not None
         except NoResultFound :
             safe = False
             body = 'Not Authorized'

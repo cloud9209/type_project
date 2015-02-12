@@ -1,5 +1,6 @@
 from application import db
 from google.appengine.api import files, images
+from flask import session
 import author, project, work, base64
 
 GCS_BUCKET = '/gs/type-storage'
@@ -34,6 +35,7 @@ def store(category, id, raw_image) :
 
     ''' commit '''
     db.session.commit()
+    if category == 'author' : session['user_thumbnail'] = _target_.thumbnail
     return True
 
 def load(filename) :
@@ -73,4 +75,5 @@ def remove(category, id) :
     _target_.image = ''
     _target_.thumbnail = ''
     db.session.commit()
+    if category == 'author' : session['user_thumbnail'] = ''
     return True

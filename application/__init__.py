@@ -25,6 +25,7 @@ if app.config['ENABLE_FLASK_DEBUG_TB'] == True :
     from flask.ext.debugtoolbar import DebugToolbarExtension
     from application.models.image_storage import load_base64
     app.config['DEBUG_TB_PROFILER_ENABLED'] = True
+    app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
     toolbar = DebugToolbarExtension(app)
     app.jinja_env.globals.update(load_base64=load_base64)
 

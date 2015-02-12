@@ -68,12 +68,11 @@ def secure() :
         body = 'comment_id not exist'
     else :
         try :
-            comment = TypeProjectComment.query.filter(
+            safe = TypeProjectComment.query.filter(
                 getattr(TypeProjectComment,         'id') == request.form['comment_id'],
                 getattr(TypeProjectComment, 'project_id') == session['project_id'],
                 getattr(TypeProjectComment,  'writer_id') == session['user_id'],
-            ).one()
-            safe = comment is not None
+            ).one() is not None
         except NoResultFound :
             safe = False
             body = 'Not Authorized'
