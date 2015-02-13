@@ -16,7 +16,7 @@ from flask import make_response, abort
 from oauthlib.oauth1 import RequestValidator
 from oauthlib.oauth1 import WebApplicationServer as Server
 from oauthlib.oauth1 import SIGNATURE_HMAC, SIGNATURE_RSA
-from oauthlib.common import to_unicode, add_params_to_uri
+from oauthlib.common import to_unicode, add_params_to_uri, urlencode
 from oauthlib.oauth1.rfc5849 import errors
 from ..utils import extract_params, create_response
 
@@ -496,10 +496,15 @@ class OAuth1Provider(object):
 
                 server = self.server
                 uri, http_method, body, headers = extract_params()
-                valid, req = server.validate_protected_resource_request(
-                    uri, http_method, body, headers, realms
-                )
-
+                try:
+                    valid, req = server.validate_protected_resource_request(
+                        uri, http_method, body, headers, realms
+                    )
+                except Exception as e:
+                    log.warn('Exception: %r', e)
+                    e.urlencoded = urlencode([('error', 'unknown')])
+                    e.status_code = 400
+                    return _error_response(e)
                 for func in self._after_request_funcs:
                     valid, req = func(valid, req)
 

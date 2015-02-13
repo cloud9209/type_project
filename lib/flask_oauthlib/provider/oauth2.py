@@ -131,11 +131,18 @@ class OAuth2Provider(object):
         if token_generator and not callable(token_generator):
             token_generator = import_string(token_generator)
 
+        refresh_token_generator = self.app.config.get(
+            'OAUTH2_PROVIDER_REFRESH_TOKEN_GENERATOR', None
+        )
+        if refresh_token_generator and not callable(refresh_token_generator):
+            refresh_token_generator = import_string(refresh_token_generator)
+
         if hasattr(self, '_validator'):
             return Server(
                 self._validator,
                 token_expires_in=expires_in,
                 token_generator=token_generator,
+                refresh_token_generator=refresh_token_generator,
             )
 
         if hasattr(self, '_clientgetter') and \
@@ -161,6 +168,7 @@ class OAuth2Provider(object):
                 validator,
                 token_expires_in=expires_in,
                 token_generator=token_generator,
+                refresh_token_generator=refresh_token_generator,
             )
         raise RuntimeError('application not bound to required getters')
 
@@ -249,13 +257,22 @@ class OAuth2Provider(object):
     def usergetter(self, f):
         """Register a function as the user getter.
 
-        This decorator is only required for password credential
+        This decorator is only required for **password credential**
         authorization::
 
             @oauth.usergetter
-            def get_user(username=username, password=password,
+            def get_user(username, password, client, request,
                          *args, **kwargs):
-                return get_user_by_username(username, password)
+                # client: current request client
+                if not client.has_password_credential_permission:
+                    return None
+                user = User.get_user_by_username(username)
+                if not user.validate_password(password):
+                    return None
+
+                # parameter `request` is an OAuthlib Request object.
+                # maybe you will need it somewhere
+                return user
         """
         self._usergetter = f
         return f
@@ -362,8 +379,8 @@ class OAuth2Provider(object):
             server = self.server
             uri, http_method, body, headers = extract_params()
 
-            if request.method == 'GET':
-                redirect_uri = request.args.get('redirect_uri', None)
+            if request.method in ('GET', 'HEAD'):
+                redirect_uri = request.args.get('redirect_uri', self.error_uri)
                 log.debug('Found redirect_uri %s.', redirect_uri)
                 try:
                     ret = server.validate_authorization_request(
@@ -375,15 +392,23 @@ class OAuth2Provider(object):
                 except oauth2.FatalClientError as e:
                     log.debug('Fatal client error %r', e)
                     return redirect(e.in_uri(self.error_uri))
+                except oauth2.OAuth2Error as e:
+                    log.debug('OAuth2Error: %r', e)
+                    return redirect(e.in_uri(redirect_uri))
 
             else:
-                redirect_uri = request.values.get('redirect_uri', None)
+                redirect_uri = request.values.get(
+                    'redirect_uri', self.error_uri
+                )
 
             try:
                 rv = f(*args, **kwargs)
             except oauth2.FatalClientError as e:
                 log.debug('Fatal client error %r', e)
                 return redirect(e.in_uri(self.error_uri))
+            except oauth2.OAuth2Error as e:
+                log.debug('OAuth2Error: %r', e)
+                return redirect(e.in_uri(redirect_uri))
 
             if not isinstance(rv, bool):
                 # if is a response or redirect
@@ -397,7 +422,7 @@ class OAuth2Provider(object):
         return decorated
 
     def confirm_authorization_request(self):
-        """When consumer confirm the authrozation."""
+        """When consumer confirm the authorization."""
         server = self.server
         scope = request.values.get('scope') or ''
         scopes = scope.split()
@@ -418,9 +443,28 @@ class OAuth2Provider(object):
             log.debug('Authorization successful.')
             return create_response(*ret)
         except oauth2.FatalClientError as e:
+            log.debug('Fatal client error %r', e)
             return redirect(e.in_uri(self.error_uri))
         except oauth2.OAuth2Error as e:
-            return redirect(e.in_uri(redirect_uri))
+            log.debug('OAuth2Error: %r', e)
+            return redirect(e.in_uri(redirect_uri or self.error_uri))
+
+    def verify_request(self, scopes):
+        """Verify current request, get the oauth data.
+
+        If you can't use the ``require_oauth`` decorator, you can fetch
+        the data in your request body::
+
+            def your_handler():
+                valid, req = oauth.verify_request(['email'])
+                if valid:
+                    return jsonify(user=req.user)
+                return jsonify(status='error')
+        """
+        uri, http_method, body, headers = extract_params()
+        return self.server.verify_request(
+            uri, http_method, body, headers, scopes
+        )
 
     def token_handler(self, f):
         """Access/refresh token handler decorator.
@@ -448,6 +492,38 @@ class OAuth2Provider(object):
             return create_response(*ret)
         return decorated
 
+    def revoke_handler(self, f):
+        """Access/refresh token revoke decorator.
+
+        Any return value by the decorated function will get discarded as
+        defined in [`RFC7009`_].
+
+        You can control the access method with the standard flask routing
+        mechanism, as per [`RFC7009`_] it is recommended to only allow
+        the `POST` method::
+
+            @app.route('/oauth/revoke', methods=['POST'])
+            @oauth.revoke_handler
+            def revoke_token():
+                pass
+
+        .. _`RFC7009`: http://tools.ietf.org/html/rfc7009
+        """
+        @wraps(f)
+        def decorated(*args, **kwargs):
+            server = self.server
+
+            token = request.values.get('token')
+            request.token_type_hint = request.values.get('token_type_hint')
+            if token:
+                request.token = token
+
+            uri, http_method, body, headers = extract_params()
+            ret = server.create_revocation_response(
+                uri, headers=headers, body=body, http_method=http_method)
+            return create_response(*ret)
+        return decorated
+
     def require_oauth(self, *scopes):
         """Protect resource with specified scopes."""
         def wrapper(f):
@@ -459,11 +535,7 @@ class OAuth2Provider(object):
                 if hasattr(request, 'oauth') and request.oauth:
                     return f(*args, **kwargs)
 
-                server = self.server
-                uri, http_method, body, headers = extract_params()
-                valid, req = server.verify_request(
-                    uri, http_method, body, headers, scopes
-                )
+                valid, req = self.verify_request(scopes)
 
                 for func in self._after_request_funcs:
                     valid, req = func(valid, req)
@@ -510,11 +582,15 @@ class OAuth2RequestValidator(RequestValidator):
         .. _`Section 4.1.3`: http://tools.ietf.org/html/rfc6749#section-4.1.3
         .. _`Section 6`: http://tools.ietf.org/html/rfc6749#section-6
         """
+
         if request.grant_type == 'password':
-            return True
+            client = self._clientgetter(request.client_id)
+            return (not client) or client.client_type == 'confidential' or\
+                request.client_secret
+
         auth_required = ('authorization_code', 'refresh_token')
         return 'Authorization' in request.headers and\
-                request.grant_type in auth_required
+            request.grant_type in auth_required
 
     def authenticate_client(self, request, *args, **kwargs):
         """Authenticate itself in other means.
@@ -565,10 +641,6 @@ class OAuth2RequestValidator(RequestValidator):
         client = request.client or self._clientgetter(client_id)
         if not client:
             log.debug('Authenticate failed, client not found.')
-            return False
-
-        if client.client_secret != request.client_secret:
-            log.debug('Authenticate client failed, secret not match.')
             return False
 
         # attach client on request for convenience
@@ -794,7 +866,7 @@ class OAuth2RequestValidator(RequestValidator):
         redirect_uris strictly, you can add a `validate_redirect_uri`
         function on grant for a customized validation.
         """
-        request.client = request.client = self._clientgetter(client_id)
+        request.client = request.client or self._clientgetter(client_id)
         client = request.client
         if hasattr(client, 'validate_redirect_uri'):
             return client.validate_redirect_uri(redirect_uri)
@@ -846,8 +918,7 @@ class OAuth2RequestValidator(RequestValidator):
 
         Attach user object on request for later using.
         """
-        log.debug('Validating username %r and password %r',
-                  username, password)
+        log.debug('Validating username %r and its password', username)
         if self._usergetter is not None:
             user = self._usergetter(
                 username, password, client, request, *args, **kwargs
@@ -857,4 +928,25 @@ class OAuth2RequestValidator(RequestValidator):
                 return True
             return False
         log.debug('Password credential authorization is disabled.')
+        return False
+
+    def revoke_token(self, token, token_type_hint, request, *args, **kwargs):
+        """Revoke an access or refresh token.
+        """
+        if token_type_hint:
+            tok = self._tokengetter(**{token_type_hint: token})
+        else:
+            tok = self._tokengetter(access_token=token)
+            if not tok:
+                tok = self._tokengetter(refresh_token=token)
+
+        if tok and tok.client_id == request.client.client_id:
+            request.client_id = tok.client_id
+            request.user = tok.user
+            tok.delete()
+            return True
+
+        msg = 'Invalid token supplied.'
+        log.debug(msg)
+        request.error_message = msg
         return False
