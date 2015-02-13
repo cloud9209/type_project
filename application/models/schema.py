@@ -3,11 +3,14 @@ from application import db
 class Author(db.Model) :
     id              = db.Column(db.Integer, primary_key = True)
     email           = db.Column(db.String(60)) # -> to Unique
-    password        = db.Column(db.String(100))
+    password        = db.Column(db.String(100), default = "")
     name            = db.Column(db.String(45))
     image           = db.Column(db.String(100), default = "")
     thumbnail       = db.Column(db.String(100), default = "")
     projects        = db.relationship('TypeProject', backref='Author', lazy='dynamic', cascade='all, delete-orphan')
+    googleplus_id   = db.Column(db.String(255), default = "")
+    facebook_id     = db.Column(db.String(255), default = "")
+    # role_code, statuc_code
 
 class TypeProject(db.Model) :
     id              = db.Column(db.Integer, primary_key = True)

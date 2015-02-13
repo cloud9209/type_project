@@ -29,6 +29,25 @@ if app.config['ENABLE_FLASK_DEBUG_TB'] == True :
     toolbar = DebugToolbarExtension(app)
     app.jinja_env.globals.update(load_base64=load_base64)
 
+# [Flask Extension] Signup with Google
+from flask.ext.oauthlib.client import OAuth
+app.config['GOOGLE_ID'] = "895405110794-br07tvijkpkn3ranupra2nd6ej6bqm4m.apps.googleusercontent.com"
+app.config['GOOGLE_SECRET'] = "BXZkSIkfspr1q9sTDhl-KnGM"
+oauth = OAuth(app)
+google = oauth.remote_app(
+    'google',
+    consumer_key         = app.config.get('GOOGLE_ID'),
+    consumer_secret      = app.config.get('GOOGLE_SECRET'),
+    request_token_params = {
+        'scope' : 'https://www.googleapis.com/auth/userinfo.email'
+    },
+    base_url             = 'https://www.googleapis.com/oauth2/v1/',
+    request_token_url    =  None,
+    access_token_method  = 'POST',
+    access_token_url     = 'https://accounts.google.com/o/oauth2/token',
+    authorize_url        = 'https://accounts.google.com/o/oauth2/auth',
+)
+
 # [Jinja] Unicode String Truncator : WILL CHANGE ALL WHITESPACE TO SPACE
 import unicodedata
 def u_width(u_str) :
