@@ -70,8 +70,9 @@ def remove(category, id) :
     _target_ = eval('%s.get("id", %d, 1)' % (category, id))
     if _target_ is None : return False
 
-    files.delete('%s/%s' % (GCS_BUCKET, _target_.image))
-    files.delete('%s/%s' % (GCS_BUCKET, _target_.thumbnail))
+    if _target_.image.split('/')[0] in ['author', 'project', 'work'] :
+        files.delete('%s/%s' % (GCS_BUCKET, _target_.image))
+        files.delete('%s/%s' % (GCS_BUCKET, _target_.thumbnail))
     _target_.image = ''
     _target_.thumbnail = ''
     db.session.commit()

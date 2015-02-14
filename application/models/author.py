@@ -2,13 +2,15 @@ from application import db
 from schema import Author
 from flask import session, request
 from attrdict import attrdict
-import logging
+import logging, image_storage
 
 def add(data, auth_type) :
     if auth_type == 'GOOGLE' :
         db.session.add( Author (
             email = data['email'],
             name = data['name'],
+            image = data['picture'],
+            thumbnail = data['picture'],
             googleplus_id = data['id']
         ))
     elif auth_type == 'FACEBOOK' :
@@ -17,6 +19,8 @@ def add(data, auth_type) :
         db.session.add( Author (
             email = data['email'],
             name = data['name'],
+            image = "http://graph.facebook.com/%s/picture" % data['id'],
+            thumbnail = "http://graph.facebook.com/%s/picture" % data['id'],
             facebook_id = data['id']
         ))
     elif auth_type is None :
@@ -30,20 +34,29 @@ def add(data, auth_type) :
         logging.critical('models.author.add : Unrechable branch')
     db.session.commit()
 
-def add_exclusive(data, auth_type = None) :
+def add_exclusively(data, auth_type = None) :
     success = True
     account = get('email', data['email'], 1)
     if account is None : 
         add(data, auth_type)
-    elif auth_type is 'GOOGLE' :
-        if account.googleplus_id == '' :
+        return success
+
+    was_external_image_source = account.image.split('/')[0] not in ['author', 'project', 'work']
+    if auth_type is 'GOOGLE' :
+        if account.googleplus_id == '' or account.googleplus_id == data['id'] :
+            if was_external_image_source :
+                account.image     = data['picture']
+                account.thumbnail = data['picture']
             account.googleplus_id = data['id']
             db.session.commit()
         else :
             success = False # Other id binded to the email
     elif auth_type is 'FACEBOOK' :
-        if account.facebook_id == '' :
-            account.facebook_id = data['id']
+        if account.facebook_id == '' or account.facebook_id == data['id'] :
+            if was_external_image_source :
+                account.image     = "http://graph.facebook.com/%s/picture" % data['id']
+                account.thumbnail = "http://graph.facebook.com/%s/picture" % data['id']
+            account.facebook_id   = data['id']
             db.session.commit()
         else :
             success = False # Other id binded to the email
