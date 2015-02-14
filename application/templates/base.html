@@ -66,9 +66,6 @@
         </a>
         {% else %}
         <form class="navbar-form navbar-right" role="form" action="{{url_for('sign_in')}}" method="POST">
-          <a href="{{ url_for('oauth_google') }}" class="btn btn-block btn-social btn-google-plus">
-            <i class="fa fa-google-plus"></i> Sign in with Google
-          </a>
           <div class="form-group">
             <input type="email" class="form-control" name="email" placeholder="전자서찰주소" required/>
           </div>
@@ -77,12 +74,26 @@
           </div>
           <button type="submit" class="btn btn-default">좀, 들어갑시다.</button>
         </form>
+        <a class="navbar-form navbar-right signup-logo" href="{{url_for('oauth_facebook')}}">
+          <img id="facebook-logo" src="{{url_for('static',filename='res/images/facebook_logo.png')}}">
+        </a>
+        <a class="navbar-form navbar-right signup-logo" href="{{url_for('oauth_google')}}">
+          <img id="google-logo" src="{{url_for('static',filename='res/images/google_logo.png')}}">
+        </a>
         {% endif %}
       </div><!-- /.navbar-collapse -->
     </center>
   </div><!-- /.container-fluid -->
 </nav>
-
+<style>/*for fb and g+*/
+  .signup-logo       {width:32px; height:32px; padding:0px;}
+  #facebook-logo     {width:100%; height:100%;}
+  #facebook-logo     {content:url("{{url_for('static',filename='res/images/facebook_logo.png'     )}}");}
+  #google-logo       {margin:-5px -5px -5px -20px;}}
+  #google-logo       {content:url("{{url_for('static',filename='res/images/google_logo.png'       )}}");}
+  #google-logo:hover {content:url("{{url_for('static',filename='res/images/google_logo_hover.png' )}}");}
+  #google-logo:active{content:url("{{url_for('static',filename='res/images/google_logo_active.png')}}");}  
+</style>
 <body>
   {%block body%}
   {%endblock%}
