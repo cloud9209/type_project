@@ -14,7 +14,7 @@
       <p>{{comment.body}}</p>
     </div>
     <div class="comment_on_work_date">
-      <p>{{comment.creation_time}}</p>
+      <p>{{comment.creation_time | pretty_date}}</p>
     </div>
     {% endif %}
   </div>

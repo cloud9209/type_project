@@ -63,7 +63,8 @@ import unicodedata
 def u_width(u_str) :
     return sum( 1 + (unicodedata.east_asian_width(u_char) in "WF") for u_char in u_str )
 
-def u_truncate(u_str, max_width, encoding = 'utf-8', ending = '...') :
+@app.template_filter()
+def u_truncate(u_str, max_width = app.config.get('STRING_TRUNCATE_LENGTH'), encoding = 'utf-8', ending = '...') :
     if u_width(u_str) < max_width : return u_str
     max_width -= len(ending)
     _unicode_, _width_ = u'', 0
@@ -75,7 +76,26 @@ def u_truncate(u_str, max_width, encoding = 'utf-8', ending = '...') :
         _unicode_ += '%s ' % word
         _width_ += _word_width_ + 1
     return _unicode_
-app.jinja_env.globals.update(u_truncate = u_truncate)
+
+from datetime import datetime
+@app.template_filter()
+def pretty_date(dt, default = None):
+    if default is None : default = 'just now'
+    diff = datetime.utcnow() - dt
+    periods = (
+        (diff.days / 365    ,   'year',   'years'),
+        (diff.days / 30     ,  'month',  'months'),
+        (diff.days / 7      ,   'week',   'weeks'),
+        (diff.days          ,    'day',    'days'),
+        (diff.seconds / 3600,   'hour',   'hours'),
+        (diff.seconds / 60  , 'minute', 'minutes'),
+        (diff.seconds       , 'second', 'seconds'),
+    )
+    for period, singular, plural in periods :
+        if not period : continue
+        if period == 1: return u'%d %s ago' % (period, singular)
+        else          : return u'%d %s ago' % (period, plural)
+    return default
 
 # Import Every function in 'controllers' directory
 from application.models import schema

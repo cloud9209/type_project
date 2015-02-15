@@ -1,7 +1,6 @@
 from application import db
 from schema import Author, TypeProjectComment
 from flask import session, request
-import datetime
 from attrdict import attrdict
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
@@ -40,24 +39,16 @@ def remove(comment_id) :
     db.session.commit()
     return comment
 
-def get(attr = None, value = None, limit = -1) :
+def get(attr = None, value = None, limit = -1, default = None) :
     project_comments = None
     if (attr, value) == (None, None) : project_comments = TypeProjectComment.query.filter()
     else                             : project_comments = TypeProjectComment.query.filter(getattr(TypeProjectComment, attr) == value)
 
-    comments = []
-    try :
-        if   limit == 1 : comments =[project_comments.one()]
-        elif limit >  1 : comments = project_comments.limit(limit)
-        else            : comments = project_comments.all()
-    except :
-        return None
-
-    for comment in comments :
-        comment.creation_time += datetime.timedelta(hours=9)
-
-    if limit == 1 : return comments[0]
-    else          : return comments
+    if limit == 1 :
+        try    : return project_comments.one()
+        except : return default
+    elif limit > 1 : return project_comments.limit(limit)
+    else           : return project_comments.all()
 
 def secure() :
     safe, action, body = None, 'alert', None

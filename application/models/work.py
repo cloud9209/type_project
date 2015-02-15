@@ -1,7 +1,6 @@
 from application import db
 from schema import TypeWork
 from flask import session, request
-import datetime
 from attrdict import attrdict
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
@@ -36,19 +35,11 @@ def get(attr = None, value = None, limit = -1, default = None) :
     if (attr, value) == (None, None) : type_works = TypeWork.query.filter()
     else                             : type_works = TypeWork.query.filter(getattr(TypeWork, attr) == value)
 
-    works = []
-    try :
-        if limit == 1 : works =[type_works.one()]
-        if limit >  1 : works = type_works.limit(limit)
-        else          : works = type_works.all()
-    except  :
-        return default
-
-    for work in works :
-        work.date += datetime.timedelta(hours=9)
-
-    if limit == 1 : return works[0]
-    else          : return works
+    if limit == 1 :
+        try    : return type_works.one()
+        except : return default
+    elif limit > 1 : return type_works.limit(limit)
+    else           : return type_works.all()
 
 def remove(attr, value) :
     try :

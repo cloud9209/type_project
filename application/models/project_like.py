@@ -1,7 +1,6 @@
 from application import db
 from schema import Author, TypeProjectLike
 from flask import session, request
-import datetime
 from attrdict import attrdict
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
@@ -47,21 +46,16 @@ def toggle(liker_id, project_id) :
     db.session.commit()
     return _is_liking_
 
-def get(attr = None, value = None, limit = -1) :
+def get(attr = None, value = None, limit = -1, default = None) :
     project_likes = None
     if (attr, value) == (None, None) : project_likes = TypeProjectLike.query.filter()
     else                             : project_likes = TypeProjectLike.query.filter(getattr(TypeProjectLike, attr) == value)
 
-    likes = []
-    try :
-        if   limit == 1 : likes =[project_likes.one()]
-        elif limit >  1 : likes = project_likes.limit(limit)
-        else            : likes = project_likes.all()
-    except :
-        return None
-
-    if limit == 1 : return likes[0]
-    else          : return likes
+    if limit == 1 :
+        try    : return project_likes.one()
+        except : return default
+    elif limit > 1 : return project_likes.limit(limit)
+    else           : return project_likes.all()
 
 def secure() :
     return attrdict( safe = False, action = 'alert', body = 'Authentication Function Not Implemented')

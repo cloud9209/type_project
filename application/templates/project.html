@@ -79,7 +79,7 @@
               </a>
             </div>
             <div class="work_description">
-              <p>{{ u_truncate(work.description, config.STRING_TRUNCATE_LENGTH) }}</p>
+              <p>{{ work.description | u_truncate }}</p>
             </div>
             <div class="reactions_to_proj">
               <a class="work_like" href="javascript:void(0)">
@@ -135,7 +135,7 @@
               <p>{{comment.body}}</p>
             </div>
             <div class="comment_on_project_date">
-              <p>{{comment.creation_time}}</p>
+              <p>{{comment.creation_time | pretty_date}}</p>
             </div>
           </div>
           <div class="comment_on_project_manage_btn">
