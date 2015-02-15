@@ -1,0 +1,23 @@
+/* Facebook and g+*/
+.signup-logo       {width:32px; height:32px; padding:0px;}
+#facebook-logo     {width:100%; height:100%;}
+#facebook-logo     {content:url("/static/res/images/facebook_logo.png");}
+#google-logo       {margin:-5px -5px -5px -20px;}}
+#google-logo       {content:url("/static/res/images/google_logo.png");}
+#google-logo:hover {content:url("/static/res/images/google_logo_hover.png");}
+#google-logo:active{content:url("/static/res/images/google_logo_active.png");} 
+
+/* User thumbnail */
+#user-thumbnail {
+    width : 32px;
+    height : 32px;
+    margin : -6px 0px -6px 10px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+/* Navbar Offset */
+body {
+    margin-top : 50px;
+}
